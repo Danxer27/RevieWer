@@ -181,6 +181,7 @@ def adjuntar_pdf():
     if not ruta:
         return
 
+    # Copea archivo y su ruta
     src  = Path(ruta)
     dest = PDF_DIR / src.name
     shutil.copy2(src, dest)
@@ -193,6 +194,7 @@ def adjuntar_pdf():
     set_progreso(0)
     btn_iniciar.config(state="normal")
 
+    # Limpia el txt guardado temporalmente
     texto_actual = None
     btn_procesar_texto.pack_forget()
 
@@ -257,6 +259,7 @@ def _pipeline_hilo():
             f.write(f"_Generado: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}_\n\n")
             f.write(reporte)
 
+        # Si la revision se hizo desde un texto ya extraido, no vuelve a guardar el texto plano
         if texto_actual is None:
             nombre_txt = f"{timestamp}_{nombre_archivo}.txt"
             ruta_txt  = TEXTOS_DIR / nombre_txt
@@ -408,9 +411,6 @@ root.resizable(True, True)
 
 frame_main = tk.Frame(root, bg="#1a1a2e")
 frame_main.pack(fill="both", expand=True)
-
-
-
 
 
 
