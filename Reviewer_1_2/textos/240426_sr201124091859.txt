@@ -1,0 +1,2251 @@
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+Students Motivation Towards Science Learning: A 
+Confirmatory Factor Analysis 
+ 
+Maria Sophia R. Peligrino 
+ 
+Abstract: This study explored the factors suitable to the Filipino students' motivation towards Science Learning Scale in Panabo 
+National High School from Students Motivation Towards Science Learning (SMTSL) Scale by Tuan et al. (2005). Outcome of this study 
+may be used as an instrument to assess motivational levels of their learners and strengthen the components of motivation that will hep 
+students to become efficient in learning Science and academically successful and address problems in students' motivation in line with 
+Filipino setting. This study also employed Confirmatory Factor Analysis (CFA) approach. the result shows the re-specified model of 
+Students' Motivation towards Science Learning model. 
+ 
+Keywords: CFA, SMTSL Scale, Model Fit, Filipino students, Science Motivation, PNHS 
+ 
+1. The Problem and Its Setting 
+ 
+1.1 Background of the study 
+ 
+Well-motivated students are enthusiastic in engaging with 
+the learning materials, class activities and discussions, and 
+are eager in achieving goals academically. Students‟ 
+academic motivation call upon teachers to put focus on 
+developing students„ self-efficacies and on urging students 
+to believe in their abilities to do well, and for teachers to also 
+believe in their students (Gbollie and Keamu, 2017).  
+ 
+The most recent results of Programme for International 
+Student Assessment (PISA), from 2015, placed the U. S. in 
+an unimpressive result. Out of 71 countries in science, it 
+ranked 24th. Among the 35 members of the Organization for 
+Economic Cooperation and Development, which sponsors 
+the PISA initiative, the U. S. ranked 19th in Science. 
+Organization for Economic Co-operation and development 
+(OECD) in the journal of PISA in Focus emphasized that the 
+results mirror steady decline of students‟ motivation.  
+ 
+Parallel to this, Philippines‟ participation to the Trends in 
+International Mathematics and Science Study (TIMSS) 
+revealed that in 2003 shows that the Philippines at the 43rd 
+out of 46 countries in HS II Sciencewhich is one among the 
+three lowest country. Moreover, the NAT passing rate for 
+high school students for School Year 2011-2012 was lower 
+at 48.9% compared to the elementary students‟ 66.79% 
+based on National Center for Education Survey (NCES) 
+(Jalmasco, 2019).  
+ 
+Based on the Bureau of Education Assessment on the 
+National Achievement Test for grade 10 school year 2016-
+2017 the Panabo city ranked 74th out of 216 division in the 
+Philippines with low mean score result of 36.32.  
+ 
+With the problem discussion above, the low rating of 
+students‟ achievement in science is important to address. 
+Furthermore, the fitness of the factors of students‟ 
+motivation towards learning may vary depending in the data 
+and cultural settings (Mavrikaki et. al., 2015). There are 
+researches also that have been conducted in other countries 
+which determine the level of students‟ motivation towards 
+science (Albalate et. al, 2018). However, the factors fit for 
+students‟ motivation towards science learning of the students 
+in the Philippines have not studied at extent. And it is the 
+aim of this study to identify the factors of students‟ 
+motivation towards science learning suitable to the Filipino 
+students and help them to become productive members of 
+the society.  
+ 
+The researcher‟s intent is to contribute to the literature 
+regarding students‟ motivation towards science learning in 
+the norms of Filipino students. Result of this study will be 
+usedas an instrument to assess motivational levels of their 
+learners and strengthen the components of motivation that 
+will help students to become more efficient in learning 
+Science and be academically successful and address 
+problems about student‟s motivation in line with the setting 
+of Filipino student.  
+ 
+1.2 Statement of the Problem 
+ 
+This study aimed to identify the factors suitable to the 
+Filipino students‟ motivation towards Science learning scale 
+among the students of Panabo National High School.  
+ 
+Specifically, this sought to answer the following questions:  
+1) What are the items comprising Students‟ Motivation 
+towards Science Learning Survey tool after face 
+validation?  
+2) Do the underlying dimensions of students‟ motivation 
+towards Science learning exhibit a parsimonious fit? 
+3) What is the reliability of Students‟ motivation towards 
+Science learning scale for students in terms of:  
+ Convergent Validity 
+ Divergent Validity 
+4) Based on the results of analysis what measurement tool 
+is suitable in the evaluation of students‟ motivation 
+towards science learning scale? 
+ 
+2. Review of Related Literature 
+ 
+This study provides a synopsis of related researches which 
+introduces the structure and framework for student‟s 
+motivation towards science learning.  
+ 
+Factors Linked to Students’ Motivation towards Science 
+Learning 
+Various motivation factors in exploring students‟ motivation 
+towards Science learning include students‟ self-efficacy, 
+active 
+learning 
+strategies, 
+science 
+learning 
+value, 
+performance 
+goal, 
+achievement 
+goal, 
+and 
+learning 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+689 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+environment stimulation do contribute to students‟ Science 
+learning motivation. In addition, the Science attitude related 
+achievement (Tuan, Chin, and Shieh, 2005).  
+ 
+In the same study, it said that the SMTLS questionnaire was 
+developed through analysis of existing research to identify 
+motivation factors in science learning and adjusted the items 
+from some relevant motivation questionnaires, such as the 
+MSLQ, the Patterns of Adaptive Learning Survey and the 
+Multidimensional Motivational Instrument in addition of the 
+factors self-efficacy, performance goal, and achievement 
+goal scales. Incorporated qualitative findings previous study 
+of studies and the feature of science learning into designing 
+scales and items.  
+In the same year an experimental study conducted by Tuan 
+et. al., which investigated 8th graders with different learning 
+styles their motivation outcomes through inquiry-based 
+teaching. Students' motivation toward Science learning 
+questionnaire (SMTSL) was used wherein after using 
+inquiry instruction on student‟s motivation than students 
+taught in traditional teaching there is an increase on the level 
+of student‟s motivation. Similarly, the self-efficacy, active 
+learning strategies, Science learning value, performance goal 
+and achievement goal were the different learning styles of 
+students that increased significantly in SMTSL scales.  
+ 
+In the study of Adaptation of the Students' Motivation 
+Towards Science Learning (SMTSL) questionnaire in the 
+Greek language in 2013 by Demitzkie et., Al. determined 
+that the Students‟ Motivation Toward Science Learning 
+(SMTSL) questionnaire was a valid and reliable tool for 
+Greek students, with 6 sub-scales: self-efficacy, biology 
+learning value, active learning strategies, performance goal, 
+achievement goal and learning environment stimulation.  
+ 
+Consequently, according to Köksal (2012) the result 
+advanced Science students on motivation toward Science 
+learning questionnaire conducted in Turkey was out found to 
+be as reliable and valid to use for further aims in studying 
+with advanced Science students.  
+ 
+The adapted and translated questionnaire on students‟ 
+motivation towards Science learning in Serbian language, 
+particularly in Chemistry subject study, is consisted of 29 
+items contained five subscales that measured a sense of self-
+efficacy for learning chemistry, active learning strategies, 
+chemistry learning value, performance goal and achievement 
+goal. The outcomes showed that the tested model has good 
+fit indicators which determined that the adapted and 
+translated Serbian version of the SMTSL questionnaire is 
+reliable and can be used in research and practical purposes 
+(Olić et. al., 2013).  
+ 
+A study conducted in Malaysia by Chan and Norlizah (2017) 
+which found that students‟ motivation towards Science 
+learning has a significant relation to students‟ Science 
+achievement. This rationalized the importance of students‟ 
+motivation towards Science learning to students‟ Science 
+achievement. In addition, among the scales, “active learning 
+strategies” has the highest correlation with students‟ Science 
+achievement.  
+ 
+Likewise, in the work of Albalate et. al (2018) with the 
+senior high school STEM strands students; it is suggested 
+that factors of motivation should be considered in 
+implementing Science curriculum. Such factors that are 
+linked to the motivation include self-efficacy, active learning 
+strategies, science learning value, performance goal, 
+achievement goal and learning environment stimulation.  
+ 
+Motivation and Science Learning: The most recent results 
+of Programme for International Student Assessment (PISA), 
+from 2015, placed the U. S. an unimpressive result; ranked 
+24th out of 71 countries in Science. Among the 35 members 
+of the Organization for Economic Cooperation and 
+Development, which sponsored the PISA initiative, the U. S. 
+ranked 19th in science. According to Organization for 
+Economic Co-operation and development (OECD) in the 
+journal of PISA in Focus, the result of the assessment was 
+associated to the students‟ motivation 
+ 
+In the year of 2017, Bullock study entitled “Factors 
+Affecting Student Motivation and Achievement in Science 
+in Selected Middle School Eighth Grade Classes” displayed 
+a relationship between student motivation and student 
+achievement. Student motivation was statistically significant 
+to both student perceptions of teacher expectations and 
+actual teacher expectations. It also suggested that student 
+motivation increased with higher perceptual and actual 
+teacher expectations which implied that students who are 
+more highly motivated will have greater academic 
+achievement.  
+ 
+Alfaddai (2015) suggested that children who are motivated 
+are more likely to have higher academic performance, 
+compared to those children who are not motivated. He also 
+recommended that as educators, we should find the best 
+model that will maintain a stable learning environment, 
+which keeps students motivated to achieve academically 
+with a vision to instituting holistic, creative and motivated 
+learners.  
+ 
+Self-efficacy: Moreover, significant relationships were 
+found for self-efficacy and goal-setting; self-efficacy and 
+achievement motivation which supported that self-efficacy 
+and goal-setting were important factors of achievement 
+motivation, with goal-setting making the largest unique 
+contribution (Davids, 2015). Parallel to this, a qualitative 
+study was conducted to High school students and college 
+students in exploring the self-efficacy and academic 
+motivation. It was found that the learners are struggling to 
+maintain the self-efficacy and motivation needed to 
+accomplish rigorous and challenging tasks in both high 
+school and college (Bryant, 2017). Thus, students perceived 
+that they are capable, and they think the conceptual change 
+tasks are worthwhile to participate in, and their learning goal 
+is to gain competence, then students will be willing to make 
+a sustained effort and be engaged in making conceptual 
+change (Pintrich et al., 1993).  
+ 
+Active Learning Strategies: Based on the study of 
+Soltanzade et. al., (2013) using Achievement Motive Scale 
+Test 
+(AMST) 
+and 
+demographic 
+questionnaire 
+with 
+respondents of 1013 students that studied in Karaj high 
+schools, it concluded that the use of active learning method 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+690 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+in classroom is essential to have a positive impact on the 
+quality of the students learning process and achievement 
+motivation. Thus, the meaningful differences obtained in the 
+present research recommended that the active learning 
+method has a significant role in achievement motivation 
+rather than traditional learning method.  
+ 
+Similar to this, in the study of implementing an active 
+learning environment to influence students; motivation in 
+biochemistry, the student‟s motivation in the active learning 
+environment was higher than or equal to other courses in 
+pharmacy-biochemistry. Which it demonstrated that the 
+active learning environment had a positive influence on 
+students‟ motivation (Cicuto and Torres, 2016).  
+ 
+Science Learning Value: According to Corrigan (2014) 
+said that when learning Science, students need to be aware 
+of these values and their significance in other disciplines 
+they are learning. Similar to this, in the study “The Role of 
+Motivation and Perceptions about Science Laboratory 
+Environment on Lower Secondary Students‟ Attitude 
+towards Science” suggested the teachers to design their 
+teaching considering motivational factors particularly the 
+value of the task; self-efficacy and regulation (Chua and 
+Karpudewan, 2017).  
+ 
+Meanwhile, of Lay and Chandrasegaran (2016), measured 
+students‟ interest and liking of learning Science, students‟ 
+understanding about the importance of the subject and 
+usefulness of the subject, and students‟ self-confidence or 
+self-concept in their ability to learn science. The study 
+indicated liking and valuing of learning science were 
+positively related with their science achievement in the 
+eighth-graders‟.  
+ 
+Performance and Achievement goal: Motivation has 
+significant role especially in student learning in science 
+classrooms. There are numerous factors influencing student 
+learning concentrated in four motivational beliefs, namely 
+self-efficacy, task value, interest, and achievement goals. 
+Moreover, students‟ beliefs are influenced by various 
+instructional activities, and these beliefs in turn, lead to 
+increased student achievement. In contrast, the beliefs or 
+strategies interact with instruction to influence student 
+achievement (Bonney et. al, 2005)  
+ 
+Learning Environment Stimulation: In the year of 2014, 
+The Roots of Physics Students‟ Motivation study by Van 
+Dusen reviewed features of the learning environments that 
+determined students‟ experiences in physics class. This 
+highlighted the importance of feeling a sense of belonging in 
+the context of physics and the power that teachers have in 
+shaping students‟ motivation through the construction of 
+their classroom learning environments. It demonstrated how 
+the different ways that students experience in physics class 
+influenced their performance and curiosity in physics. Thus, 
+learning environment of students and stimulates learning 
+motivation (Asvio, 2017).  
+ 
+Confirmatory Factor Analysis: According to Malo (2016) 
+Confirmatory Factor Analysis (CFA) is used as a tool to 
+validate the measurement model before specifying and 
+estimating the structural model: Are the constructs 
+unidimensional and valid?; How many indicators should be 
+used for each construct?; Are the measures able to portray 
+the construct or explain it? 
+ 
+According to Lani (2010), CFA researchers were able to 
+specify the number of factors necessary in the data; and 
+which measured variable is related to which latent variable. 
+It is treatment that will be used to confirm or reject the 
+measurement theory.  
+ 
+Model fitness must met the criteria of the given indexes 
+Arbuckle and Wothke (1999) denoting that CMIN/DF 
+should be less than 3.0, Tucker-Lewis Index (TLI) and 
+Comparative Fit Index (CFI) should be close to 0.90. thus, 
+the RMSEA and PCLOSE values are supported by 
+MacCallum, Browne and Sugawara (1996) indicating 0.01, 
+0.05, and 0.08 as excellent, good, and mediocre fit 
+respectively, with P of close fit (PCLOSE) that is greater 
+than 0.05. Arbuckle (2009), posited that the CMIN/DF 
+should be < 3.0 and the p-value should be greater than 0.05. 
+Furthermore, P of close fit (PCLOSE) should be greater than 
+0.05 (Kenny, 2011) and the TLI, and CFI should exceed.90 
+to indicate good fit (Hu & Bentler, 1999).  
+ 
+Moreover, the process of model re-specification by 
+MacCallum (1986) who highlighted that model re-
+specification is observed to improve the parsimonious fit of 
+the model. In which a researcher may delete non-significant 
+paths or add paths to the model based in empirical result 
+(Pedhazur, 1982).  
+ 
+Thus, the above discussion of the related literature and study 
+supported the constructs of students‟ motivation towards 
+science learning. This include the six factors: Self-efficacy, 
+self-efficacy, active learning strategy, science learning value, 
+performance 
+goal, 
+achievement 
+goal, 
+and 
+learning 
+environment stimulation. STML questionnaire was used by 
+international researches to assess the level of students‟ 
+motivation toward science learning. Moreover, Confirmatory 
+Factor Analysis is the best approach to be used in 
+conforming the factors fit for student‟ motivation towards 
+science learning of Filipino students.  
+ 
+Theoretical framework and Conceptual Framework 
+Linnenbrink and Pintrich (2002) asserted that student 
+motivation is a complex construct composed of different 
+domains. Hence, Tuan, Chin, and Shieh (2005) postulated 
+the various factors comprising students‟ motivation towards 
+Science learning. This includes students‟ self-efficacy, 
+active learning strategy, science learning value, performance 
+goal, 
+achievement 
+goal, 
+and 
+learning 
+environment 
+stimulation. They assert that these factors contribute to how 
+students learn Science and fuel their drive to learn more. 
+Deci and Ryan (2000) also stated in the Self-determination 
+theory of motivation which addresses needs of students in 
+terms 
+of 
+psychological 
+relatedness, 
+autonomy 
+and 
+competence. Thus, it supports that motivation is significant 
+in science education. According to Brown (2006) the model 
+identification pertains in part to the difference between the 
+number of freely estimated model parameters and the 
+number of pieces of information in the input variance-
+covariance matrix.  
+ 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+691 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+ 
+Figure 1: Research Paradigm for Confirmatory Analysis of 
+Students‟ Motivation towards Science Learning 
+ 
+Significance of the Study 
+With the intention toidentify the factors suitable to the 
+Filipino students‟ motivation towards Science, this study 
+took it special significance to the following:  
+ 
+Students: This research would centered on the factors 
+comprising Filipino students‟ motivation towards Science 
+learning. Ultimately, they would benefit the most because 
+the factors comprising their drive to learn would explored. 
+Consequently, Science instruction would be more tailored to 
+how their enthusiasm for learning develops.  
+ 
+Teachers: This research would aid teachers to use the 
+revised STML questionnaire as instrument to assess 
+motivational levels of their learners and strengthen the 
+components of motivation that will help students to become 
+more efficient learning Science and be academically 
+successful.  
+ 
+Administrators: The result of this study would provide 
+them a clearer view of the framework on the students‟ 
+motivation towards Science learning. Furthermore, finding 
+of this will pave the way to programs needed to enhance 
+students‟ motivation leading to attainment of higher 
+achievement in Science.  
+ 
+Other Researchers: Future researchers may use the study‟s 
+questionnaire as this would evaluated based on the context 
+of Filipino learners. Hence, by using this as an instrument 
+for their research, they would able to arrive at data reflecting 
+how Filipino learners‟ motivation is related with other 
+learning domains.  
+ 
+Definition of Terms 
+The major terms used in this study are herein defined both 
+conceptually and operationally:  
+ 
+Students’ Motivation: It describes the aspects within an 
+individual which arouse, maintain and channel behavior 
+towards goals in learning activity (Deci & Ryan 2005). In 
+this study, Students‟ Motivation is the domain upon which 
+its constructs or factors are explored using the adapted 
+Students‟ Motivation towards Science Learning (STML) 
+questionnaire.  
+ 
+Science Learning: The students‟ ability to acquire 
+knowledge and skills, how they learn through analyzing 
+data, and create outcomes in science (Tuan et. al., 2005). In 
+this study, Science Learning is one of the constructs or 
+factors of the adapted Students‟ Motivation towards Science 
+Learning (SMTSL) questionnaire.  
+ 
+Self-Efficacy: The students‟ confidence in their own skill in 
+performing well in science tasks (Tuan et. al., 2005). In this 
+study, Students‟ motivation is one of the constructs or 
+factors of the adapted Students‟ Motivation towards Science 
+Learning (SMTSL) questionnaire.  
+ 
+Active Learning Strategies: Learners have an active role to 
+construct new knowledge based on their previous 
+understanding using variety of strategies (Tuan et. al., 2005). 
+In this study, Active Learning Strategies is one of the 
+constructs or factors of the adapted Students‟ Motivation 
+towards Science Learning (SMTSL) questionnaire.  
+ 
+Science Learning Value: Students will have the ability to 
+acquire problem-solving competency, stimulate their own 
+thinking, experience the inquiry activity, and find the 
+relevance of science in daily life. Thus, learners who 
+perceive these values will be motivated in learning science 
+(Tuan et. al., 2005). In this study, Science Learning Value is 
+one of the constructs or factors of the adapted Students‟ 
+Motivation 
+towards 
+Science 
+Learning 
+(SMTSL) 
+questionnaire.  
+ 
+Performance Goal: Getting the attention from the teacher 
+and competing with other students are the goals of students 
+in science learning (Tuan et. al., 2005). In this study, 
+Performance Goal is one of the constructs or factors of the 
+adapted Students‟ Motivation towards Science Learning 
+(SMTSL) questionnaire.  
+ 
+Achievement Goal: As the students increase their 
+competence and achievement during science learning they 
+feel satisfied (Tuan et. al., 2005). In this study, Achievement 
+Goal is one of the constructs or factors of the adapted 
+Students‟ Motivation towards Science Learning (SMTSL) 
+questionnaire.  
+ 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+692 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+Learning 
+Environment 
+Stimulation: 
+The 
+students‟ 
+motivation in science learning is influenced by learning 
+environment surrounding students, such as curriculum, 
+teacher‟s teaching, and student interaction (Tuan et. al., 
+2005). In this study, Learning Environment Stimulation is 
+one of the constructs or factors of the adapted Students‟ 
+Motivation 
+towards 
+Science 
+Learning 
+(SMTSL) 
+questionnaire.  
+ 
+3. Method 
+ 
+This chapter discusses the research design, research 
+respondents, 
+research 
+instruments, 
+data 
+gathering 
+procedures, and statistical treatment of data.  
+ 
+Research Design 
+This study used quantitative type of research. It is guided by 
+the principles of Creswell (2003) who emphasized its 
+appropriateness in terms of testing theories by examining the 
+relationship among variables which can be measured on 
+instrument and analyzed using statistical procedure. 
+Furthermore, confirmatory factor analysis (CFA) employed 
+as an approach by the researcher to confirm the theorized 
+construct in a study load into certain number of underlying 
+sub-constructs or component (Awang 2012).  
+ 
+As such, CFA was used to know whether the underlying 
+dimensions of students‟ motivation towards Science as 
+presented in the Students Motivation towards Science 
+Learning byTuan, Chin, and Shieh (2005) confirms with the 
+norms of students in the Philippine public high school 
+setting, specifically, in Panabo National High School.  
+ 
+Consequently, this quantitative type of study used the 
+Confirmatory Factor Analysis to conform the factors of 
+students‟ motivation towards science using the standardized 
+tool STML by Tuan et. al., (2015). Lastly, the approach is fit 
+to this study wherein it specify the number of factors 
+essential in the data; and which measure variable is 
+connected to which underlying variable.  
+ 
+Research Locale 
+This study was conducted in the Panabo National High 
+School, Division of Panabo. It is a public high school 
+located at New Site, Gredu, Panabo City and is 0.8 km away 
+from the National Highway. Figure 2 shows the map of 
+Panabo City highlighting Panabo National High School 
+(Google, n. d. ).  
+ 
+The school is implementing four (4) different programs 
+namely; Special Program in the Arts (SPA), Special 
+Education (SPED), Science Technology and Engineering 
+(STE) and the Basic Education Curriculum (BEC). Its goal 
+is aligned with the mission and vision of the Department of 
+Education which is to produce excellent graduates by 
+providing them with the necessary knowledge, skills and 
+attitude necessary to become productive citizens.  
+ 
+ 
+ 
+Figure 2: Map of Panabo City highlighting the Panabo National High School (Google, n. d. ). 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+693 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+Research Respondents 
+The respondents of this study were the junior high school 
+students enrolled in SY 2018-2019. Stratified random 
+sampling technique was used in the selection of the 
+respondents in which the percentage for each stratum is 
+multiplied to its corresponding population to determine the 
+number of respondents needed (Shi, 2015). Raosoft sample 
+size calculator was used to determine the appropriate 
+number of sample from the population. Table 1 shows the 
+distribution of the respondents. From the population of 6 
+380, a total number of 363 respondents were recruited in 
+grade 10 (Raosoft. com, 2014).  
+ 
+Research Instrument 
+A standardized validated questionnaire, The Students‟ 
+Motivation towards Science Learning adapted from Tuan, 
+Chin, and Shieh (2005) with 35 questions, was used as an 
+instrument in gathering data to be distributed to the 
+respondents. It is consisted of six (6) domains: Self-Efficacy, 
+Active Learning Strategies, Science Learning Value, 
+Performance Goal, Achievement Goal, and Learning 
+Environment Stimulation. Tuan, Chin, and Shieh (2005) 
+claimed that the questionnaire has both construct and 
+criterion-related validity and had been used to correlate with 
+Science attitude and achievement scores.  
+ 
+Table 1: Distribution of Respondents 
+Grade Level 
+Population 
+Percentage 
+Sample size 
+7 
+1, 943 
+30 
+109 
+8 
+1, 604 
+25 
+91 
+9 
+1, 465 
+24 
+87 
+10 
+1, 368 
+21 
+76 
+Total 
+6, 380 
+100 
+363 
+ 
+The parameter limits for students‟ motivation towards 
+science learning items on the scales were anchored at 1.00-
+1.49 =Strongly Disagree (the student strongly disagrees to 
+the statement), 1.50-2.49= Disagree (the student disagrees to 
+the statement), 2.50-3.49= Neutral (the student has no 
+opinion to the statement), 3.50-4.49= Agree (the student 
+agrees to the statement), 4.50-5.00= Strongly agree (the 
+student strongly agree to the statement).  
+ 
+Data Gathering Procedure 
+In collecting the data needed, the following procedure were 
+observed:  
+ 
+Seeking Permission to Conduct the Study: The researcher 
+asked permission and approval from the Dean of the 
+Graduate School of St. Mary‟s College, Inc. Then, to the 
+Schools Division Superintendent and to the School Principal 
+regarding the conduct of the study at Panabo National High 
+School. The content of the letter is to allow the researcher to 
+conduct her study on the extent of manifestation of Students‟ 
+Motivation towards Science Learning.  
+ 
+Administration and Retrieval of the questionnaire: Three 
+(3) experts were invited to perform content validity of the 
+questions and check the suitability of the items that captured 
+the underlying dimensions on students‟ motivation towards 
+Science learning with the purpose of ensuring the readability 
+and comprehensibility of the scale. The researcher 
+personally distributed and administered the SMTSL 
+Questionnaire to the respondents in their classrooms with the 
+assistance of class advisers or Science teachers of the 
+respondents to ensure the reliability of data.  
+ 
+Checking, Collating and the Processing of data: After the 
+retrieval of the questionnaire, the responses were checked, 
+collated and tabulated. The tabulated data were treated, 
+analyzed and interpreted statistically by the statistician. 
+Specifically, CFA was used by the researcher to test whether 
+the obtained factor structure in Students‟ Motivation towards 
+Science Learning Model is the best fitting model or could 
+still be improved. Latent variables were allowed to correlate 
+with caution on negative and high correlations. Additional 
+within-factor error covariance was not allowed. Thus, it 
+answered whether the latent dimensions that were derived in 
+the model would exhibit a parsimonious fit. Moreover, 
+several statistical tools were considered in making decisions 
+on the best fitting model such as Chi-square test, 
+Comparative Fit Index (CFI), Tucker-Lewis Index (TLI), 
+Root Mean Square Error of Approximation (RMSEA) and p 
+of Close Fit (PCLOSE).  
+ 
+Lastly, the reliability was test of the obtained factor structure 
+and each item of the factors were subjected to inter-item 
+correlation and determination of the Cronbach‟s alpha.  
+ 
+Statistical Treatment of Data 
+After collecting the data needed, the following statistical 
+treatment were used:  
+ 
+Confirmatory Factor Analysis: The goal of this analysis 
+was to assess the fit of the measurement model of the 
+SMTSL and to verify whether its dimensions present reliable 
+and valid representations. It was also used in discovering the 
+underlying factors for a set of items and estimating how 
+strongly they relate to the factors through the use of Analysis 
+of Moment Structures [AMOS] Software. According to Lani 
+(2011), CFA researchers will be able to specify the number 
+of factors necessary in the data; and which measured 
+variable is related to which latent variable. It was a treatment 
+that was used to confirm or reject the measurement theory. 
+Particularly, answers the research questions items number 2 
+and 3.  
+ 
+Reliability Testing: The Cronbach‟s Alpha was used to 
+measure the scale of reliability of this study and answer the 
+research question item number 4. SMTSL questionnaire 
+tested the internal consistency and strength through inter-
+item correlation.  
+ 
+Ethical Consideration 
+The Belmont Report has striking response to the ethical 
+issues in the field of research. Moreover, there are three 
+basic principles the principles of respect for persons, 
+beneficence and justice (Friesen et. al., 2017). This 
+quantitative research rigorously abide by the following 
+facets for ethical consideration:  
+ 
+Respect for Persons: According to Mazur (2007) this 
+ethical principle wherein respondents have the opportunity 
+to decide on what shall or shall not happen to them. Thus, in 
+this study the respondents in this study were informed and 
+allowed to make a voluntary decision to participate based on 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+694 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+their desire to add to the body of literature. And given 
+informed assent. The researcher considered and respect the 
+respondents‟ choice to withdraw at any stage of the research 
+without requiring them to explain. Parallel to this, before the 
+respondents answered the questionnaires the researcher 
+secured informed assent and parental consent which ensured 
+the approval of the respondents and their parents. Further, 
+the permission and approval to conduct the study was also 
+requested from the Office of the Schools Division 
+Superintendent of Panabo City Division.  
+ 
+Beneficence: This ethical principle refers to responsibility of 
+the researcher to make the most of benefits for the 
+participants and society (Adams, 2014). Hence, in this study 
+personal information of the respondents held highly 
+confidential and in no way included in the discussion of the 
+results. Further, filling up of their names was not required in 
+the questionnaire. Only the researcher would have access to 
+the data to ensure that sanctity of their responses is 
+safeguarded. This study ensured that the benefit the 
+recipients would have would outweigh any possible 
+disadvantage.  
+ 
+Justice: This is the benefits and ideal distribution of risk 
+throughout population in which individual should have 
+unbiased access to the latent benefits of the intervention and 
+share in the potential risk (Mazur, 2007). Accordingly, the 
+researcher secured permission from the author of the 
+questionnaire which was used as the study‟s instrument. 
+Further, respondents in this study were randomly selected to 
+ensure that everyone had equal chances of being selected as 
+part of the study‟s sample population.  
+ 
+4. Results 
+ 
+This chapter exhibits the results, analysis and interpretation 
+of findings of the investigation. The data are presented in 
+model diagram, tabular and textual forms.  
+ 
+Face Validity 
+The questionnaire used in this study, Students‟ Motivation 
+Towards Science Learning, was crafted in 2005 by 
+Hsiao‐Lin Tuan, Chi‐Chin Chin & Shyang‐Horng Shieh in 
+their research work entitled, “The development of a 
+questionnaire to measure students' motivation towards 
+science learning” published in the International Journal of 
+Science Education. This study adapted the said questionnaire 
+in the attempt to uncover the extent to which their 
+hypothesized model is consistent with the data gathered 
+from 1407 respondents.  
+ 
+The 35-item survey tool on students‟ motivation comprised 
+of nine (9) negatively stated item-statements to decrease bias 
+in the responses. These items were 2, 4, 5, 6, 7, 21, 22, 23, 
+and 24. This necessitated for the researcher to do reverse 
+scoring in order to remain consistent with the concept 
+conveyed by each factor.  
+In this study, three validators who are experts in the field of 
+study  
+ 
+Table 2: The Validated SMTSL Survey Tool 
+STUDENTS‟ MOTIVATION TOWARDS SCIENCE LEARNING SCALE 
+A. SELF-EFFICACY 
+1. Whether the science content is difficult or easy, I am sure that I can understand it.  
+2. I am not confident about understanding difficult science concepts.  
+3. I am sure that I can do well on science tests.  
+4. No matter how much effort I put in, I cannot learn science.  
+5. When science activities are too difficult, I give up or only do the easy parts.  
+6. During science activities, I prefer to ask other people for the answer rather than think for myself.  
+7. When I find the science content difficult, I do not try to learn it 
+B. ACTIVE LEARNING STRATEGIES 
+8. When learning new science concepts, I attempt to understand them.  
+9. When learning new science concepts, I connect them to my previous experiences.  
+10. When I do not understand a science concept, I find relevant resources that will help me.  
+11. When I do not understand a science concept, I would discuss with the teacher or other students to clarify my understanding.  
+12. During the learning processes, I attempt to make connections between the concepts that I learn.  
+13. When I make a mistake, I try to find out why.  
+14. When I meet science concepts that I do not understand, I still try to learn them.  
+15. When new science concepts that I have learned conflict with my previous understanding, I try to understand why.  
+C. SCIENCE LEARNING VALUE 
+16. I think that learning science is important because I can use it in my daily life.  
+17. I think that learning science is important because it stimulates my thinking.  
+18. In science, I think that it is important to learn to solve problems.  
+19. In science, I think it is important to participate in inquiry activities.  
+20. It is important to have the opportunity to satisfy my own curiosity when learning science.  
+D. PERFORMANCE GOAL 
+21. I participate in science courses to get a good grade.  
+22. I participate in science courses to perform better than other students.  
+23. I participate in science courses so that other students think that I‟m smart.  
+24. I participate in science courses so that the teacher pays attention to me.  
+E. ACHIEVEMENT GOAL  
+25. During a science course, I feel most fulfilled when I attain a good score in a test.  
+26. I feel most fulfilled when I feel confident about the content in a science course.  
+27. During a science course, I feel most fulfilled when I am able to solve a difficult problem.  
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+695 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+28. During a science course, I feel most fulfilled when the teacher accepts my ideas.  
+29. During a science course, I feel most fulfilled when other students accept my ideas.  
+F. LEARNING ENVIRONMENT STIMULATION 
+30. I am willing to participate in this science course because the content is exciting and changeable.  
+31. I am willing to participate in this science course because the teacher uses a variety of teaching methods.  
+32. I am willing to participate in this science course because the teacher does not put a lot of pressure on me.  
+33. I am willing to participate in this science course because the teacher pays attention to me.  
+34. I am willing to participate in this science course because it is challenging.  
+35. I am willing to participate in this science course because the students are involved in discussions.  
+ 
+LEGEND 
+1 = if you strongly disagree tothe statement 
+2 =if you disagree to the statement  
+3 = if you have no opinion to the statement 
+4 = if you agree to the statement 
+5 =if you strongly agree to the statement 
+ 
+were invited to perform face validation of the questionnaire. 
+Experts reviewed the items as to whether the tool could 
+validly measure students‟ motivation towards learning 
+Science just on the face of it. This was a necessary step prior 
+to the questionnaire administration to ascertain that students 
+would understand and respond coherently.  
+ 
+In detail, self-efficacy consisted of the following items: (1) 
+Whether the science content is difficult or easy, I am sure 
+that I can understand it, (2) I am not confident about 
+understanding difficult science concepts., (3) I am sure that I 
+can do well on science tests (4) No matter how much effort I 
+put in, I cannot learn science., (5) When science activities 
+are too difficult, I give up or only do the easy parts., (6) 
+During science activities, I prefer to ask other people for the 
+answer rather than think for myself., and (7) When I find the 
+science content difficult, I do not try to learn it.  
+ 
+On the other hand, Active Learning Strategies, was 
+measured in terms of the following items: (8) When learning 
+new science concepts, I attempt to understand them. (9) 
+When learning new science concepts, I connect them to my 
+previous experiences. (10) When I do not understand a 
+science concept, I find relevant resources that will help me. 
+(11) When I do not understand a science concept, I would 
+discuss with the teacher or other students to clarify my 
+understanding. (12) During the learning processes, I attempt 
+to make connections between the concepts that I learn. (13) 
+When I make a mistake, I try to find out why. (14) When I 
+meet science concepts that I do not understand, I still try to 
+learn them. (15) When new science concepts that I have 
+learned conflict with my previous understanding, I try to 
+understand why.  
+ 
+Model Specification and Identification 
+Figure 3 presents the SMTSL model specification and 
+identification. Unobserved variables are termed latent factors 
+or constructs. These are illustrated graphically with circles or 
+ovals. Consistent with this premise, the unobserved variables 
+SE (Self-efficacy), AL (Active Learning Strategies), SLV 
+(Science Learning Value), PG (Performance Goal), AG 
+(Achievement Goal) and LES (Learning Environment 
+Stimulation) are presented in oval. Since the latent 
+constructs cannot be measured, each of the constructs was 
+linked to 35 observed variables otherwise considered as its 
+indicators. These observed variables are represented by 
+squares. Data contained in these variables were generated 
+from the responses of the students for each of the items.  
+The model presents the item for each factor being linked by 
+a single-headed arrow towards the six unobserved variables 
+in order to measure their factor loading towards the said 
+variable. SE (Self-efficacy) with S1_1 to S1_7, AL (Active 
+Learning Strategies) with S2_8 to S2_15, SLV (Science 
+Learning Value) withS3_16 to S3_S20, PG (Performance 
+Goal) with S4_21 to S4_S24 measure factor, AG 
+(Achievement Goal) with S5_25 to S5_29, and LES 
+(Learning Environment Stimulation) with S6_30 to S6_35. 
+The six unobserved variables where then linked with a 
+double-headed arrow to measure the extent to which they 
+covary.  
+ 
+Further, each of the items, being considered as the 
+endogenous variables, were provided with residual terms 
+that represent error in their prediction from the exogenous 
+factors, the domains of students‟ motivation. For example, 
+the residual e1 in Figure 3 represents error in prediction of 
+item S1_6 on the measurement for Self-Efficacy.  
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+696 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+ 
+Figure 3: Model Specification and Identification 
+ 
+Table 3: Model Fit Values of the Specified SMTSL Model 
+Index 
+Criterion 
+Model Fit Value 
+CMIN/DF 
+< 3.0 
+2.570 
+p-value 
+>0.05 
+0.000 
+TLI 
+>0.90 
+0.754 
+CFI 
+>0.90 
+0.775 
+RMSEA 
+<0.08 
+0.066 
+PCLOSE 
+>0.05 
+0.000 
+ 
+Model Estimation and Assessment 
+The Students Motivation towards Science 
+Learning 
+Questionnaire was evaluated to determine whether it exhibits 
+a parsimonious fit. Table 4 shows an overview of the model 
+fit indices. It can be observed that CMIN/DF has a value of 
+2.570. This implies that the model satisfied the said criterion 
+as it required for the values to be <3.0. This is aligned with 
+the assertion of Arbuckle and Wothke (1999) denoting the 
+premise that CMIN/DF should be less than 3.0. The Value of 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+697 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+RMSEA is 0.066 which also satisfied the threshold of <0.8. 
+However, other fit indices of the model such as p-value, TLI, 
+CFI, and PCLOSE indicate poor fit and do not meet the 
+criteria set by each index.  
+ 
+Arbuckle and Wothke (1999) emphasized the need for 
+Tucker-Lewis Index (TLI) and Comparative Fit Index (CFI) 
+to be close or greater than 0.90. In addition, RMSEA and 
+PCLOSE values may be used to classify model fitness. 
+MacCallum, Browne and Sugawara (1996) enumerated 0.01, 
+0.05, and 0.08 as excellent, good, and mediocre fit, 
+respectively with P of close fit (PCLOSE) that is greater 
+than 0.05. Furthermore, P of close fit (PCLOSE) should be 
+greater than 0.05 (Kenny, 2011).  
+ 
+Model Re-specification 
+The data in table 4 suggest the need for model re-
+specification since most of the fit indices do not satisfy the 
+criteria. Hence, modification indices were reviewed to look 
+for logical means to re-specify the model based on the 
+modification indices.  
+ 
+Figure 4 presents the re-specified SMTSL model. Double-
+headed arrows are used to provide covariance among error 
+terms within similar latent factor. Connecting the error terms 
+of endogenous variables from a different exogenous variable 
+was not performed even if this was suggested by the 
+software‟s modification indices. Further, this was done 
+gradually, checking for changes in the model‟s fit indices 
+from time to time. This was observed because as stated by 
+Jain and Sharma (2012) it is not right to correlate error terms 
+with observed variables, or with error terms that are not part 
+of the same factor. Which means that the error terms must 
+correlate on the same factor. Hence, the following 
+endogenous variables were covaried in the attempt to 
+improve the model‟s fit indices: (1) e5-e7, (2) e12-e15, (3) 
+e12-e13, (4) e11-e12, (5) e9-e11, (6) e8-e11, (7) e19-e20, (8) 
+e16-e18,  
+ 
+Figure 4: Model Re-specification 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+698 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+(9) e21-e24, (10) e23-e24, (11) e28-e29, (12) e25-e26, (13) 
+e26-e27, (14) e30-e35, (15) e30-e33, (16) e32-e33, (17) e32-
+24, and (18) e33-e34.  
+ 
+Consequently, the re-specified model was evaluated to 
+evaluate whether the new model fit values have already 
+satisfied the criteria set for the best fitting model. Thus, table 
+5 provides the new values generated by the model.  
+The result displayed a parsimonious fit for CMIN/DF with 
+the value of 2.085 < 3.0. This is supported by Arbuckle and 
+Wothke (1999) denoting that CMIN/DF should be less than 
+3.0. While RMSEA is 0.055 closer to <0.08 regarded as 
+good fit by MacCallum et al. (1996)  upon which he set 
+three classifications based on the values 0.01, 0.05, and 0.08 
+to indicate excellent, good, and mediocre fit respectively. 
+Meanwhile, the TLI fit value of 0.880 and CFI value of 
+0.852 may already be considered as a good fit as these 
+values are closer to >0.90 as compared to the previous 
+model (Kim et. al., 2016). Thus, it is suggested to use of at 
+least three fit indices (Wan Mohamad, 2013).  
+ 
+The process of model re-specification was done in 
+accordance to the principle of MacCallum (1986) who 
+highlighted that model re-specification is observed to 
+improve the parsimonious fit of the model. In which a 
+researcher may delete non-significant paths or add paths to 
+the model based in empirical result (Pedhazur, 1982).  
+ 
+Table 4: Model Fit Values for Re-specified Model 
+Index 
+Criterion 
+Model Fit Value 
+CMIN/DF 
+< 3.0 
+2.085 
+p-value 
+>0.05 
+0.000 
+TLI 
+>0.90 
+0.880 
+CFI 
+>0.90 
+0.851 
+RMSEA 
+<0.08 
+0.055 
+PCLOSE 
+>0.05 
+0.050 
+ 
+Convergent Validity 
+Convergent validity is shown when each measurement item 
+correlates strongly with its assumed theoretical construct. In 
+other words, the items that are the indicators of a construct 
+should converge or share a high proportion of variance in 
+common. The ideal level of standardized loadings for 
+reflective indicators is 0.60 - 0.70 (Barclay et al., 1995). 
+However, Fornell and Larcker (1981) emphasized that if 
+AVE is less than 0.5, but composite reliability is higher than 
+0.6, the convergent validity of the construct is still adequate.  
+ 
+Table 6 shows the Average Shared Variance (AVE) for each 
+item comprising the six domains. This value determines 
+whether a construct really measures what it intends to 
+measure (Saunders and Thornhill, 2003). Upon initial 
+assessment, only the domain Achievement Goal satisfied the 
+threshold of 0.40, leaving the rest of the domains with values 
+lesser than acceptable as illustrated in table 5.  
+ 
+In order to meet the criteria for convergent validity, the 
+researcher removed items for each factor with loadings that 
+are less than 0.50. As presented in table 5 the items were 
+complete, but after computing the Average Variance 
+Extracted (AVE) there are items drop by the researcher. 
+Hence, the following items were dropped: (1) Whether the 
+science content is difficult or easy, I am sure that I can 
+understand it; (3) I am sure that I can do well on science 
+tests; (6) During science activities, I prefer to ask other 
+people for the answer rather than think for myself; (8) When 
+learning new science concepts, I attempt to understand 
+them; (9) When learning new science concepts, I connect 
+them to my previous experiences; (10) When I do not 
+understand a science concept, I find relevant resources that 
+will help me; (11) When I do not understand a science 
+concept, I would discuss with the teacher or other students 
+to clarify my understanding; (16) I think that learning 
+science is important because I can use it in my daily life; 
+(20) It is important to have the opportunity to satisfy my own 
+curiosity when learning science; (21) I participate in science 
+courses to get a good grade; (32) I am willing to participate 
+in this science course because the teacher does  
+ 
+Table 5: Standardized Regression Weights: (Group number 
+1-Default model) 
+ 
+ 
+ 
+Estimate 
+Squared Loading 
+AVE 
+S1-7 
+<--- 
+SE 
+0.568 
+0.322624 
+0.292497 
+S1-6 
+<--- 
+SE 
+0.419 
+0.175561 
+ 
+S1-5 
+<--- 
+SE 
+0.545 
+0.297025 
+ 
+S1-4 
+<--- 
+SE 
+0.693 
+0.480249 
+ 
+S1-3 
+<--- 
+SE 
+0.132 
+0.017424 
+ 
+S1-2 
+<--- 
+SE 
+-0.864 
+0.746496 
+ 
+S1-1 
+<--- 
+SE 
+0.09 
+0.0081 
+ 
+S2-15 
+<--- 
+AL 
+0.656 
+0.430336 
+0.347506 
+S2-14 
+<--- 
+AL 
+0.741 
+0.549081 
+ 
+S2-13 
+<--- 
+AL 
+0.61 
+0.3721 
+ 
+S2-12 
+<--- 
+AL 
+0.622 
+0.386884 
+ 
+S2-11 
+<--- 
+AL 
+0.315 
+0.099225 
+ 
+S2-10 
+<--- 
+AL 
+0.559 
+0.312481 
+ 
+S2-9 
+<--- 
+AL 
+0.523 
+0.273529 
+ 
+S2-8 
+<--- 
+AL 
+0.597 
+0.356409 
+ 
+S3-20 
+<--- 
+SLV 
+0.482 
+0.232324 
+0.362665 
+S3-19 
+<--- 
+SLV 
+0.621 
+0.385641 
+ 
+S3-18 
+<--- 
+SLV 
+0.606 
+0.367236 
+ 
+S3-17 
+<--- 
+SLV 
+0.725 
+0.525625 
+ 
+S3-16 
+<--- 
+SLV 
+0.55 
+0.3025 
+ 
+S4-24 
+<--- 
+PG 
+0.758 
+0.574564 
+0.372033 
+S4-23 
+<--- 
+PG 
+0.859 
+0.737881 
+ 
+S4-22 
+<--- 
+PG 
+0.394 
+0.155236 
+ 
+S4-21 
+<--- 
+PG 
+-0.143 
+0.020449 
+ 
+S5-29 
+<--- 
+AG 
+0.563 
+0.316969 
+0.45073 
+S5-28 
+<--- 
+AG 
+0.651 
+0.423801 
+ 
+S5-27 
+<--- 
+AG 
+0.715 
+0.511225 
+ 
+S5-26 
+<--- 
+AG 
+0.724 
+0.524176 
+ 
+S5-25 
+<--- 
+AG 
+0.691 
+0.477481 
+ 
+S6-35 
+<--- 
+LES 
+0.486 
+0.236196 
+0.310016 
+S6-34 
+<--- 
+LES 
+0.638 
+0.407044 
+ 
+S6-33 
+<--- 
+LES 
+0.196 
+0.038416 
+ 
+S6-32 
+<--- 
+LES 
+0.354 
+0.125316 
+ 
+S6-30 
+<--- 
+LES 
+0.79 
+0.6241 
+ 
+S6-31 
+<--- 
+LES 
+0.655 
+0.429025 
+ 
+not put a lot of pressure on me; and (33) I am willing to 
+participate in this science course because the teacher pays 
+attention to me.  
+ 
+The removal of the abovementioned items increased the 
+capacity of the tool to measure the construct it intends to 
+measure. Table 6 reveals that indicator S1_2 earned the 
+highest loading of-0.864 while S1_5 got the lowest loading 
+of 0.45 for the construct SE (Science Environment) thereby 
+reaching an AVE of 0.461599.  
+ 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+699 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+On the other hand, indicator S2_14 obtained the highest 
+loading of 0.741 with S2_13 at 0.61 for AL (Active 
+Learning Strategies) to gain an AVE of 0.4346. 
+Additionally, SLV (Science Learning) has an AVE of 
+0.426167 with S3_17 bearing the highest loading of 0.725 
+and 
+S3_18 
+with 
+the 
+lowest 
+loading 
+of 
+0.606. 
+Correspondingly, an AVE of 0.489227 was recorded for PG 
+(Performance Goal) bearing indicators S4_24 with a loading 
+of 0.758 and S2_22 with 0.394. AG (Achievement Goal) 
+marked an AVE of 0.45073 whereby S5_25 gained the 
+highest loading of 0.724 and S5_29 with 0.563. Lastly, LES 
+(Learning Environment Stimulation) earned an AVE of 
+0.424091 comprised of indicator S6_30 with the highest 
+loading of 0.79 and lowest of 0.486 for S6_35.  
+ 
+Table 6: Convergent Validity Measures for SMTSL 
+Questionnaire 
+Items 
+ 
+Factors Estimate Squared Loading 
+AVE 
+S1-7 
+<--- 
+SE 
+0.568 
+0.322624 
+0.461599 
+S1-5 
+<--- 
+SE 
+0.545 
+0.297025 
+ 
+S1-4 
+<--- 
+SE 
+0.693 
+0.480249 
+ 
+S1-2 
+<--- 
+SE 
+-0.864 
+0.746496 
+ 
+S2-15 <--- 
+AL 
+0.656 
+0.430336 
+0.4346 
+S2-14 <--- 
+AL 
+0.741 
+0.549081 
+ 
+S2-13 <--- 
+AL 
+0.61 
+0.3721 
+ 
+S2-12 <--- 
+AL 
+0.622 
+0.386884 
+ 
+S3-19 <--- 
+SLV 
+0.621 
+0.385641 
+0.426167 
+S3-18 <--- 
+SLV 
+0.606 
+0.367236 
+ 
+S3-17 <--- 
+SLV 
+0.725 
+0.525625 
+ 
+S4-24 <--- 
+PG 
+0.758 
+0.574564 
+0.489227 
+S4-23 <--- 
+PG 
+0.859 
+0.737881 
+ 
+S4-22 <--- 
+PG 
+0.394 
+0.155236 
+ 
+S5-29 <--- 
+AG 
+0.563 
+0.316969 
+0.45073 
+S5-28 <--- 
+AG 
+0.651 
+0.423801 
+ 
+S5-27 <--- 
+AG 
+0.715 
+0.511225 
+ 
+S5-26 <--- 
+AG 
+0.724 
+0.524176 
+ 
+S5-25 <--- 
+AG 
+0.691 
+0.477481 
+ 
+S6-35 <--- 
+LES 
+0.486 
+0.236196 
+0.424091 
+S6-34 <--- 
+LES 
+0.638 
+0.407044 
+ 
+S6-30 <--- 
+LES 
+0.79 
+0.6241 
+ 
+S6-31 <--- 
+LES 
+0.655 
+0.429025 
+ 
+ 
+Discriminant Validity 
+According to Fornell & Larcker (1981) discriminant validity 
+is the extent to which a construct is truly distinct from other 
+constructs. It means that a latent variable should explain 
+better the variance of its own indicators than the variance of 
+other latent variables. To examine discriminant validity, the 
+shared variances between factors were compared with the 
+Average Variance Extracted (AVE) of the individual factors.  
+ 
+This means that the values for squared correlations should 
+not be greater than the value of the AVE for each factor. 
+Table 7 shows that the squared correlations between SE and 
+AL of 0.168921 is lower when compared to the AVE of SE 
+and AL. The same is true to the shared variance between AL 
+and SLV bearing squared correlations of 0.432964 which is 
+still less than the AVE of both AL and SLV.  
+ 
+Meanwhile, this trend was also observable among all the 
+other variables like SLV and PG, PG and AG, SE and SLV, 
+AE and PG, SE and AG, AL and PG, SLV and LES, PG and 
+LES, and AG and LES. The data satisfy the criteria and 
+suggest that each factor covered in the study exhibits 
+discriminant validity. Thus, it proves that each item per 
+factor only measures to the factor it belongs.  
+ 
+Scale Reliability 
+The final items of the questionnaire are presented below. 
+The questionnaire underwent reliability testing for internal 
+consistency using Cronbach‟s alpha as a measure of internal 
+consistency. The Cronbach‟s alpha for the different 
+constructs satisfy the criteria for internal consistency bearing 
+the following values: Self-Efficacy (α=0.82), Active 
+Learning Strategies (α=0.86), Science Learning Value 
+(α=0.87), Performance Goal (α=0.90), Achievement Goal 
+(α=0.89), and Learning Environment Stimulation (α=0.85). 
+This depicts that the set of items within these constructs are 
+closely related. In all, the survey questionnaire on Students‟ 
+Motivation towards Science Learning Questionnaire got a 
+Cronbach‟s alpha of 0.93. This indicates that the tool has 
+good internal consistency. This is supported by Nunnally 
+(1978) that instruments used in basic research should have 
+reliability of.70 or better.  
+ 
+Table 7: Discriminant Validity Measures for SMTSL 
+Questionnaire 
+Items 
+ 
+Domain 
+Estimate 
+Square Correlations 
+SE 
+<--> 
+AL 
+0.354 
+0.125316 
+AL 
+<--> 
+SLV 
+0.658 
+0.432964 
+SLV 
+<--> 
+PG 
+0.22 
+0.0484 
+PG 
+<--> 
+AG 
+0.116 
+0.013456 
+SE 
+<--> 
+SLV 
+0.485 
+0.235225 
+SE 
+<--> 
+PG 
+0.326 
+0.106276 
+SE 
+<--> 
+AG 
+0.424 
+0.179776 
+AL 
+<--> 
+PG 
+0.129 
+0.016641 
+AL 
+<--> 
+AG 
+0.443 
+0.196249 
+SLV 
+<--> 
+AG 
+0.555 
+0.308025 
+SE 
+<--> 
+LES 
+0.411 
+0.168921 
+AL 
+<--> 
+LES 
+0.479 
+0.229441 
+SLV 
+<--> 
+LES 
+0.639 
+0.408321 
+PG 
+<--> 
+LES 
+0.031 
+0.000961 
+AG 
+<--> 
+LES 
+0.6 
+0.36 
+ 
+ 
+Table 8: Revised Students‟ Motivation towards Science Learning (SMTSL) Scale 
+REVISED STUDENTS‟ MOTIVATION TOWARDS SCIENCE LEARNING SCALE 
+A. SELF-EFFICACY 
+1. I am not confident about understanding difficult science concepts.  
+2. No matter how much effort I put in, I cannot learn science.  
+3. When science activities are too difficult, I give up or only do the easy parts.  
+4. When I find the science content difficult, I do not try to learn it 
+B. ACTIVE LEARNING STRATEGIES 
+5. During the learning processes, I attempt to make connections between the concepts that I learn.  
+6. When I make a mistake, I try to find out why.  
+7. When I meet science concepts that I do not understand, I still try to learn them.  
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+700 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+8. When new science concepts that I have learned conflict with my previous understanding, I try to understand why.  
+C. SCIENCE LEARNING VALUE 
+9. I think that learning science is important because it stimulates my thinking.  
+10. In science, I think that it is important to learn to solve problems.  
+11. In science, I think it is important to participate in inquiry activities.  
+D. PERFORMANCE GOAL 
+12. I participate in science courses to perform better than other students.  
+13. I participate in science courses so that other students think that I‟m smart.  
+14. I participate in science courses so that the teacher pays attention to me.  
+E. ACHIEVEMENT GOAL  
+15. During a science course, I feel most fulfilled when I attain a good score in a test.  
+16. I feel most fulfilled when I feel confident about the content in a science course.  
+17. During a science course, I feel most fulfilled when I am able to solve a difficult problem.  
+18. During a science course, I feel most fulfilled when the teacher accepts my ideas.  
+19. During a science course, I feel most fulfilled when other students accept my ideas.  
+F. LEARNING ENVIRONMENT STIMULATION 
+20. I am willing to participate in this science course because the content is exciting and changeable.  
+21. I am willing to participate in this science course because the teacher uses a variety of teaching methods.  
+22. I am willing to participate in this science course because it is challenging.  
+23. I am willing to participate in this science course because the students are involved in discussions.  
+ 
+LEGEND 
+1 = if you strongly disagree tothe statement 
+2 =if you disagree to the statement  
+3 = if you have no opinion to the statement 
+4 = if you agree to the statement 
+5 =if you strongly agree to the statement 
+ 
+5. Summary, 
+Conclusion 
+and 
+Recommendation 
+ 
+This 
+chapter 
+represents 
+the 
+summary 
+of 
+findings, 
+conclusions, and recommendations.  
+ 
+5.1 Summary of Findings  
+ 
+Based from the analysis, the following are the summary of 
+findings:  
+1) The Students‟ Motivation towards Science Learning 
+Questionnaire contained 35 items measuring Students‟ 
+Motivation towards Science Learning.  
+2) Model estimation and assessment of the identified 
+model of Students‟ Motivation Towards Science 
+Learning revealed poor fit indices of with p-value 0.000 
+(>0.05), TLI 0.754 and CFI 0.775 (>0.90), and 
+PCLOSE 0.000 (>0.05)  
+3) The model re-specification of Students‟ Motivation 
+Towards Science Learning exhibits parsimonious fit as 
+all model fit values have successfully met the criteria set 
+by index of (CMIN/DF < 3.0), (RMSEA < 0.08), and 
+closer fit value to the criteria of (TLI, CFI, and GFI 
+>.90). This means that the model fits well with the data 
+and therefore assert as the new best fit model of 
+Students‟ Motivation towards Science Learning.  
+4) The convergent validity SMTSL scale necessitated the 
+removal of 12 items to increase the capacity of the tool 
+to measure the construct it intends to measure which is 
+suitable in the evaluation of students‟ motivation 
+towards science learning scale. Hence, item numbers 1, 
+3, 6, 8, 9, 10, 11, 16, 20, 21, 32 and 33 were dropped to 
+satisfy the threshold and suit the set of data. In addition, 
+there are only 23 items included in the revised SMTSL 
+scale.  
+5) The divergent validity of SMTSL Scale was achieved 
+since the squared correlations of the variables (SE and 
+AL, AL and SLV, SLV and PG, PG and AG, SE and 
+SLV, SE and PG, SE and AG, AL and PG, AL and AG, 
+SLV and AG, SE and LES, AL and LES, SLV and LES, 
+PG and LES, AG and LES) are lesser than their 
+respective AVEs  
+6) The overall reliability of the SMTSL Scale was high 
+with a Cronbach‟s alpha value of 0.93. The subscales 
+are also above 0.70 which is the criteria of high 
+reliability, namely: Self-Efficacy (α=0.82), Active 
+Learning Strategies (α=0.86), Science Learning Value 
+(α=0.87), Performance Goal (α=0.90), Achievement 
+Goal (α=0.89), and Learning Environment Stimulation 
+(α=0.85).  
+ 
+5.2 Conclusions  
+ 
+Based on the findings of the study, the following are the 
+conclusions:  
+1) The Students‟ Motivation towards Science Learning 
+Questionnaire satisfies the norms for face validity.  
+2) The identified model of Students‟ Motivation towards 
+Science Learning revealed poor model fit values. The 
+result concluded that the model specification and 
+identification indicate poor fit.  
+3) The re-specified model of Students‟ Motivation towards 
+Science Learning satisfied the different model fit 
+indices and therefore exhibit a parsimonious fit.  
+4) Criteria for convergent validity necessitated the deletion 
+of some items from the questionnaire.  
+5) Self-Efficacy, Active Learning Strategies, Science 
+Learning Value, Performance Goal, Achievement Goal, 
+and Learning Environment Stimulation are distinct 
+constructs and therefore satisfied the criteria for 
+divergent validity.  
+6) The reliability of the Students‟ Motivation towards 
+Science Learning Questionnaire is high which provides 
+evidence that the items being measured are consistent in 
+measuring the underlying factors.  
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+701 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+5.3 Recommendation 
+ 
+Based from the findings, analysis, and conclusion drawn in 
+this the study, the following recommendations are 
+summarized.  
+1) One of the limitations of this study was the exclusivity 
+of its respondents who are from Panabo National High 
+School Junior high school students, Panabo City 
+Division. Hence, this research suggests that the study 
+may include the Senior High School Students and 
+should be administered to the entire division since the 
+increase 
+in 
+population 
+size 
+may 
+enhance 
+the 
+generalizability of the scale.  
+2) The revised STML questionnaire may be used or 
+adapted as a tool by the teachers to assess motivational 
+levels of their learners and strengthen the components of 
+motivation that would help students to become more 
+efficient 
+learning 
+Science 
+and 
+be 
+academically 
+successful.  
+3) The future researchers may add items and improve the 
+revised SMTSL scale since the questionnaire is from 
+other country. The items dropped may not be relevant or 
+suitable to the Filipino student of the entire division of 
+Panabo or entire Region XI.  
+ 
+References 
+ 
+[1] 
+Adams, L. (2014). Research ethics. Ethics in Medicine, 
+University of Washington School of Medicine. 
+Retrieved September 19, 2018, from https://depts. 
+washington. edu/bioethx/topics/resrch. html 
+[2] 
+Alfaddai, A. (2015) The impact of motivation by 
+school‟s administration on the student‟s achievement. 
+Retrieved September 18, 2018, from https://etd. 
+ohiolink. 
+edu/!etd. 
+send_file?accession=csu1450965514 
+& 
+disposition=inline 
+[3] 
+Albalate, A., Larcia, H. D., Jaen, J. A., Pangan, K. R., 
+& Garing, A. (2018). Students‟ motivation towards 
+science learning (Smtsl) of STEM students of 
+University Of Batangas, Lipa City. International 
+Journal of Social Sciences, 3 (3), 1262-1274. doi: 
+20319/pijss.2018.33.12621274 
+[4] 
+Arbuckle, J. L., & Wothke, W. (1999). AMOS 4.0 
+User’s guide. Chicago, IL: Smallwaters Corp.  
+[5] 
+Asvio, Nova. (2017). The influence of learning 
+motivation and learning environment on undergraduate 
+students' learning achievement of management of 
+Islamic education, Study Program of Iain Batusangkar 
+in 2016. Noble International Journal of Social Sciences 
+Research, 2 (2), 16-31, Retrieved October 4, 2018 
+from http://napublisher. org/?ic=journals & id=2 
+[6] 
+Awang, Z. H. (2012). A Handbook on SEM: Structural 
+Equation Modeling (4th ed. ). Kualalumpur: Centre 
+For Graduate Studies, University Teknologi MARA 
+Kelantan. Retrieved September 25, 2018, from file: 
+///C: 
+/Users/acer/Downloads/7Chapter3AnalyzingtheMeasur
+ementModel%20 (2). pdf.  
+[7] 
+Barclay, D. W., Higgins, C. A., & Thompson, R. 
+(1995). The partial least squares approach to causal 
+modeling: personal computer adoption and use as 
+illustration. Technology Studies, from 2 (2), 285-309. 
+Retrieved February 17, 2019 from https://www. scirp. 
+org/ 
+(S 
+(i43dyn45teexjx455qlt3d2q)) 
+/reference/ReferencesPapers. 
+aspx?ReferenceID=95167 
+[8] 
+Bonney, C., Klemper, T., Coppola, B., & Pintrich, P. 
+(2005). Student learning in science classrooms: What 
+role does motivation play? Beyond Cartesian Dualism: 
+Encountering Affect in the Teaching and Learning of 
+Science. 
+Retrieved September 25, 2018, from 
+http://www-personal. 
+umich. 
+edu/~bcoppola/publications/ScienceEd. Alsop. final. 
+pdf 
+[9] 
+Brown, T. (2006). Confirmatory Factor Analysis for 
+Applied Research (D. Kenny, Ed. ).72 Spring Street, 
+New York: The Guilford Press A Division of Guilford 
+Publications 
+[10] Browne, M. W., & Cudeck, R. (1993). Alternative 
+ways of assessing model fit. In K. A. Bollen & J. S. 
+Long (Eds. ), Testing structural equation models. 
+Newbury Park, CA: Sage.  
+[11] Bryant, S. (2017) Self-Efficacy sources and academic 
+motivation: A qualitative study of 10th graders. 
+Electronic Theses and Dissertations. Retrieved October 
+5, 2018, from https://dc. etsu. edu/cgi/viewcontent. 
+cgi?article=4693 & context=etd 
+[12] Bullock, 
+N. 
+(2017) 
+Factors 
+affecting 
+student 
+motivation and achievement in science in selected 
+middle school eighth grade classes. Electronic Theses 
+& Dissertations Collection for Atlanta University & 
+Clark Atlanta University. Retrieved September 13, 
+2018 
+from 
+http://digitalcommons. 
+auctr. 
+edu/cgi/viewcontent. 
+cgi?article=1165 
+& 
+context=cauetds\ 
+[13] Cicuto, C., & Torres, B. (2016). Implementing an 
+active learning environment to influence students‟ 
+motivation in Biochemistry. Journal of Chemical 
+Education, 93 (6), 1020-1026. Retrieved October 5, 
+2018, from https://eric. ed. gov/?id=EJ1104120 
+[14] Chan, Y. L. & Norlizah, C. (2017) Students‟ 
+motivation towards science learning and students‟ 
+science 
+achievement. 
+International 
+Journal 
+of 
+Academic Research in Progressive Education and 
+Development, 
+6 
+(4), 
+174-189. 
+doi: 
+10.6007/IJARPED/v6-i4/3716 
+[15] Chua, K., & Karpudewan, M. (2017). The role of 
+motivation and perceptions about science laboratory 
+environment on lower secondary students‟ attitude 
+towards science. Asia-Pacific Forum on Science 
+Learning and Teaching, 18 (2), 8th ser. Retrieved 
+September 20, 2018, from https://www. eduhk. 
+hk/apfslt/v18_issue2/karpudewan/index. 
+htm.  
+Creswell, J. (2003). Research design: qualitative, 
+quantitative, and mixed method approaches. SAGE.  
+[16] Davids, S. (2015) The relationship between self-
+efficacy, goal setting and achievement motivation 
+among final year student at a selected university in the 
+Western Cape Province. Retrieved September 20, 2018 
+from 
+https://etd. 
+uwc. 
+ac. 
+za/bitstream/handle/11394/5235/Davids_s_mcom_ems
+_2015. pdf?sequence=1 & isAllowed=y 
+[17] Deci, E., & Ryan, R., (2002) Self-determination theory 
+and the facilitation of intrinsic motivation, social 
+development, and well-being. American Psychological 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+702 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+Association, Inc., 55 (1): 68-78, doi: 10.1037//0003-
+066X.55.1.68 
+[18] Dermitzaki, I. Stavroussi, P. Vavougios, D. & Kotsis, 
+K. (2013) Adaptation of the students' motivation 
+towards science learning (SMTSL) questionnaire in the 
+Greek language. European Journal of Psychology of 
+Education, 28 (3), 747-766. Retrieved September 115, 
+2018 from https://www. jstor. org/stable/23581520 
+[19] Friesen, Phoebe & Kearns, Lisa & Redman, Barbara & 
+Caplan, Arthur. (2017). Extending Ethical Strides: 
+From Tribal IRBs to the Bronx Community Research 
+Review Board. The American Journal of Bioethics.17. 
+W5-W8.10.1080/15265161.2017.1378755.  
+[20] Fornell, C., & Larcker, D. (1982). Evaluating 
+Structural 
+Equation 
+Models 
+with 
+Unobservable 
+Variables 
+and 
+Measurement 
+Error. 
+Journal 
+of 
+Marketing Research, 18 (1), 39-50. Retrieved January 
+28, 2019 from http://www. jstor. org/stable/3151312.  
+[21] Gbollie, C. & Keamu H. P., (2017). Student academic 
+performance: The role of motivation, strategies, and 
+perceived factors hindering Liberian junior and senior 
+high school students learning. Education Research 
+International. doi: 10.1155/2017/1789084 
+[22] Jalmasco, N. M. (2019, March 5). Science education 
+realities. The Manila times. Retrieved March 5, 2019, 
+from https://www. manilatimes. net/science-education-
+realities/100096/ 
+[23] Kim, H., Ku, B., Kim, J. Y., Park, Y. J., & Park, Y. B. 
+(2016). Confirmatory and Exploratory Factor Analysis 
+for validating the phlegm pattern questionnaire for 
+healthy subjects. Evidence-based complementary and 
+alternative medicine: eCAM, 2016, 2696019. doi: 
+10.1155/2016/2696019 
+[24] Lani, J. (2010). Confirmatory Factor Analysis. 
+Retrieved September 20, 2018, from https://www. 
+statisticssolutions. 
+com/wp-content/uploads/kalins-
+pdf/singles/confirmatory-factor-analysis. pdf 
+[25] Lay, Y., & Chandrasegaran, A. (2016). The predictive 
+effects of motivation toward learning science on 
+TIMSS grade 8 students‟ science achievement: A 
+comparative study between Malaysia and Singapore. 
+EURASIA Journal of Mathematics, Science and 
+Technology Education, 12 (12), 2949-2959. doi: 
+10.12973/eurasia.2016.02315a 
+[26] Linnenbrink, E. & Pintrich, P., (2002). Motivation as 
+an enabler for academic success. School Psychology 
+Review.31 (3): 313-327. Retrieved September 20, 
+2018 
+from 
+http://prof. 
+usb. 
+ve/jjramirez/PREGRADO/CCP114%20Motivacion%2
+0linnenbrink%20y%20Pintrich. pdf  
+[27] Hu, L. & Bentler, P. (1999) Cutoff criteria for fit 
+indexes in covariance structure analysis: Conventional 
+criteria versus new alternatives. Structural Equation 
+Modeling: A Multidisciplinary Journal, 6: 1, 1-55, 
+DOI: 10.1080/10705519909540118 
+[28] Jain, T. K., & Sharma A., (2012) Service quality 
+model: Model fit indices results. International Journal 
+of Engineering Research & Technology. Retrieved 
+December 10, 2018 from https://www. academia. 
+edu/3477727/Service_Quality_Model_Model_Fit_Indi
+ces_Results 
+[29] Kenny, D. A. (2011). Respecification of latent variable 
+models. 
+Retrieved 
+January 
+20, 
+2019 
+from 
+http://davidakenny. net/cm/respec. htm 
+[30] Köksal, M. (2012) Adaptation Study of Motivation 
+Toward 
+Science 
+Learning 
+Questionnaire 
+for 
+Academically Advanced Science Students. Retrieved 
+September 25, 2018 from https://www. researchgate. 
+net/profile/Mustafa_Koksal2/publication/274903933_
+Adaptation_study_of_motivation_toward_science_lear
+ning_questionnaire_for_academically_advanced_scien
+ce_students/links/552cb01c0cf29b22c9c462d2/Adaptat
+ion-study-of-motivation-toward-science-learning-
+questionnaire-for-academically-advanced-science-
+students. pdf 
+[31] Malo, P., (2016) Structural equations modeling - part 
+1: Confirmatoryfactor analysis. Aalto University 
+School of Business. Retrieved September 28, 2018 
+from http://statwiki. kolobkreations. com/ 
+[32] Google (n. d). Panabo National High School [Map]. 
+Retrieved 
+March 
+1, 
+2019, 
+from 
+https://goo. 
+gl/maps/khMehULZZ4z 
+[33] Mavrikaki, E., Andressa, H., & Dermitzaki, I. (2015). 
+Adaptation of the students' motivation towards science 
+learning (SMTSL) questionnaire to measure Greek 
+students‟ 
+motivation 
+towards 
+biology 
+learning. 
+International Journal Of Biology Education, 4, doi: 
+10.20876/ijobed.16761.  
+[34] Mazur, D. J. (2007). Evaluating the science and ethics 
+of research on humans: a guide for IRB members. 
+Johns Hopkins University Pres.  
+[35] MacCallum, R. C., Browne, M. W., & Sugawara, H. 
+M. (1996). Power analysis and determination of 
+sample size for covariance structure modeling. 
+Psychological Methods, 1 (2), 130-149. http://dx. doi. 
+org/10.1037/1082-989X.1.2.130 
+[36] Nunnally, J. 
+C. (1978). Psychometric Theory. 
+McGraw-Hill Book Company. Retrieved December 
+12, 
+2018 
+from 
+http://garlield. 
+library. 
+upenn. 
+edu/classics1979/A1979HZ313000) 1. pdf 
+[37] Olić, S., Ninković, S., & Adamov, J. (2013) 
+Adaptation 
+and 
+empirical 
+evaluation 
+of 
+the 
+questionnaire on students‟ motivation towards science. 
+Retrieved September 28, 2018 from https://www. 
+researchgate. 
+net/publication/299574247_Adaptation_and_empirical
+_evaluation_of_the_questionnaire_on_students'_motiv
+ation_towards_science_learning  
+[38] Pedhazur, E. J. (1982). Multiple regression in 
+behavioral research: Explanation and prediction. New 
+York: Holt, Rinehart and Winston, Inc.  
+[39] Pintrich, P. R., Smith, D. A., Garcia, T., & McKeachie, 
+W. J. (1993). Reliability and  
+[40] predictive validity of the Motivated Strategies for 
+Learning 
+Questionnaire 
+(MSLQ). 
+doi: 
+10.1177/0013164493053003024 
+[41] Programme for International Student Assessment. 
+(2015). 
+Retrieved 
+September 
+10, 
+2018 
+from 
+https://nces. 
+ed. 
+gov/surveys/pisa/pisa2015/pisa2015highlights_3. asp 
+[42] Raosoft. com. (2014). Sample Size Calculator. 
+Retrieved October 12, 2018 from http://www. raosoft. 
+com/samplesize. html.  
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+703 
+
+
+International Journal of Science and Research (IJSR) 
+ISSN: 2319-7064 
+SJIF (2022): 7.942 
+Volume 12 Issue 1, January 2023 
+www.ijsr.net 
+Licensed Under Creative Commons Attribution CC BY 
+[43] Saunders, M., Lewis, P., & Thornhill, A. (2003). 
+Research Methods for Business Students (3rd ed. ). 
+England: Prentice Hall 
+[44] Schreiber, J., et al. (2006). Reporting Structural 
+Equation Modeling and Confirmatory Factor Analysis 
+Results: A Review. Journal of Educational Research-J 
+EDUC RES.99.323-338.10.3200/JOER.99.6.323-338.  
+[45] Shi, F., (2015). Study on a Stratified Sampling 
+Investigation Method for Resident Travel and the 
+Sampling Rate. Hindawi Publishing Corporation. 
+Retrieved February 8, 2019 from http://dx. doi. 
+org/10.1155/2015/496179 
+[46] Soltanzadeh, L., Hashemi S. R. N., & Shahi, S., (2013) 
+The effect of active learning on academic achievement 
+motivation in high schools students. Retrieved October 
+4, 
+2018 
+from 
+https://pdfs. 
+semanticscholar. 
+org/6900/a3ef1464c0213ceda854456c275294a15f9d. 
+pdf  
+[47] Tuan, H., Chin, C., & Shieh, S., (2005) The 
+development of a questionnaire to measure students' 
+motivation towards science learning. International 
+Journal of Science Education, 27: 6, 639-654. 
+Retrieved 
+from 
+http://dx. 
+doi. 
+org/10.1080/0950069042000323737  
+[48] Tuan, H., Chin, C., Tsai, C., & Cheng, S. (2005) 
+Investigating the effectiveness of inquiry instruction on 
+the motivation of different learning styles students. 
+International Journal of Science and Mathematics 
+Education, 
+3 
+(4), 
+541-566. 
+doi: 
+10.1080/0950069042000323737 
+[49] Van Dusen, B. (2014). The Roots of Physics Students‟ 
+Motivation. School of Education Graduate Theses & 
+Dissertations. Retrieved September 26, 2018, from 
+https://scholar. colorado. edu/educ_gradetds/2 
+[50] Wan Mohamad, A. B. W. A., (2013) Moderator-
+mediator on motivation using structural equation 
+modeling. LAP LAMBERT Academic Publishing.  
+[51] 2017 NAT G6 & G10 National Data (Rep. ). (2018). 
+BEA-EDUCATION 
+ASSESSMENT 
+DIVISION. 
+Retrieved November 12, 2018 
+Paper ID: SR201124091859
+DOI: 10.21275/SR201124091859
+704 
