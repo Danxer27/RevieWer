@@ -13,6 +13,7 @@ from datetime import datetime
 import markdown
 from tkinterweb import HtmlFrame
 import subprocess
+from PIL import Image, ImageTk
 
 cliente = ollama.Client(host='http://localhost:11434')
 
@@ -409,15 +410,24 @@ root.geometry("1200x720")
 root.configure(bg="#1a1a2e")
 root.resizable(True, True)
 
+
 frame_main = tk.Frame(root, bg="#1a1a2e")
 frame_main.pack(fill="both", expand=True)
 
-
-
 # ── Panel izquierdo — Historial ──
-frame_left = tk.Frame(frame_main, bg="#0f3460", width=230)
+frame_left = tk.Frame(frame_main, bg="#141438", width=230)
 frame_left.pack(side="left", fill="y", padx=(10, 0), pady=10)
 frame_left.pack_propagate(False)
+
+_img = Image.open(Path(__file__).parent / "logo.png").resize((142, 70), Image.LANCZOS)
+logo_img = ImageTk.PhotoImage(_img)
+
+tk.Label(
+    frame_left,
+    image=logo_img,
+    bg="#1a1a2e",
+).pack(anchor="center", padx=10, pady=(12, 8))
+
 
 tk.Label(
     frame_left, text="HISTORIAL",
