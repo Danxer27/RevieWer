@@ -164,7 +164,7 @@ frame_left = tk.Frame(frame_main, bg="#141438", width=230)
 frame_left.pack(side="left", fill="y", padx=(10, 0), pady=10)
 frame_left.pack_propagate(False)
 
-_img = Image.open(Path(__file__).parent / "logo.png").resize((142, 70), Image.LANCZOS)
+_img = Image.open(Path(__file__).parent / "imgs/logo.png").resize((142, 70), Image.LANCZOS)
 logo_img = ImageTk.PhotoImage(_img)
 
 btn_logo = tk.Button(
@@ -281,7 +281,7 @@ frame_right_first.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
 
     # Panel derecho al inicio
-img_f = Image.open(Path(__file__).parent / "logo.png").resize((355, 175), Image.LANCZOS)
+img_f = Image.open(Path(__file__).parent / "imgs/logo.png").resize((355, 175), Image.LANCZOS)
 logo_imgf = ImageTk.PhotoImage(img_f)
 tk.Label(
     frame_right_first,
