@@ -23,17 +23,20 @@ TEXTOS_DIR = Path(__file__).parent / "textos"
 PDF_DIR.mkdir(exist_ok=True)
 REVIEW_DIR.mkdir(exist_ok=True)
 
-MODELO_OL = "gemma3:1b"
-
-# Modelos: llama3.2:3b, qwen3.5:4b, gemma3:1b
-
+MODELO_OL = None
 
 def activar_ollama():
     # Solo en caso de que no funcione la llamada directa a ollama
     ollama_path = Path.home() / "AppData" / "Local" / "Programs" / "Ollama" / "ollama.exe"
     subprocess.Popen([str(ollama_path), "serve"])    
 
-#activar_ollama()
+# Modelos disponibles
+models = cliente.list()
+modelos = []
+for model in models['models']:
+    modelos.append(model['model'])
+
+
 #  & "C:\Users\joel_\AppData\Local\Programs\Ollama\ollama.exe" serve  
 
 # Estados
@@ -43,6 +46,9 @@ proceso_activo = False
 stop_event     = threading.Event()
 _buffer        = [] 
 texto_actual   = None 
+intento_activacion_ollama = False
+var_modelo = None
+after_display  = False
 
 # Helpers para texto
 def limpiar_nombre_archivo(name: str) -> str:
@@ -134,6 +140,12 @@ def _ui(fn):
 def set_estado(texto: str, color: str = "#4a4a8a"):
     _ui(lambda: lbl_estado.config(text=texto, fg=color))
 
+def set_modelo_first(texto: str, color: str = "#4a4a8a"):
+    _ui(lambda: lbl_text_first_model.config(text=texto, fg=color))
+
+def set_modelo_after(texto: str, color: str = "#4a4a8a"):
+    _ui(lambda: lbl_text_model_mini.config(text=texto, fg=color))
+
 def set_progreso(valor: int):
     _ui(lambda: progress_bar.config(value=valor))
 
@@ -174,13 +186,14 @@ def _restaurar_botones():
 # PIPELINE DE REVISION
 def adjuntar_pdf():
     global pdf_actual, nombre_archivo, texto_actual
-
     ruta = filedialog.askopenfilename(
         title="Seleccionar documento",
         filetypes=[("Documentos", "*.pdf *.docx")]
     )
     if not ruta:
         return
+    
+    iniciar_derecho()
 
     # Copea archivo y su ruta
     src  = Path(ruta)
@@ -206,6 +219,10 @@ def iniciar_revision():
         return
     if pdf_actual is None and texto_actual is None:
         set_estado("Adjunta un documento primero.", "#e9c46a")
+        return
+    
+    if MODELO_OL is None:
+        set_estado("Debes seleciconar un modelo primero.", "#e9c46a")
         return
 
     stop_event.clear()
@@ -255,6 +272,12 @@ def _pipeline_hilo():
         nombre_md = f"{timestamp}_{nombre_archivo}.md"
         ruta_md   = REVIEW_DIR / nombre_md
         
+        # Asigna numeros a reportes repetidos
+        contador = 1
+        while ruta_md.exists():
+            ruta_md = REVIEW_DIR / f"{nombre_md}({contador}).md"
+            contador += 1
+        
         with open(ruta_md, 'w', encoding='utf-8') as f:
             f.write(f"# Revisión: {nombre_archivo}\n")
             f.write(f"_Generado: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}_\n\n")
@@ -287,20 +310,74 @@ def _pipeline_hilo():
 
 
 def revisar_paper(texto: str) -> Union[str, None]:
+    global intento_activacion_ollama
+
     system_prompt = """
-Eres un revisor académico experto y riguroso ("Peer Reviewer") de una revista científica de alto impacto.
-Tu trabajo es leer el documento proporcionado y generar un reporte de revisión estructurado.
+You are a strict, detail-oriented academic peer reviewer for a high-impact scientific journal (e.g., IEEE, Nature, ACM).
 
-Debes evaluar:
-1. Resumen de la contribución principal (¿Qué problema resuelve?).
-2. Fortalezas del documento.
-3. Debilidades o áreas de mejora (metodología, claridad, resultados).
-4. Análisis exhaustivo de los procedimientos en las metodologías y experimentos.
-5. Veredicto final: (Aceptar, Revisiones Menores, Revisiones Mayores, o Rechazar) con una breve justificación.
+Your goal is NOT to be polite — your goal is to identify all weaknesses that could lead to rejection and help the authors fix them before submission.
 
-Responde en formato Markdown estructurado (usa #, ##, ###, **, listas).
-Tono profesional, objetivo y constructivo. Criterios de artículo científico.
-Ve al grano; escribe principalmente los puntos negativos y posibles mejorías en frases concisas.
+Carefully read the provided manuscript and produce a structured, critical review.
+
+Follow this structure exactly:
+
+# 1. Summary of the Paper
+- Briefly describe the main contribution.
+- What problem is being solved?
+- Why does it matter?
+
+# 2. Novelty and Significance
+- Is the contribution truly novel?
+- How does it compare to typical work in this field?
+- Is it incremental, moderate, or significant?
+
+# 3. Strengths
+- List the strongest aspects of the paper.
+- Be specific (methodology, results, clarity, impact, etc.).
+
+# 4. Weaknesses (CRITICAL SECTION)
+- List all weaknesses clearly and directly.
+- Focus especially on:
+  - Methodological flaws
+  - Weak or missing experiments
+  - Lack of baselines or comparisons
+  - Unsupported claims
+  - Reproducibility issues
+  - Poor structure or unclear writing
+- Avoid generic comments. Each point must be actionable.
+
+# 5. Methodology and Experimental Rigor (Deep Analysis)
+- Are the methods correct and well-justified?
+- Are assumptions valid and clearly stated?
+- Are experiments sufficient to support the claims?
+- Are there missing ablations, controls, or statistical validation?
+- Could results be misleading or biased?
+
+# 6. Reproducibility Checklist
+- Is there enough detail to reproduce the work?
+- Are datasets, parameters, and evaluation metrics clearly defined?
+- What is missing?
+
+# 7. Required Improvements Before Submission
+- Provide a prioritized list of concrete actions the authors MUST take to reduce rejection risk.
+
+# 8. Final Verdict
+Choose one:
+- Accept
+- Minor Revisions
+- Major Revisions
+- Reject
+
+- Provide a short but strong justification based on the issues above.
+
+---
+
+Output requirements:
+- Use Markdown formatting (#, ##, bullet points).
+- Be concise but precise.
+- Prioritize criticism over praise.
+- Do NOT soften major issues.
+- Write as if the paper will be rejected unless these issues are fixed.
 """
     set_estado("Generando revisión...", "#4cc9f0")
     set_progreso(50)
@@ -337,7 +414,14 @@ Ve al grano; escribe principalmente los puntos negativos y posibles mejorías en
     except Exception as e:
         set_estado(f"Error Ollama: {e}", "#e94560")
         escribir_salida(f"**Error al comunicarse con Ollama:**\n\n{e}")
-        return None
+        if not intento_activacion_ollama:
+            intento_activacion_ollama = True
+            try:
+                activar_ollama()
+                return revisar_paper(texto)
+            except Exception as ee:
+                set_estado(f"Error al activar Ollama: {ee}", "#e94560")
+                return None
 
 
 def _cancelado():
@@ -374,6 +458,7 @@ def cargar_textos():
 
 def abrir_revision(event):
     btn_procesar_texto.pack_forget()
+    iniciar_derecho()
     sel = lista_historial.curselection()
     if not sel:
         return
@@ -388,6 +473,7 @@ def abrir_revision(event):
 
 def abrir_texto(event):
     global texto_actual, nombre_archivo
+    iniciar_derecho()
     sel = lista_textos.curselection()
     if not sel:
         return
@@ -401,7 +487,19 @@ def abrir_texto(event):
         nombre_archivo = nombre  # Para usar en el procesamiento
         btn_procesar_texto.pack(side="left", padx=(8, 0))
 
+def seleccionar_modelo(event):
+    global MODELO_OL
+    MODELO_OL = var_modelo.get()
+    response = f"Modelo elegido: {var_modelo.get()}"
+    if after_display:
+        set_estado("Documento y modelos listos.", "#06d6a0")
 
+    set_modelo_first(response, "#06d6a0")
+    set_modelo_after(response, "#06d6a0")
+
+def display_inicial():
+    frame_right.pack_forget()
+    frame_right_first.pack()
 
 # Interfaz grafica
 root = tk.Tk()
@@ -414,7 +512,7 @@ root.resizable(True, True)
 frame_main = tk.Frame(root, bg="#1a1a2e")
 frame_main.pack(fill="both", expand=True)
 
-# ── Panel izquierdo — Historial ──
+#  Panel izquierdo — Historial
 frame_left = tk.Frame(frame_main, bg="#141438", width=230)
 frame_left.pack(side="left", fill="y", padx=(10, 0), pady=10)
 frame_left.pack_propagate(False)
@@ -422,10 +520,11 @@ frame_left.pack_propagate(False)
 _img = Image.open(Path(__file__).parent / "logo.png").resize((142, 70), Image.LANCZOS)
 logo_img = ImageTk.PhotoImage(_img)
 
-tk.Label(
+tk.Button(
     frame_left,
     image=logo_img,
     bg="#1a1a2e",
+    command=display_inicial
 ).pack(anchor="center", padx=10, pady=(12, 8))
 
 
@@ -480,15 +579,15 @@ lista_historial.pack(fill="both", expand=True)
 scroll_hist.config(command=lista_historial.yview)
 lista_historial.bind("<<ListboxSelect>>", abrir_revision)
 
-tk.Button(
-    frame_left, text="↻  Recargar historial",
-    command=cargar_historial,
-    bg="#1a1a2e", fg="#a5a5ee",
-    font=("Consolas", 8), relief="flat", pady=6,
-    cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
-).pack(fill="x", padx=6, pady=(0, 8))
+# tk.Button(
+#     frame_left, text="↻  Recargar historial",
+#     command=cargar_historial,
+#     bg="#1a1a2e", fg="#a5a5ee",
+#     font=("Consolas", 8), relief="flat", pady=6,
+#     cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
+# ).pack(fill="x", padx=6, pady=(0, 8))
 
-# ── Sección Textos ──
+#Sección Textos
 tk.Label(
     frame_ltxt, text="TEXTOS",
     bg="#0f3460", fg="#a5a5ee",
@@ -515,23 +614,104 @@ lista_textos.pack(fill="both", expand=True)
 scroll_text.config(command=lista_textos.yview)
 lista_textos.bind("<<ListboxSelect>>", abrir_texto)
 
-tk.Button(
-    frame_ltxt, text="↻  Recargar textos",
-    command=cargar_textos,
-    bg="#1a1a2e", fg="#a5a5ee",
-    font=("Consolas", 8), relief="flat", pady=6,
-    cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
-).pack(fill="x", padx=6, pady=(0, 8))
+# tk.Button(
+#     frame_ltxt, text="↻  Recargar textos",
+#     command=cargar_textos,
+#     bg="#1a1a2e", fg="#a5a5ee",
+#     font=("Consolas", 8), relief="flat", pady=6,
+#     cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
+# ).pack(fill="x", padx=6, pady=(0, 8))
+
+
 
 # ── Panel derecho ──
 frame_right = tk.Frame(frame_main, bg="#1a1a2e")
 frame_right.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+frame_right.pack_forget()
+
+frame_right_first = tk.Frame(frame_main, bg="#1a1a2e")
+frame_right_first.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+
+
+
+    # Panel derecho al inicio
+img_f = Image.open(Path(__file__).parent / "logo.png").resize((355, 175), Image.LANCZOS)
+logo_imgf = ImageTk.PhotoImage(img_f)
+tk.Label(
+    frame_right_first,
+    image=logo_imgf,
+    bg="#1a1a2e",
+).pack(pady=(200, 50), padx=8, side="top", anchor="center")
+
+lbl_title = tk.Label(
+    frame_right_first, text="RevieWer",
+    bg="#1a1a2e" , fg="#c73652",
+    font=("Consolas", 32, "bold")
+).pack(pady=(8, 8), padx=8, side="top", anchor="center")
+
+lbl_text_first = tk.Label(
+    frame_right_first, text="Adjunta tu documento",
+    bg="#1a1a2e",fg="#a5a5ee",
+    font=("Consolas", 12, "bold")
+)
+lbl_text_first.pack(pady=(0, 8), padx=8, side="top", anchor="center")
+
+btn_adjuntar_prev = tk.Button(
+    frame_right_first, text="+  Adjuntar PDF",
+    command=adjuntar_pdf,
+    bg="#e94560", fg="white",
+    font=("Consolas", 11, "bold"),
+    relief="flat", padx=16, pady=8,
+    cursor="hand2", activebackground="#c73652"
+).pack(pady=(50, 8), padx=8, side="top", anchor="center")
+
+lbl_text_first_model = tk.Label(
+    frame_right_first, text="Selecciona un modelo",
+    bg="#1a1a2e",fg="#a5a5ee",
+    font=("Consolas", 12, "bold")
+)
+lbl_text_first_model.pack(pady=(0, 8), padx=8, side="top", anchor="center")
+
+    # Seleccion de modelo mediante listbox
+# style.configure(
+#     "TCombobox*Listbox",
+#     fieldbackground="#0d0d1a",
+#     background="#0f3460",
+#     foreground="white",
+#     arrowcolor="#e94560",
+#     padding=5
+# )
+
+# style.map(
+#     "TCombobox*Listbox",
+#     fieldbackground=[("readonly", "#0d0d1a")],
+#     background=[("active", "#e94560"), ("disabled", "#0d0d1a")],
+#     arrowcolor=[("active", "white"), ("disabled", "#0d0d1a")]
+# )
+var_modelo = tk.StringVar()
+combo_first = ttk.Combobox(frame_right_first, textvariable=var_modelo, state="readonly")
+combo_first['values'] = modelos
+combo_first.pack()
+
+root.option_add("*TCombobox*Listbox.background", "#0d0d1a")
+root.option_add("*TCombobox*Listbox.foreground", "white")
+root.option_add("*TCombobox*Listbox.selectBackground", "#e94560")
+root.option_add("*TCombobox*Listbox.selectForeground", "#0f3460")   
+
+combo_first.bind("<<ComboboxSelected>>", seleccionar_modelo)
+
+
+def iniciar_derecho():
+    global after_display
+    frame_right_first.pack_forget()
+    frame_right.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+    after_display = True
 
 # Botones
 frame_btns = tk.Frame(frame_right, bg="#1a1a2e")
 frame_btns.pack(fill="x", pady=(10, 6))
 
-tk.Button(
+btn_adjuntar = tk.Button(
     frame_btns, text="+  Adjuntar PDF",
     command=adjuntar_pdf,
     bg="#e94560", fg="white",
@@ -539,6 +719,7 @@ tk.Button(
     relief="flat", padx=16, pady=8,
     cursor="hand2", activebackground="#c73652"
 ).pack(side="left", padx=(0, 8))
+
 
 btn_iniciar = tk.Button(
     frame_btns, text="▶  Iniciar Revisión",
@@ -572,6 +753,23 @@ btn_procesar_texto = tk.Button(
 )
 # Inicialmente oculto
 btn_procesar_texto.pack_forget()
+
+# Mini frame para el modelo
+frame_mini_model = tk.Frame(frame_btns, bg="#0d0d1a")
+frame_mini_model.pack(fill="x", pady=(0, 4), side="right")
+
+lbl_text_model_mini = tk.Label(
+    frame_mini_model, text="Selecciona un modelo",
+    bg="#0d0d1a",fg="#a5a5ee",
+    font=("Consolas", 14, "bold")
+)
+lbl_text_model_mini.pack(pady=(0, 8), padx=8, side="top", anchor="center")
+
+combo_after = ttk.Combobox(frame_mini_model, textvariable=var_modelo, state="readonly")
+combo_after['values'] = modelos
+combo_after.pack() 
+combo_after.bind("<<ComboboxSelected>>", seleccionar_modelo)
+
 
 # Archivo seleccionado
 lbl_archivo = tk.Label(
