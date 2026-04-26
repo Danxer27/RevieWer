@@ -82,22 +82,6 @@ def extraer_texto(ruta_archivo: str) -> Union[str, None]:
 
 
 
-def _ui(fn):
-    UIF.root.after(0, fn)
-
-
-def _restaurar_botones():
-    global proceso_activo
-    proceso_activo = False
-    UIF.btn_iniciar.config(state="normal")
-    UIF.btn_stop.config(state="disabled")
-
-
-def _cancelado():
-    UIF.set_estado("Proceso interrumpido.", "#e94560")
-    UIF.set_progreso(0)
-    UIF._buffer.clear()
-    _restaurar_botones()
 
 
 # PIPELINE DE REVISION
@@ -156,7 +140,7 @@ def _pipeline_hilo():
         if texto_actual is None:
             # Extraccion del texto
             UIF.set_estado("Extrayendo texto...", "#4cc9f0")
-            UIF.set_progreso(10)
+            UIF.set_progreso(5)
 
             if stop_event.is_set():
                 return _cancelado()
@@ -171,7 +155,7 @@ def _pipeline_hilo():
         
         # Pasando a modelo para consulta
         UIF.set_estado("Consulta con modelol..", "#4cc9f0")
-        UIF.set_progreso(30)
+        UIF.set_progreso(10)
 
         if stop_event.is_set():
             return _cancelado()
@@ -230,15 +214,16 @@ def revisar_paper(texto: str) -> Union[str, None]:
     global intento_activacion_ollama
 
     system_prompt = PROMT
+    #print(system_prompt)
     UIF.set_estado("Generando revisión...", "#4cc9f0")
-    UIF.set_progreso(50)
+    UIF.set_progreso(20)
     UIF._buffer.clear()
 
     # Mostrar indicador de carga inicial
     UIF._ui(lambda: UIF.salida_html.load_html(UIF._md_a_html("_Generando revisión..._")))
 
     reporte_completo = []
-    progreso_actual  = 50.0
+    progreso_actual  = 20.0
 
     try:
         stream = cliente.chat(
@@ -257,7 +242,7 @@ def revisar_paper(texto: str) -> Union[str, None]:
             token = chunk['message']['content']
             reporte_completo.append(token)
             UIF.append_salida(token)
-            progreso_actual = min(88.0, progreso_actual + 0.15)
+            progreso_actual = min(95.0, progreso_actual + 0.05)
             UIF.set_progreso(int(progreso_actual))
 
         return "".join(reporte_completo)
@@ -314,7 +299,20 @@ def seleccionar_modelo(event):
     UIF.set_modelo_first(response, "#06d6a0")
     UIF.set_modelo_after(response, "#06d6a0")
 
+def _ui(fn):
+    UIF.root.after(0, fn)
 
+def _restaurar_botones():
+    global proceso_activo
+    proceso_activo = False
+    UIF.btn_iniciar.config(state="normal")
+    UIF.btn_stop.config(state="disabled")
+
+def _cancelado():
+    UIF.set_estado("Proceso interrumpido.", "#e94560")
+    UIF.set_progreso(0)
+    UIF._buffer.clear()
+    _restaurar_botones()
 
 def interrumpir():
     if proceso_activo:
@@ -323,7 +321,7 @@ def interrumpir():
 
 
 
-# Set commands and binds
+# Conexiones a comandos de la interfaz
 #UIF.btn_logo.config(command=display_inicial)
 UIF.btn_adjuntar_prev.config(command=adjuntar_pdf)
 
