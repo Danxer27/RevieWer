@@ -1,0 +1,8 @@
+Reviewer/pdfs/*
+Reviewer/revisiones/*
+Reviewer/textos/*
+Reviewer/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -1,0 +1,6 @@
+ollama
+pymupdf
+python-docx
+pillow
+tkinterweb
+markdown
