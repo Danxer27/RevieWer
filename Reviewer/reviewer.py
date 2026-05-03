@@ -12,7 +12,7 @@ import subprocess
 from pathlib import Path
 from tkinter import filedialog
 from Promt import promt as PROMT
-
+from agentes import revisar_multiagente
 
 cliente = ollama.Client(host='http://localhost:11434')
 
@@ -161,7 +161,12 @@ def _pipeline_hilo():
             return _cancelado()
 
         # Genera reporta
-        reporte = revisar_paper(texto)
+        reporte = revisar_multiagente(        # ← agrega estas
+            texto,
+            MODELO_OL,
+            UIF.set_estado,
+            UIF.set_progreso
+        )
 
         if reporte is None:
             return _cancelado()
