@@ -3,15 +3,19 @@ import shutil
 import Interfaz as UIF
 import ollama
 import threading
-import fitz           # PyMuPDF
+try:
+    import pymupdf as fitz
+except ImportError:
+    import fitz           # PyMuPDF
 from docx import Document
 from typing import Union
 import re, unicodedata
 from datetime import datetime
-import subprocess
 from pathlib import Path
-from tkinter import filedialog
 from Promt import promt as PROMT
+from Promt import SECCIONES_REQUERIDAS
+
+from modeling import revisar_paper
 
 
 cliente = ollama.Client(host='http://localhost:11434')
@@ -31,16 +35,9 @@ nombre_archivo = None
 proceso_activo = False
 stop_event     = threading.Event()
 texto_actual   = None 
-intento_activacion_ollama = False
+#intento_activacion_ollama = False
 #var_modelo = None
-#after_display  = False
-
-
-#  & "C:\Users\joel_\AppData\Local\Programs\Ollama\ollama.exe" serve  
-def activar_ollama():
-    # Solo en caso de que no funcione la llamada directa a ollama
-    ollama_path = Path.home() / "AppData" / "Local" / "Programs" / "Ollama" / "ollama.exe"
-    subprocess.Popen([str(ollama_path), "serve"])    
+#after_display  = False   
 
 # Modelos disponibles
 models = cliente.list()
@@ -48,6 +45,12 @@ modelos = []
 for model in models['models']:
     modelos.append(model['model'])
 
+Color_alerta = {
+    'rojo':'#e94560',
+    'amarillo':'#e9c46a',
+    'verde':'#06d6a0',
+    'azul':'#4cc9f0'
+}
 
 # Helpers para texto
 def limpiar_nombre_archivo(name: str) -> str:
@@ -82,17 +85,17 @@ def extraer_texto(ruta_archivo: str) -> Union[str, None]:
 
 
 
-
-
 # PIPELINE DE REVISION
 def adjuntar_pdf():
     global pdf_actual, nombre_archivo, texto_actual
-    ruta = filedialog.askopenfilename(
-        title="Seleccionar documento",
-        filetypes=[("Documentos", "*.pdf *.docx")]
+    ruta = UIF.ask_open_file(
+        "Seleccionar documento",
+        "Documentos (*.pdf *.docx);;Todos los archivos (*.*)",
     )
     if not ruta:
+        UIF.set_estado("Error al establecer la ruta del documento.", )
         return
+
     
     UIF.iniciar_display_derecho()
 
@@ -105,7 +108,7 @@ def adjuntar_pdf():
 
     UIF.lbl_archivo.config(text=f"{src.name}", fg="#e94560")
     UIF.escribir_salida(f"**Documento cargado**\n\nRuta: `{dest}`\n\nPresiona ▶ Iniciar Revisión para procesar.")
-    UIF.set_estado("Documento listo.", "#06d6a0")
+    UIF.set_estado("Documento listo.", Color_alerta["verde"])
     UIF.set_progreso(0)
     UIF.btn_iniciar.config(state="normal")
 
@@ -117,13 +120,14 @@ def adjuntar_pdf():
 def iniciar_revision():
     global proceso_activo, texto_actual
     if proceso_activo:
+        UIF.set_estado("Proceso ya activo. Espera a que el proceso actual termine", Color_alerta["amarillo"])
         return
     if pdf_actual is None and texto_actual is None:
-        UIF.set_estado("Adjunta un documento primero.", "#e9c46a")
+        UIF.set_estado("Adjunta un documento primero.", Color_alerta["amarillo"])
         return
     
     if MODELO_OL is None:
-        UIF.set_estado("Debes seleciconar un modelo primero.", "#e9c46a")
+        UIF.set_estado("Debes seleciconar un modelo primero.", Color_alerta["amarillo"])
         return
 
     stop_event.clear()
@@ -135,29 +139,31 @@ def iniciar_revision():
 
 
 def _pipeline_hilo():
-    global texto_actual
+    global texto_actual, proceso_activo
     try:
         if texto_actual is None:
             # Extraccion del texto
-            UIF.set_estado("Extrayendo texto...", "#4cc9f0")
+            UIF.set_estado("Extrayendo texto...", Color_alerta["azul"])
             UIF.set_progreso(5)
 
             if stop_event.is_set():
+                proceso_activo = False
                 return _cancelado()
 
             texto = extraer_texto(str(pdf_actual))
             if not texto:
-                UIF.set_estado("No se pudo extraer texto.", "#e94560")
+                UIF.set_estado("No se pudo extraer texto.", Color_alerta["rojo"])
                 UIF.escribir_salida("**Error:** el documento no contiene texto extraíble.")
                 return _restaurar_botones()
         else:
             texto = texto_actual
         
         # Pasando a modelo para consulta
-        UIF.set_estado("Consulta con modelol..", "#4cc9f0")
+        UIF.set_estado("Consulta con modelol..", Color_alerta["azul"])
         UIF.set_progreso(10)
 
         if stop_event.is_set():
+            proceso_activo = False
             return _cancelado()
 
         # Genera reporta
@@ -165,12 +171,19 @@ def _pipeline_hilo():
 
         if reporte is None:
             return _cancelado()
+        
+        # Validar estructura
+        es_valido, faltantes = validar_reporte(reporte)
+        if not es_valido:
+            UIF.set_estado("Advertencia: reporte incompleto", Color_alerta["amarillos"])
+            advertencia = f"\n\n---\n **Secciones no generadas:** {', '.join(faltantes)}"
+            reporte += advertencia
 
         UIF.set_estado("Guardando reporte...", "#4cc9f0")
         UIF.set_progreso(90)
 
-        timestamp = datetime.now().strftime("%d%m%y")
-        nombre_md = f"{timestamp}_{nombre_archivo}.md"
+        #timestamp = datetime.now().strftime("%d%m%y")
+        nombre_md = f"{nombre_archivo}.md"
         ruta_md   = REVIEW_DIR / nombre_md
         
         # Asigna numeros a reportes repetidos
@@ -181,12 +194,13 @@ def _pipeline_hilo():
         
         with open(ruta_md, 'w', encoding='utf-8') as f:
             f.write(f"# Revisión: {nombre_archivo}\n")
-            f.write(f"_Generado: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}_\n\n")
+            f.write(f"_Generado: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}_\n")
+            f.write(f"_Modelo: {MODELO_OL}_\n\n")
             f.write(reporte)
 
         # Si la revision se hizo desde un texto ya extraido, no vuelve a guardar el texto plano
         if texto_actual is None:
-            nombre_txt = f"{timestamp}_{nombre_archivo}.txt"
+            nombre_txt = f"{nombre_archivo}.txt"
             ruta_txt  = TEXTOS_DIR / nombre_txt
 
             with open(ruta_txt, 'w', encoding='utf-8') as f:
@@ -206,58 +220,18 @@ def _pipeline_hilo():
     except Exception as e:
         UIF.set_estado(f"Error: {e}", "#e94560")
         UIF.escribir_salida(f"**Error inesperado:**\n\n{e}")
+        proceso_activo = False
     finally:
         _restaurar_botones()
 
 
-def revisar_paper(texto: str) -> Union[str, None]:
-    global intento_activacion_ollama
-
-    system_prompt = PROMT
-    #print(system_prompt)
-    UIF.set_estado("Generando revisión...", "#4cc9f0")
-    UIF.set_progreso(20)
-    UIF._buffer.clear()
-
-    # Mostrar indicador de carga inicial
-    UIF._ui(lambda: UIF.salida_html.load_html(UIF._md_a_html("_Generando revisión..._")))
-
-    reporte_completo = []
-    progreso_actual  = 20.0
-
-    try:
-        stream = cliente.chat(
-            model=MODELO_OL,
-            messages=[
-                {'role': 'system', 'content': system_prompt},
-                {'role': 'user',   'content': f"Aquí tienes el documento para revisar:\n\n{texto}"}
-            ],
-            options={'num_ctx': 32000, 'temperature': 0.2},
-            stream=True,
-        )
-
-        for chunk in stream:
-            if stop_event.is_set():
-                return None
-            token = chunk['message']['content']
-            reporte_completo.append(token)
-            UIF.append_salida(token)
-            progreso_actual = min(95.0, progreso_actual + 0.05)
-            UIF.set_progreso(int(progreso_actual))
-
-        return "".join(reporte_completo)
-
-    except Exception as e:
-        UIF.set_estado(f"Error Ollama: {e}", "#e94560")
-        UIF.escribir_salida(f"**Error al comunicarse con Ollama:**\n\n{e}")
-        if not intento_activacion_ollama:
-            intento_activacion_ollama = True
-            try:
-                activar_ollama()
-                return revisar_paper(texto)
-            except Exception as ee:
-                UIF.set_estado(f"Error al activar Ollama: {ee}", "#e94560")
-                return None
+def validar_reporte(reporte: str) -> tuple[bool, list[str]]:
+    """
+    Verifica que el reporte contenga todas las secciones requeridas.
+    Retorna (es_valido, secciones_faltantes).
+    """
+    faltantes = [s for s in SECCIONES_REQUERIDAS if s not in reporte]
+    return len(faltantes) == 0, faltantes
 
 
 def abrir_revision(event):
