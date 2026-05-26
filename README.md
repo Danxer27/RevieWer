@@ -9,12 +9,12 @@ El sistema procesa documentos en varias etapas:
 1. **Extracción de texto**: Convierte PDFs a texto plano utilizando bibliotecas como PyMuPDF.
 2. **Análisis con IA**: Emplea modelos de lenguaje local (via Ollama) para evaluar coherencia, metodología, referencias y hallazgos.
 3. **Generación de reporte**: Produce un informe en formato Markdown con análisis comparativo y resumen ejecutivo.
-4. **Interfaz gráfica**: Una aplicación Tkinter permite subir archivos, seleccionar modelos y visualizar resultados.
+4. **Interfaz gráfica**: Una aplicación Qt (PySide6) permite subir archivos, seleccionar modelos y visualizar resultados.
 
 ## Tutorial
 
 ### Instalación
-1. Instala Python 3.9-3.14.
+1. Instala Python 3.9-3.13 (la interfaz Qt requiere PySide6; Python 3.14 aún no es compatible).
 2. Instala las dependencias: `pip install -r requirements.txt`.
 3. Instala Ollama y descarga un modelo (ej: `ollama pull llama3`).
 
