@@ -1,4 +1,4 @@
-# Disponible para version 3.9 - 3.14
+# Disponible para version 3.11
 import shutil
 import Interfaz as UIF
 import ollama
@@ -12,10 +12,12 @@ from typing import Union
 import re, unicodedata
 from datetime import datetime
 from pathlib import Path
-from Promt import promt as PROMT
+#from Promt import promt as PROMT
 from Promt import SECCIONES_REQUERIDAS
-
+import numpy as np
 from modeling import revisar_paper
+import Construir_promt
+
 
 
 cliente = ollama.Client(host='http://localhost:11434')
@@ -23,8 +25,10 @@ cliente = ollama.Client(host='http://localhost:11434')
 PDF_DIR    = Path(__file__).parent / "pdfs"
 REVIEW_DIR = Path(__file__).parent / "revisiones"
 TEXTOS_DIR = Path(__file__).parent / "textos"
+CHROMA_DIR = Path(__file__).parent / "dt/sira_chroma_db"
 PDF_DIR.mkdir(exist_ok=True)
 REVIEW_DIR.mkdir(exist_ok=True)
+TEXTOS_DIR.mkdir(exist_ok=True)
 
 MODELO_OL = None
 
@@ -51,6 +55,8 @@ Color_alerta = {
     'verde':'#06d6a0',
     'azul':'#4cc9f0'
 }
+
+Construir_promt.CHROMA_DIR = CHROMA_DIR
 
 # Helpers para texto
 def limpiar_nombre_archivo(name: str) -> str:
@@ -108,7 +114,7 @@ def adjuntar_pdf():
 
     UIF.lbl_archivo.config(text=f"{src.name}", fg="#e94560")
     UIF.escribir_salida(f"**Documento cargado**\n\nRuta: `{dest}`\n\nPresiona ▶ Iniciar Revisión para procesar.")
-    UIF.set_estado("Documento listo.", Color_alerta["verde"])
+    UIF.reportar_etapa("preparado", 1.0)
     UIF.set_progreso(0)
     UIF.btn_iniciar.config(state="normal")
 
@@ -117,23 +123,62 @@ def adjuntar_pdf():
     UIF.btn_procesar_texto.pack_forget()
 
 
+# def extraer_metodologia(texto: str):
+
+#     embeds = OllamaEmbeddings(
+#         model='nomic-embed-text:latest',
+#         base_url="http://localhost:11434"
+#     )
+
+#     txt_splitter = SemanticChunker(
+#         embeds,
+#         breakpoint_threshold_type="standar_deviation", 
+#         breakpoint_threshold_amount=1.25, 
+#     )
+
+#     paper_text = texto
+#     chunks = txt_splitter.create_document([paper_text])
+
+#     keywords_metodologia = [
+#     "experimental design", "materials and methods", "data collection", 
+#     "participants", "statistical analysis", "procedures", "framework",
+#     ]
+
+#     query_embed = embeds.embed_query(" ".join(keywords_metodologia))
+
+#     metodologia_chunks = []
+#     umbral_similitud = 0.5
+
+#     for idx, chunk in enumerate(chunks):
+#         chunk_embed = embeds.embed_documents(chunk.page_context)
+
+#         #Calcular similutd
+#         simil = np.dot(query_embed, chunk_embed) / (
+#             np.linalg.norm(query_embed) * np.linalg.norm(chunk_embed)
+#         )
+
+#         if simil > umbral_similitud:
+#             metodologia_chunks.append((simil, chunk.page_content))
+
+
 def iniciar_revision():
     global proceso_activo, texto_actual
     if proceso_activo:
-        UIF.set_estado("Proceso ya activo. Espera a que el proceso actual termine", Color_alerta["amarillo"])
+        UIF.reportar_etapa("advertencia", 0.0, detalle="Proceso en curso; espera a que termine.")
         return
     if pdf_actual is None and texto_actual is None:
-        UIF.set_estado("Adjunta un documento primero.", Color_alerta["amarillo"])
+        UIF.reportar_etapa("advertencia", 0.0, detalle="Adjunta un documento primero.")
         return
-    
+
     if MODELO_OL is None:
-        UIF.set_estado("Debes seleciconar un modelo primero.", Color_alerta["amarillo"])
+        UIF.reportar_etapa("advertencia", 0.0, detalle="Selecciona un modelo primero.")
         return
 
     stop_event.clear()
     proceso_activo = True
     UIF.btn_iniciar.config(state="disabled")
     UIF.btn_stop.config(state="normal")
+    UIF.reportar_etapa("iniciando", 0.0)
 
     threading.Thread(target=_pipeline_hilo, daemon=True).start()
 
@@ -142,9 +187,7 @@ def _pipeline_hilo():
     global texto_actual, proceso_activo
     try:
         if texto_actual is None:
-            # Extraccion del texto
-            UIF.set_estado("Extrayendo texto...", Color_alerta["azul"])
-            UIF.set_progreso(5)
+            UIF.reportar_etapa("extraccion_texto", 0.0)
 
             if stop_event.is_set():
                 proceso_activo = False
@@ -152,22 +195,20 @@ def _pipeline_hilo():
 
             texto = extraer_texto(str(pdf_actual))
             if not texto:
-                UIF.set_estado("No se pudo extraer texto.", Color_alerta["rojo"])
+                UIF.reportar_error("No se pudo extraer texto del documento.")
                 UIF.escribir_salida("**Error:** el documento no contiene texto extraíble.")
-                return _restaurar_botones()
+                return
+            UIF.reportar_etapa("extraccion_texto", 1.0)
         else:
             texto = texto_actual
-        
-        # Pasando a modelo para consulta
-        UIF.set_estado("Consulta con modelol..", Color_alerta["azul"])
-        UIF.set_progreso(10)
+            UIF.reportar_etapa("extraccion_texto", 1.0)
 
         if stop_event.is_set():
             proceso_activo = False
             return _cancelado()
 
         # Genera reporta
-        reporte = revisar_paper(texto)
+        reporte = revisar_paper(texto, MODELO_OL)
 
         if reporte is None:
             return _cancelado()
@@ -175,12 +216,15 @@ def _pipeline_hilo():
         # Validar estructura
         es_valido, faltantes = validar_reporte(reporte)
         if not es_valido:
-            UIF.set_estado("Advertencia: reporte incompleto", Color_alerta["amarillos"])
+            UIF.reportar_etapa(
+                "advertencia",
+                0.5,
+                detalle=f"Reporte incompleto: faltan {', '.join(faltantes)}",
+            )
             advertencia = f"\n\n---\n **Secciones no generadas:** {', '.join(faltantes)}"
             reporte += advertencia
 
-        UIF.set_estado("Guardando reporte...", "#4cc9f0")
-        UIF.set_progreso(90)
+        UIF.reportar_etapa("guardando", 0.0)
 
         #timestamp = datetime.now().strftime("%d%m%y")
         nombre_md = f"{nombre_archivo}.md"
@@ -209,8 +253,8 @@ def _pipeline_hilo():
             UIF._ui(UIF.cargar_textos)
 
         UIF._finalizar_streaming()   # render MD final limpio
-        UIF.set_progreso(100)
-        UIF.set_estado("Revisión completada.", "#06d6a0")
+        UIF.reportar_etapa("guardando", 1.0)
+        UIF.reportar_etapa("completado", 1.0)
         UIF._ui(UIF.cargar_historial)
         
 
@@ -218,11 +262,14 @@ def _pipeline_hilo():
             texto_actual = None
 
     except Exception as e:
-        UIF.set_estado(f"Error: {e}", "#e94560")
+        UIF.reportar_error(str(e))
         UIF.escribir_salida(f"**Error inesperado:**\n\n{e}")
         proceso_activo = False
     finally:
         _restaurar_botones()
+
+
+
 
 
 def validar_reporte(reporte: str) -> tuple[bool, list[str]]:
@@ -263,15 +310,19 @@ def abrir_texto(event):
         nombre_archivo = nombre  # Para usar en el procesamiento
         UIF.btn_procesar_texto.pack(side="left", padx=(8, 0))
 
-def seleccionar_modelo(event):
+def seleccionar_modelo(event=None):
     global MODELO_OL
-    MODELO_OL = UIF.var_modelo.get()
-    response = f"Modelo elegido: {UIF.var_modelo.get()}"
-    if UIF.after_display:
-        UIF.set_estado("Documento y modelos listos.", "#06d6a0")
+    nombre = UIF.var_modelo.get()
+    if not nombre:
+        return
+    MODELO_OL = nombre
+    response = f"Modelo elegido: {nombre}"
+    if UIF.after_display and (pdf_actual is not None or texto_actual is not None):
+        UIF.reportar_etapa("preparado", 1.0)
+        UIF.btn_iniciar.config(state="normal")
 
-    UIF.set_modelo_first(response, "#06d6a0")
-    UIF.set_modelo_after(response, "#06d6a0")
+    UIF.set_modelo_first(response, Color_alerta["verde"])
+    UIF.set_modelo_after(response, Color_alerta["verde"])
 
 def _ui(fn):
     UIF.root.after(0, fn)
@@ -279,35 +330,40 @@ def _ui(fn):
 def _restaurar_botones():
     global proceso_activo
     proceso_activo = False
-    UIF.btn_iniciar.config(state="normal")
-    UIF.btn_stop.config(state="disabled")
+
+    def _do():
+        UIF.btn_iniciar.config(state="normal")
+        UIF.btn_stop.config(state="disabled")
+
+    UIF._ui(_do)
 
 def _cancelado():
-    UIF.set_estado("Proceso interrumpido.", "#e94560")
-    UIF.set_progreso(0)
+    UIF.reportar_error("Proceso interrumpido.")
     UIF._buffer.clear()
     _restaurar_botones()
 
 def interrumpir():
     if proceso_activo:
         stop_event.set()
-        UIF.set_estado("Interrumpiendo...", "#e94560")
+        UIF.reportar_etapa("error", 0.0, detalle="Interrumpiendo proceso…")
 
 
 
 # Conexiones a comandos de la interfaz
-#UIF.btn_logo.config(command=display_inicial)
-UIF.btn_adjuntar_prev.config(command=adjuntar_pdf)
+UIF.wire_commands(
+    on_adjuntar=adjuntar_pdf,
+    on_iniciar=iniciar_revision,
+    on_stop=interrumpir,
+    on_procesar_texto=iniciar_revision,
+)
 
 UIF.combo_first['values'] = modelos
-UIF.combo_first.bind("<<ComboboxSelected>>", seleccionar_modelo)
-
-UIF.btn_adjuntar.config(command=adjuntar_pdf)
-UIF.btn_iniciar.config(command=iniciar_revision)
-UIF.btn_stop.config(command=interrumpir)
-UIF.btn_procesar_texto.config(command=iniciar_revision)
-
 UIF.combo_after['values'] = modelos
+if modelos:
+    UIF.var_modelo.set(modelos[0])
+    seleccionar_modelo()
+
+UIF.combo_first.bind("<<ComboboxSelected>>", seleccionar_modelo)
 UIF.combo_after.bind("<<ComboboxSelected>>", seleccionar_modelo)
 
 UIF.lista_historial.bind("<<ListboxSelect>>", abrir_revision)

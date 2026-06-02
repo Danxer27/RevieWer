@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 import markdown
-from PySide6.QtCore import Qt, QTimer, QUrl
+from PySide6.QtCore import QObject, Qt, QTimer, QUrl, Signal
 from PySide6.QtGui import QPixmap, QIcon
 from PySide6.QtWidgets import (
     QApplication,
@@ -96,7 +96,24 @@ COLORES = {
 }
 
 
-# --- Adaptadores (API compatible con tkinter para reviewer.py) ---
+#  Adaptadores (API compatible con tkinter)
+
+
+def _estilo_etiqueta_estado(color: str) -> str:
+    return (
+        f"color: {color}; background-color: {color}22;"
+        f" border-left: 3px solid {color}; padding: 5px 10px;"
+        f" border-radius: 4px; font-family: 'Segoe UI'; font-size: 9px;"
+    )
+
+
+def _estilo_barra_progreso(color: str) -> str:
+    return (
+        f"QProgressBar {{ background: #23406F; border: none; border-radius: 5px;"
+        f" height: 10px; }}"
+        f"QProgressBar::chunk {{ background: {color}; border-radius: 5px; }}"
+    )
+
 
 class _LabelAdapter:
     def __init__(self, label: QLabel):
@@ -106,7 +123,8 @@ class _LabelAdapter:
         if "text" in kwargs:
             self._w.setText(kwargs["text"])
         if "fg" in kwargs:
-            self._w.setStyleSheet(f"color: {kwargs['fg']};")
+            color = kwargs["fg"]
+            self._w.setStyleSheet(_estilo_etiqueta_estado(color))
 
 
 class _ButtonAdapter:
@@ -118,12 +136,6 @@ class _ButtonAdapter:
             self._w.setEnabled(True)
         elif state == "disabled":
             self._w.setEnabled(False)
-        if command is not None:
-            try:
-                self._w.clicked.disconnect()
-            except RuntimeError:
-                pass
-            self._w.clicked.connect(command)
 
     def pack(self, **kwargs):
         self._w.show()
@@ -170,6 +182,7 @@ class _ComboAdapter:
     def bind(self, event, callback):
         if event == "<<ComboboxSelected>>":
             self._w.activated.connect(lambda _i: callback(None))
+            self._w.currentIndexChanged.connect(lambda _i: callback(None))
 
 
 class _StringVarAdapter:
@@ -179,6 +192,9 @@ class _StringVarAdapter:
     def get(self):
         if not self._combos:
             return ""
+        for combo in reversed(self._combos):
+            if combo.currentIndex() >= 0:
+                return combo.currentText()
         return self._combos[0].currentText()
 
     def set(self, value: str):
@@ -209,8 +225,26 @@ class _ProgressAdapter:
 
 # UI HELPERS
 
+
+class _UiDispatcher(QObject):
+    """Ejecuta callbacks en el hilo principal (seguro desde worker threads)."""
+    invoke = Signal(object)
+
+    def __init__(self):
+        super().__init__()
+        self.invoke.connect(lambda fn: fn(), Qt.ConnectionType.QueuedConnection)
+
+
+_ui_dispatcher = None
+
+
+def _init_ui_dispatcher():
+    global _ui_dispatcher
+    _ui_dispatcher = _UiDispatcher()
+
+
 def _ui(fn):
-    QTimer.singleShot(0, fn)
+    _ui_dispatcher.invoke.emit(fn)
 
 
 def set_estado(texto: str, color: str = "#4a4a8a"):
@@ -226,7 +260,125 @@ def set_modelo_after(texto: str, color: str = "#4a4a8a"):
 
 
 def set_progreso(valor: int):
-    _ui(lambda: progress_bar.config(value=valor))
+    _ui(lambda v=valor: progress_bar.config(value=v))
+
+
+# --- Etapas del pipeline (etiqueta, color, rango 0-100) ---
+ETAPAS = {
+    "reposo": {
+        "etiqueta": "Listo",
+        "mensaje": "Esperando acción…",
+        "color": "#94A3B8",
+        "progreso": (0, 0),
+    },
+    "preparado": {
+        "etiqueta": "Listo",
+        "mensaje": "Documento y modelo listos.",
+        "color": "#06D6A0",
+        "progreso": (0, 0),
+    },
+    "iniciando": {
+        "etiqueta": "Inicio",
+        "mensaje": "Iniciando revisión…",
+        "color": "#06D6A0",
+        "progreso": (0, 2),
+    },
+    "extraccion_texto": {
+        "etiqueta": "Texto",
+        "mensaje": "Extrayendo texto del documento…",
+        "color": "#06D6A0",
+        "progreso": (2, 12),
+    },
+    "embeddings": {
+        "etiqueta": "Embeddings",
+        "mensaje": "Generando embeddings semánticos…",
+        "color": "#06D6A0",
+        "progreso": (12, 22),
+    },
+    "chunking": {
+        "etiqueta": "Segmentación",
+        "mensaje": "Dividiendo el documento en fragmentos…",
+        "color": "#06D6A0",
+        "progreso": (22, 32),
+    },
+    "metodologia": {
+        "etiqueta": "Metodología",
+        "mensaje": "Analizando secciones de metodología…",
+        "color": "#06D6A0",
+        "progreso": (32, 50),
+    },
+    "chroma": {
+        "etiqueta": "ChromaDB",
+        "mensaje": "Buscando revisiones similares…",
+        "color": "#06D6A0",
+        "progreso": (50, 58),
+    },
+    "prompt": {
+        "etiqueta": "Prompt",
+        "mensaje": "Construyendo el prompt de revisión…",
+        "color": "#06D6A0",
+        "progreso": (58, 62),
+    },
+    "revision": {
+        "etiqueta": "Revisión",
+        "mensaje": "Generando revisión con el modelo…",
+        "color": "#06D6A0",
+        "progreso": (62, 92),
+    },
+    "guardando": {
+        "etiqueta": "Guardado",
+        "mensaje": "Guardando reporte y archivos…",
+        "color": "#06D6A0",
+        "progreso": (92, 98),
+    },
+    "completado": {
+        "etiqueta": "Completado",
+        "mensaje": "Revisión completada.",
+        "color": "#06D6A0",
+        "progreso": (100, 100),
+    },
+    "advertencia": {
+        "etiqueta": "Aviso",
+        "mensaje": "",
+        "color": "#E9C46A",
+        "progreso": (92, 98),
+    },
+    "error": {
+        "etiqueta": "Error",
+        "mensaje": "",
+        "color": "#E94560",
+        "progreso": (0, 0),
+    },
+}
+
+
+def _aplicar_etapa(texto: str, color: str, valor: int):
+    lbl_estado._w.setText(texto)
+    lbl_estado._w.setStyleSheet(_estilo_etiqueta_estado(color))
+    progress_bar._w.setValue(valor)
+    progress_bar._w.setStyleSheet(_estilo_barra_progreso(color))
+
+
+def reportar_etapa(clave: str, sub: float = 0.0, detalle: str | None = None):
+    """Actualiza etiqueta coloreada y barra según la etapa del pipeline."""
+    info = ETAPAS.get(clave, ETAPAS["reposo"])
+    inicio, fin = info["progreso"]
+    sub = max(0.0, min(1.0, sub))
+    valor = inicio if inicio == fin else int(inicio + (fin - inicio) * sub)
+    mensaje = detalle or info["mensaje"]
+    texto = f"{info['etiqueta']} · {mensaje}"
+    color = info["color"]
+    _ui(lambda t=texto, c=color, v=valor: _aplicar_etapa(t, c, v))
+
+
+def reportar_reposo():
+    reportar_etapa("reposo", 0.0)
+
+
+def reportar_error(mensaje: str):
+    info = ETAPAS["error"]
+    texto = f"{info['etiqueta']} · {mensaje}"
+    _ui(lambda t=texto, c=info["color"]: _aplicar_etapa(t, c, progress_bar._w.value()))
 
 
 def escribir_salida(texto: str):
@@ -353,6 +505,7 @@ def _separator(parent, color=None):
 # --- Construcción de la interfaz ---
 
 app = QApplication.instance() or QApplication(sys.argv)
+_init_ui_dispatcher()
 
 _main = QMainWindow()
 _main.setWindowTitle("Revisor de PDF")
@@ -480,9 +633,15 @@ _combo_style = (
     f"QComboBox {{ background: {COLORES['blanco_crisp']}; color: {COLORES['texto_principal']};"
     f" padding: 8px; border: 1px solid {COLORES['gris_claro']}; border-radius: 4px;"
     f" font-family: 'Segoe UI'; }}"
+    f"QComboBox::drop-down {{ border: none; }}"
     f"QComboBox QAbstractItemView {{ background: {COLORES['blanco_crisp']};"
+    f" color: {COLORES['texto_principal']};"
     f" selection-background-color: {COLORES['boton_acento']};"
     f" selection-color: {COLORES['blanco_crisp']}; }}"
+    f"QComboBox QAbstractItemView::item {{ color: {COLORES['texto_principal']};"
+    f" padding: 6px 10px; min-height: 24px; }}"
+    f"QComboBox QAbstractItemView::item:selected {{"
+    f" background: {COLORES['boton_acento']}; color: {COLORES['blanco_crisp']}; }}"
 )
 _combo_first_w.setStyleSheet(_combo_style)
 _layout_welcome.addWidget(_combo_first_w, alignment=Qt.AlignmentFlag.AlignHCenter)
@@ -669,3 +828,21 @@ combo_after = _ComboAdapter(_combo_after_w, var_modelo)
 salida_html = _HtmlAdapter(_salida_w)
 progress_bar = _ProgressAdapter(progress_bar_w)
 txt_notas = txt_notas_w
+
+
+def wire_commands(
+    on_adjuntar=None,
+    on_iniciar=None,
+    on_stop=None,
+    on_procesar_texto=None,
+):
+    """Conecta acciones a botones (Qt signals, hilo principal)."""
+    if on_adjuntar:
+        btn_adjuntar_prev._w.clicked.connect(on_adjuntar)
+        btn_adjuntar._w.clicked.connect(on_adjuntar)
+    if on_iniciar:
+        btn_iniciar._w.clicked.connect(on_iniciar)
+    if on_stop:
+        btn_stop._w.clicked.connect(on_stop)
+    if on_procesar_texto:
+        btn_procesar_texto._w.clicked.connect(on_procesar_texto)

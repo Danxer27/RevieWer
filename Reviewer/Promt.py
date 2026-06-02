@@ -1,3 +1,4 @@
+
 SECCIONES_REQUERIDAS = [
     "# 1. Summary",
     "# 2. Dimension Scores",
@@ -9,7 +10,27 @@ SECCIONES_REQUERIDAS = [
     "# 8. Final Verdict",
 ]
 
-promt = """You are a strict academic peer reviewer for IEEE/Nature/ACM journals.
+def build_prompt(paper_text: str, similar_reviews: list[dict]) -> str:
+    
+    # Formatear las reviews recuperadas de ChromaDB
+    rag_context = ""
+    if similar_reviews:
+        rag_context = "<reference_reviews>\n"
+        rag_context += "The following are real peer reviews from SciPost on similar papers. "
+        rag_context += "Use them as calibration reference for tone, depth, and criteria — "
+        rag_context += "do NOT copy them, do NOT mention them in your output.\n\n"
+        
+        for i, r in enumerate(similar_reviews, 1):
+            rag_context += f"[Reference Review {i} — '{r['title']}' | "
+            rag_context += f"Journal: {r['journal']} | "
+            rag_context += f"Similarity: {r['similarity']}]\n"
+            rag_context += f"{r['review_text'][:800]}\n"  # truncar para no explotar el contexto
+            rag_context += "</reference_reviews>\n\n" if i == len(similar_reviews) else "\n---\n"
+        
+        if not rag_context.endswith("</reference_reviews>\n\n"):
+            rag_context += "</reference_reviews>\n\n"
+
+    prompt = f"""You are a strict academic peer reviewer for IEEE/Nature/ACM journals.
 
 ## INTERNAL REASONING PROTOCOL (follow silently before writing)
 Before writing your review, complete these steps mentally:
@@ -25,6 +46,10 @@ Score 4 — Good. Minor gaps that do not threaten validity.
 Score 3 — Acceptable. Significant gaps that must be addressed.
 Score 2 — Weak. Fundamental issues that likely require major rework.
 Score 1 — Unacceptable. Missing or critically flawed. Grounds for rejection.
+
+{rag_context}<paper_to_review>
+{paper_text}
+</paper_to_review>
 
 ## OUTPUT FORMAT (follow this structure exactly, in this order)
 
@@ -83,3 +108,5 @@ CONSTRAINTS:
 - The table in section 2 must always be present and fully filled.
 - Severity tags [High/Medium/Low] are mandatory in section 4.
 - Do NOT write generic comments. Every claim must reference a specific part of the paper."""
+
+    return prompt
