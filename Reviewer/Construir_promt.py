@@ -3,8 +3,9 @@ from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_experimental.text_splitter import SemanticChunker
 from pydantic import BaseModel, Field
 from Promt import build_prompt
+import re
 
-CHROMA_DIR = None
+CHROMA_DIR = None # Modificado por la parte de reviewer
 
 class AnalisisFragmento(BaseModel):
     contiene_metodologia: bool = Field(
@@ -13,6 +14,104 @@ class AnalisisFragmento(BaseModel):
     confianza: float = Field(
         description="Nivel de certeza del análisis, de 0.0 (nada seguro) a 1.0 (totalmente seguro)."
     )
+
+class SeccionClasificacion(BaseModel):
+    etiqueta: str = Field(
+        description=(
+            """Una de: abstract | introduction | related_work | methodology |
+                results | duscussion | conclusion | appendix | other"""
+        )
+    )
+    confianza: float = Field(
+        description="Confianza e 0.0 a 1.0"
+    )
+
+# Segmentacion por seccoines
+# Patrones de encabezados
+_SECTION_PATTERS: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"(?i)^\s*abstract"), "abstract"),
+    (re.compile(r"(?i)^\s*(#+\s*)?1\.?\s+introduction"), "introduction"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(related\s+work|background|prior\s+work|literature)"), "related_work"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(method|methodology|approach|proposed\s+method|our\s+method|framework)"), "methodology"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(experiment|result|evaluation|performance|benchmark)"), "results"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(discussion|analysis|ablation)"), "discussion"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(conclusion|future\s+work|summary)"), "conclusion"),
+    (re.compile(r"(?i)^\s*(#+\s*)?(appendix|supplement)"), "appendix"),
+]
+
+_MAX_SECTION_CHARS = 3500 # limite de caracteres por seccion
+
+def _detectar_etiqueta_h(linea: str) -> str | None:
+    for pattern, label in _SECTION_PATTERS:
+        if pattern.match(linea):
+            return label
+    return None
+
+def _segmentar_paper(texto: str, llm: ChatOllama | None = None) -> dict[str, str]:
+    """
+    Segmenta el texto del paper en secciones etiquetadas.
+
+    Estrategia en dos capas:
+      1. Heurística rápida: regex sobre líneas que parecen encabezados.
+      2. Fallback LLM: si no detecta suficientes secciones con regex,
+         usa un LLM pequeño para clasificar cada chunk semántico.
+
+    Returns:
+        dict[etiqueta → contenido] donde etiqueta es una de:
+        abstract, introduction, related_work, methodology,
+        results, discussion, conclusion, appendix, other.
+    """
+    lineas = texto.split("\n")
+    secciones: dict[str, list[str]] = {}
+    seccion_actual: str = "preamble"
+    buffer: list[str] = []
+
+    for linea in lineas:
+        stripped = linea.strip()
+        etiqueta = _detectar_etiqueta_h(stripped) if stripped else None
+
+        if etiqueta:
+            #Guardar seccion anterior
+            if buffer:
+                secciones.setdefault(seccion_actual)
+                buffer = []
+            seccion_actual = etiqueta
+        else:
+            buffer.append(linea)
+        
+        #Guardar ultimo buffer
+        if buffer:
+            secciones.setdefault(seccion_actual, []).extend(buffer)
+        
+        #Consolidar y recortar
+        resultado: dict[str, str] = {}
+        for label, lines in secciones.item():
+            contenido = "\n".join(lines).strip()
+            if len(contenido) < 80: # Seccion vacia o residual
+                continue
+            resultado[label] = contenido[:_MAX_SECTION_CHARS]
+
+        if len(resultado) <= 1:
+            resultado = _segmentar_por_parrafos(texto)
+
+        return resultado
+        
+def _segmentar_por_parrafos(texto: str) -> dict[str, str]:
+    """
+    Fallback: divide el paper en bloques por doble salto de línea
+    y los etiqueta ordinalmente. Preserva el contexto aunque sin semántica
+    de sección.
+    """
+    bloques = re.split(r"\n{2,}", texto)
+    resultado: dict[str, str] = {}
+    for i, bloque in enumerate(bloques):
+        bloque = bloque.strip
+        if len(bloque) < 80:
+            continue
+        label = f"block_{id:03d}"
+        resultado[label] = bloque[:_MAX_SECTION_CHARS]
+    return resultado
+
 
 def extraer_metodologia(texto_paper: str) -> list[dict[str, any]]:
     """

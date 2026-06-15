@@ -96,16 +96,13 @@ COLORES = {
 }
 
 
-#  Adaptadores (API compatible con tkinter)
-
-
+#  Adaptadores 
 def _estilo_etiqueta_estado(color: str) -> str:
     return (
         f"color: {color}; background-color: {color}22;"
         f" border-left: 3px solid {color}; padding: 5px 10px;"
         f" border-radius: 4px; font-family: 'Segoe UI'; font-size: 9px;"
     )
-
 
 def _estilo_barra_progreso(color: str) -> str:
     return (

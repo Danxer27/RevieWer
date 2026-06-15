@@ -1,3 +1,11 @@
+"""
+modeling.py — Orquestador de la revisión de papers en SIRA.
+
+Cambio respecto a la versión anterior:
+  - Registra la nueva etapa "segmentacion" que se ejecuta en completar_promt()
+    antes del chunking semántico. No hay cambios en la lógica de streaming.
+"""
+
 import Interfaz as UIF
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import ChatOllama
@@ -9,6 +17,8 @@ def revisar_paper(texto: str, MODELO_OL: str) -> str | None:
     UIF._buffer.clear()
     UIF._ui(lambda: UIF.salida_html.load_html(UIF._md_a_html("_Generando revisión..._")))
 
+    # completar_promt ahora ejecuta internamente:
+    #   etapa "segmentacion" → "embeddings" → "chunking" → "metodologia" → "chroma" → "prompt"
     system_prompt = completar_promt(texto=texto)
 
     UIF.reportar_etapa("revision", 0.0)
@@ -28,7 +38,7 @@ def revisar_paper(texto: str, MODELO_OL: str) -> str | None:
     )
     messages = [
         SystemMessage(content=system_prompt),
-        HumanMessage(content=f"Aquí tienes el documento para revisar:\n\n{texto}"),
+        HumanMessage(content=f"Here is the paper to review:\n\n{texto}"),
     ]
 
     try:

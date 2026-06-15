@@ -1,112 +1,181 @@
+"""
+Promt.py — Generación del prompt principal de SIRA.
 
+Cambio de paradigma:
+  ANTES: puntuaciones por dimensión → comentario genérico derivado de la puntuación.
+  AHORA: extractos concretos del paper → razonamiento sobre cada uno → problemas
+         identificados con cita textual → el veredicto emerge del análisis, no al revés.
+"""
+
+from __future__ import annotations
+
+
+# ---------------------------------------------------------------------------
+# Secciones esperadas en el output (para validación en otros módulos)
+# ---------------------------------------------------------------------------
 SECCIONES_REQUERIDAS = [
-    "# 1. Summary",
-    "# 2. Dimension Scores",
-    "# 3. Strengths",
-    "# 4. Weaknesses",
-    "# 5. Methodology Deep Analysis",
-    "# 6. Reproducibility Checklist",
-    "# 7. Required Actions",
-    "# 8. Final Verdict",
+    "# 1. Research Fingerprint",
+    "# 2. Targeted Findings",
+    "# 3. Cross-Section Issues",
+    "# 4. Methodology Interrogation",
+    "# 5. Reproducibility Audit",
+    "# 6. Required Actions",
+    "# 7. Final Verdict",
 ]
 
-def build_prompt(paper_text: str, similar_reviews: list[dict]) -> str:
-    
-    # Formatear las reviews recuperadas de ChromaDB
-    rag_context = ""
-    if similar_reviews:
-        rag_context = "<reference_reviews>\n"
-        rag_context += "The following are real peer reviews from SciPost on similar papers. "
-        rag_context += "Use them as calibration reference for tone, depth, and criteria — "
-        rag_context += "do NOT copy them, do NOT mention them in your output.\n\n"
-        
-        for i, r in enumerate(similar_reviews, 1):
-            rag_context += f"[Reference Review {i} — '{r['title']}' | "
-            rag_context += f"Journal: {r['journal']} | "
-            rag_context += f"Similarity: {r['similarity']}]\n"
-            rag_context += f"{r['review_text'][:800]}\n"  # truncar para no explotar el contexto
-            rag_context += "</reference_reviews>\n\n" if i == len(similar_reviews) else "\n---\n"
-        
-        if not rag_context.endswith("</reference_reviews>\n\n"):
-            rag_context += "</reference_reviews>\n\n"
 
-    prompt = f"""You are a strict academic peer reviewer for IEEE/Nature/ACM journals.
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
 
-## INTERNAL REASONING PROTOCOL (follow silently before writing)
-Before writing your review, complete these steps mentally:
-STEP 1: Identify the core research question in one sentence.
-STEP 2: Identify the methodology used (algorithm, dataset, evaluation metric).
-STEP 3: Check each section: Abstract, Introduction, Related Work, Methodology, Results, Conclusion.
-STEP 4: For each of the 4 dimensions below, assign a score using the rubric.
-STEP 5: Derive the final verdict from the average score.
+def _format_sections(sections: dict[str, str]) -> str:
+    """Serializa el dict de secciones segmentadas para insertarlo en el prompt."""
+    if not sections:
+        return "(no section segmentation available — reason over the full text)"
 
-## SCORING RUBRIC (use this for every dimension)
-Score 5 — Exceptional. No significant issues. Ready for publication.
-Score 4 — Good. Minor gaps that do not threaten validity.
-Score 3 — Acceptable. Significant gaps that must be addressed.
-Score 2 — Weak. Fundamental issues that likely require major rework.
-Score 1 — Unacceptable. Missing or critically flawed. Grounds for rejection.
+    lines: list[str] = []
+    for label, content in sections.items():
+        lines.append(f"<section id='{label}'>")
+        lines.append(content.strip())
+        lines.append(f"</section>")
+        lines.append("")
+    return "\n".join(lines)
 
-{rag_context}<paper_to_review>
-{paper_text}
-</paper_to_review>
 
-## OUTPUT FORMAT (follow this structure exactly, in this order)
+def _format_rag(similar_reviews: list[dict]) -> str:
+    """Formatea el contexto RAG de SciPost."""
+    if not similar_reviews:
+        return ""
 
-# 1. Summary
-- Research question (1 sentence):
-- Proposed solution (1 sentence):
-- Why it matters (1 sentence):
+    parts = ["<reference_reviews>"]
+    parts.append(
+        "Real peer reviews from SciPost on comparable papers. "
+        "Use them to calibrate tone, depth, and what real reviewers focus on. "
+        "Do NOT copy them. Do NOT mention them in your output.\n"
+    )
+    for i, r in enumerate(similar_reviews, 1):
+        parts.append(
+            f"[Reference {i} — '{r['title']}' | {r['journal']} | "
+            f"similarity={r['similarity']}]"
+        )
+        # Truncar para no explotar el contexto
+        parts.append(r["review_text"][:700])
+        if i < len(similar_reviews):
+            parts.append("---")
+    parts.append("</reference_reviews>\n")
+    return "\n".join(parts)
 
-# 2. Dimension Scores
-| Dimension       | Score (1-5) | One-line justification |
-|-----------------|-------------|------------------------|
-| Novelty         |             |                        |
-| Methodology     |             |                        |
-| Reproducibility |             |                        |
-| Clarity         |             |                        |
-| **Average**     |             |                        |
 
-# 3. Strengths
-For each strength: state the specific section/element and why it is strong.
-Minimum 2, maximum 5. No generic praise.
+# ---------------------------------------------------------------------------
+# Builder principal
+# ---------------------------------------------------------------------------
 
-# 4. Weaknesses (CRITICAL)
-For each weakness:
-- [SEVERITY: High/Medium/Low] Description of the issue.
-- Specific section or claim where it occurs.
-- Concrete action required to fix it.
-Minimum 3 weaknesses. Do not soften.
+def build_prompt(
+    paper_text: str,
+    similar_reviews: list[dict],
+    sections: dict[str, str] | None = None,
+) -> str:
+    """
+    Construye el prompt completo para el LLM revisor.
 
-# 5. Methodology Deep Analysis
-- Are methods justified? (Yes/Partial/No) — explain.
-- Are experiments sufficient? (Yes/Partial/No) — explain.
-- Missing ablations or controls: list them.
-- Statistical validity: (Yes/Partial/No) — explain.
+    Args:
+        paper_text:      Texto completo del paper (fallback si sections está vacío).
+        similar_reviews: Reviews recuperadas de ChromaDB para calibración.
+        sections:        Dict {label: contenido} con el paper ya segmentado por sección.
+                         Si se provee, los agentes razonan sobre secciones concretas.
+    """
+    rag_block = _format_rag(similar_reviews)
+    sections_block = _format_sections(sections or {})
 
-# 6. Reproducibility Checklist
-For each item, mark [✓] present, [✗] missing, [~] partial:
-- [ ] Dataset description and access
-- [ ] Hyperparameters and architecture details
-- [ ] Evaluation metrics defined
-- [ ] Baseline comparisons
-- [ ] Code or implementation details
+    prompt = f"""You are an expert academic peer reviewer for IEEE, Nature, and ACM journals.
 
-# 7. Required Actions (Priority Order)
-List actions the authors MUST take, numbered from most to least critical.
-Each action must reference a specific section and propose a concrete fix.
+Your job is NOT to fill a scorecard. Your job is to read specific passages from this paper,
+identify concrete problems, and explain exactly what is wrong and why — citing the text directly.
 
-# 8. Final Verdict
-Score average: [X.X]
-Verdict: [Accept / Minor Revisions / Major Revisions / Reject]
-Justification (2 sentences max, based on the scores above):
+{rag_block}
+## HOW TO REASON (internal — do not output these steps)
+
+For each section of the paper:
+  1. Read it carefully.
+  2. Ask: Is there a claim here that is not justified? An assumption left unstated?
+     A conclusion that does not follow from the evidence? A comparison that is unfair?
+     A term used inconsistently? A number that looks suspicious?
+  3. If yes, mark it as a FINDING — copy the specific phrase or sentence, then explain the problem.
+  4. If no significant issue, note what makes the section solid.
+
+Do not evaluate in the abstract. Every observation must be anchored to something you can quote.
+
+## SEGMENTED PAPER
+
+{sections_block}
+
+<full_paper_fallback>
+{paper_text[:6000]}
+</full_paper_fallback>
 
 ---
-CONSTRAINTS:
-- Do NOT add sections not listed above.
-- Do NOT change the order of sections.
-- The table in section 2 must always be present and fully filled.
-- Severity tags [High/Medium/Low] are mandatory in section 4.
-- Do NOT write generic comments. Every claim must reference a specific part of the paper."""
+
+## OUTPUT FORMAT (follow exactly, in this order)
+
+# 1. Research Fingerprint
+One tightly written paragraph identifying: the exact research question, the proposed approach,
+what distinguishes it from prior work (or fails to), and what would need to be true for the
+paper's central claim to hold. No filler. No praise for its own sake.
+
+# 2. Targeted Findings
+
+For each significant finding, use this structure (repeat as many times as needed; minimum 4):
+
+## Finding [N]: [Short label, e.g. "Unsupported baseline comparison"]
+- **Section:** [Which section/subsection]
+- **Excerpt:** > "[Quote the relevant sentence or phrase directly from the paper]"
+- **Problem:** [What is wrong with this, specifically. What assumption does it hide?
+  What would a skeptical reader ask? Why does it weaken the paper's claim?]
+- **Severity:** [Critical | Major | Minor]
+- **Fix:** [Concrete action: what the authors must add, remove, or clarify]
+
+Do NOT group findings under generic headers like "Methodology" or "Clarity."
+Each finding must stand alone with its own excerpt and analysis.
+
+# 3. Cross-Section Issues
+Problems that span multiple sections (e.g., the abstract promises X but the results show Y;
+the introduction frames the problem as Z but the methodology solves something else).
+For each: quote from both sections and explain the contradiction or gap.
+If none exist, write: "No cross-section inconsistencies detected."
+
+# 4. Methodology Interrogation
+Answer each question with a specific reference to the paper — no generic answers:
+- **Research design justified?** (cite the passage where it is — or isn't — explained)
+- **Dataset adequate for the claims?** (cite size, source, and any obvious gaps)
+- **Evaluation metrics appropriate?** (quote which metrics are used; explain any mismatch)
+- **Ablations or controls missing?** (name them concretely: "The authors test X but never
+  isolate the contribution of Y, which makes it impossible to attribute the gain to Z")
+- **Statistical validity?** (quote any statistical claims; flag missing confidence intervals,
+  sample size justification, or p-value reporting)
+
+# 5. Reproducibility Audit
+Mark each item and add a brief note — never just a checkmark:
+- [ ] Dataset: [present/partial/missing — and what specifically is lacking]
+- [ ] Hyperparameters / architecture: [present/partial/missing — cite where]
+- [ ] Evaluation protocol: [present/partial/missing]
+- [ ] Baselines: [present/partial/missing — are they fairly implemented?]
+- [ ] Code / implementation: [present/partial/missing]
+
+# 6. Required Actions (Priority Order)
+Numbered list from most to least critical. For each:
+  [N]. **[Action verb + what]** — Reference: [section]. Required because: [one sentence].
+
+# 7. Final Verdict
+Recommendation: [Accept | Minor Revisions | Major Revisions | Reject]
+Rationale: Two sentences grounded in the findings above. No new information here.
+
+---
+
+HARD CONSTRAINTS:
+- Every claim you make must be traceable to a specific excerpt from the paper.
+- "Findings" with no quoted text are not valid findings — rewrite them.
+- Do not write generic sentences that would apply to any paper in the field.
+- Do not soften critical findings with hedging language.
+- Section order is fixed. Do not add or remove sections."""
 
     return prompt
