@@ -140,4 +140,11 @@ Output strictly in the following Markdown format:
 - ✅ Accept as is
 - 🔵 Accept with minor revisions
 - 🟡 Major revisions required
-- 🔴 Reject — fundamental issues present"""
+- 🔴 Reject — fundamental issues present
+
+CRITICAL: Start your response DIRECTLY with "## Executive Summary". 
+Do not write any preamble, acknowledgment, or conversational text before the format.
+Do not write "Okay", "Sure", "Here's" or any similar phrase.
+Your first word must be "##".
+
+"""

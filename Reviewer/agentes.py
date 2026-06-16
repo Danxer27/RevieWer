@@ -2,7 +2,7 @@ import threading
 import ollama
 from typing import Union
 from prompts import ESTRUCTURA, METODOLOGIA, REDACCION, SINTESIS
-
+from context import obtener_contexto
 
 cliente = ollama.Client(host='http://localhost:11434')
 
@@ -13,14 +13,18 @@ AGENTES = {
     "sintesis" : SINTESIS
 }
 
-def _correr_agente(nombre: str, modelo: str, texto: str, resultados: dict, errores: dict) -> Union[str, None]:
+def _correr_agente(nombre: str, modelo: str, texto: str, resultados: dict, errores: dict, contexto_arte: str="") -> Union[str, None]:
     
     try:
+        # Armar contenido con o sin contexto de OpenAlex
+        contenido = f"Document to review:\n\n{texto}"
+        if contexto_arte:
+            contenido = f"{contexto_arte}\n\n---\n\n{contenido}"
         respuesta = cliente.chat(
             model = modelo,
             messages = [
                 {'role': 'system', 'content': AGENTES[nombre]},
-                {'role': 'user', 'content': f"Documento a revisar:\n\n{texto}"}
+                {'role': 'user', 'content': contenido}
             ],
             options = {'num_ctx': 32000, 'temperature': 0.2}
         )
@@ -30,6 +34,15 @@ def _correr_agente(nombre: str, modelo: str, texto: str, resultados: dict, error
 
 
 def revisar_multiagente(texto: str, modelo: str, set_estado, set_progreso) -> Union[str, None]:
+    
+    set_estado("Consultando estado del arte...", "#4cc9f0")
+    contexto_arte = obtener_contexto(texto)
+    
+    print(f"=== CONTEXTO OPENALEX ===")
+    print(contexto_arte[:500] if contexto_arte else "VACÍO")
+    print("=== FIN ===")
+    
+    
     resultados = {}
     errores = {}
     
@@ -42,7 +55,7 @@ def revisar_multiagente(texto: str, modelo: str, set_estado, set_progreso) -> Un
     for nombre in ["estructura", "metodologia", "redaccion"]:
         h = threading.Thread(
             target = _correr_agente,
-            args = (nombre, modelo, texto, resultados, errores),
+            args = (nombre, modelo, texto, resultados, errores, contexto_arte),
             daemon=True
         )
         hilos.append(h)
