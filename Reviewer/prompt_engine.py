@@ -20,13 +20,12 @@ from langchain_ollama import ChatOllama, OllamaEmbeddings
 from langchain_experimental.text_splitter import SemanticChunker
 from pydantic import BaseModel, Field
 
+from rag_cheklist import ChecklistRAG 
+
 import interfaz as UIF
 from state import CHROMA_DIR, OLLAMA_HOST
 
-
-# ---------------------------------------------------------------------------
 # Esquema de salida estructurada del clasificador de metodología
-# ---------------------------------------------------------------------------
 
 class AnalisisFragmento(BaseModel):
     contiene_metodologia: bool = Field(
@@ -40,9 +39,7 @@ class AnalisisFragmento(BaseModel):
     )
 
 
-# ---------------------------------------------------------------------------
 # Secciones esperadas en el output del LLM (para validación externa)
-# ---------------------------------------------------------------------------
 
 SECCIONES_REQUERIDAS: list[str] = [
     "# 1. Research Fingerprint",
@@ -93,7 +90,7 @@ Texto del fragmento (Índice {idx}):
 {contenido}
 """
 
-    # ── Segmentación ─────────────────────────────────────────────────────
+    # ── Segmentación
 
     def _detectar_etiqueta(self, linea: str) -> str | None:
         """Retorna la etiqueta de sección si la línea coincide con un patrón conocido."""
@@ -162,7 +159,7 @@ Texto del fragmento (Índice {idx}):
             resultado[f"block_{i:03d}"] = bloque[: self._MAX_SECTION_CHARS]
         return resultado
 
-    # ── Extracción de metodología ─────────────────────────────────────────
+    # Extracción de metodología 
 
     def _construir_clasificador(self) -> tuple[ChatOllama, SemanticChunker]:
         """
@@ -224,7 +221,7 @@ Texto del fragmento (Índice {idx}):
         )
         return fragmentos_metodologicos
 
-    # ── RAG con ChromaDB ──────────────────────────────────────────────────
+    # RAG con ChromaDB
 
     def _texto_para_query(self, fragmentos: list[dict], texto: str) -> str:
         """Usa los fragmentos de metodología como query; cae al inicio del texto si no hay."""
@@ -262,8 +259,8 @@ Texto del fragmento (Índice {idx}):
         return [
             {
                 "review_text": doc,
-                "title": meta["title"],
-                "journal": meta["journal"],
+                "title": meta.get("title", "Unknown source"),
+                "journal": meta.get("journal", "Unknown journal"),
                 "similarity": round(1 - dist, 3),
             }
             for doc, meta, dist in zip(
@@ -271,6 +268,27 @@ Texto del fragmento (Índice {idx}):
                 results["metadatas"][0],
                 results["distances"][0],
             )
+        ]
+
+    def _consultar_checklists(self, query_text: str, llm: ChatOllama) -> list[dict]:
+        """Recupera ítems de checklist desde el índice de checklists de SIRA."""
+        UIF.reportar_etapa("chroma", 0.0)
+        try:
+            rag = ChecklistRAG(llm, CHROMA_DIR)
+            docs = rag.retrieve(query_text)
+        except Exception as e:
+            UIF.reportar_etapa("chroma", 1.0)
+            UIF.reportar_error(f"Error al recuperar checklists: {e}")
+            return []
+
+        UIF.reportar_etapa("chroma", 1.0)
+        return [
+            {
+                "checklist_text": doc.page_content,
+                "checklist_name": doc.metadata.get("checklist_name", "Checklist"),
+                "study_type": doc.metadata.get("study_type", "general"),
+            }
+            for doc in docs
         ]
 
     # ── Formateo del prompt ───────────────────────────────────────────────
@@ -310,10 +328,32 @@ Texto del fragmento (Índice {idx}):
         parts.append("</reference_reviews>\n")
         return "\n".join(parts)
 
+    def _format_checklist_guidelines(self, checklist_docs: list[dict] | None) -> str:
+        """Formatea el bloque de contexto de checklists recuperados."""
+        if not checklist_docs:
+            return ""
+
+        parts = ["<checklist_guidelines>"]
+        parts.append(
+            "The following checklist fragments are provided to help identify missing "
+            "or poorly reported methodological details. Use them as technical guidance. "
+            "Do NOT copy them verbatim.\n"
+        )
+        for i, doc in enumerate(checklist_docs, 1):
+            parts.append(
+                f"[Checklist {i} — {doc['checklist_name']} | {doc['study_type']}]"
+            )
+            parts.append(doc["checklist_text"][:700])
+            if i < len(checklist_docs):
+                parts.append("---")
+        parts.append("</checklist_guidelines>\n")
+        return "\n".join(parts)
+
     def _build_prompt(
         self,
         paper_text: str,
         similar_reviews: list[dict],
+        checklist_docs: list[dict] | None = None,
         sections: dict[str, str] | None = None,
     ) -> str:
         """
@@ -322,9 +362,11 @@ Texto del fragmento (Índice {idx}):
         Args:
             paper_text:      Texto completo del paper (fallback si sections está vacío).
             similar_reviews: Reviews recuperadas de ChromaDB para calibración.
+            checklist_docs:  Documentos de checklist recuperados de SIRA.
             sections:        Dict {label: contenido} con el paper segmentado por sección.
         """
         rag_block = self._format_rag(similar_reviews)
+        checklist_block = self._format_checklist_guidelines(checklist_docs)
         sections_block = self._format_sections(sections or {})
 
         return f"""You are an expert academic peer reviewer for IEEE, Nature, and ACM journals.
@@ -332,7 +374,7 @@ Texto del fragmento (Índice {idx}):
 Your job is NOT to fill a scorecard. Your job is to read specific passages from this paper,
 identify concrete problems, and explain exactly what is wrong and why — citing the text directly.
 
-{rag_block}
+{rag_block}{checklist_block}
 ## HOW TO REASON (internal — do not output these steps)
 
 For each section of the paper:
@@ -418,9 +460,9 @@ HARD CONSTRAINTS:
 - Do not soften critical findings with hedging language.
 - Section order is fixed. Do not add or remove sections."""
 
-    # ── Punto de entrada público ──────────────────────────────────────────
+    #  Punto de entrada público ───
 
-    def completar_prompt(self, texto: str, field_filter: str | None = None) -> str:
+    def completar_prompt(self, texto: str, llm: ChatOllama, field_filter: str | None = None) -> str:
         """
         Construye el prompt completo para la revisión de un paper.
 
@@ -432,6 +474,7 @@ HARD CONSTRAINTS:
 
         Args:
             texto:        Texto completo del paper.
+            llm:          Instancia del modelo ChatOllama usada para recuperación híbrida.
             field_filter: Filtro opcional de campo para ChromaDB.
 
         Returns:
@@ -443,20 +486,21 @@ HARD CONSTRAINTS:
         UIF.reportar_etapa("segmentacion", 1.0)
 
         # 2. Extracción de metodología → construye el query para RAG
-        #    [RAG] Si tu cadena necesita contexto adicional (e.g. metadatos del paper,
-        #    campo de investigación, año), agrégalos aquí antes de llamar a _consultar_chroma.
         fragmentos = self._extraer_metodologia(texto)
         query_text = self._texto_para_query(fragmentos, texto)
 
-        # 3. Recuperación RAG
-        #    [RAG] _consultar_chroma es donde se conecta tu cadena. Ver comentarios allá.
+        # 3. Recuperación RAG clásica + checklists
         similar_reviews = self._consultar_chroma(query_text, field_filter)
+        checklist_docs = self._consultar_checklists(query_text, llm)
 
         # 4. Ensamblado del prompt final
-        #    [RAG] Si tu cadena genera contexto extra (e.g. definiciones, resúmenes),
-        #    pásalo aquí como argumento adicional a _build_prompt.
         UIF.reportar_etapa("prompt", 0.0)
-        prompt = self._build_prompt(texto, similar_reviews, sections=secciones)
+        prompt = self._build_prompt(
+            texto,
+            similar_reviews,
+            checklist_docs=checklist_docs,
+            sections=secciones,
+        )
         UIF.reportar_etapa("prompt", 1.0)
 
         return prompt

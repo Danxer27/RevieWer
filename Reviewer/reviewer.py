@@ -11,9 +11,7 @@ from document import DocumentManager
 from pipeline import ReviewPipeline
 
 
-# ─────────────────────────────────────────────
 # ESTADO Y DEPENDENCIAS
-# ─────────────────────────────────────────────
 
 state = RevisionState()
 doc_manager = DocumentManager(state)
@@ -35,10 +33,7 @@ Color_alerta = {
     'azul': '#4cc9f0'
 }
 
-
-# ─────────────────────────────────────────────
 # CONTROLADORES DE EVENTOS
-# ─────────────────────────────────────────────
 
 def adjuntar_documento():
     """Abre el diálogo de archivo, copia el documento elegido y prepara la UI."""
@@ -129,10 +124,7 @@ def abrir_texto(event):
         state.pdf_name = nombre
 
 
-# ─────────────────────────────────────────────
 # HELPERS DE UI
-# ─────────────────────────────────────────────
-
 def _mostrar_en_display(
     nombre: str, ruta: Path, etiqueta: str, procesar_visible: bool = False
 ) -> str | None:
@@ -147,10 +139,7 @@ def _mostrar_en_display(
     return None
 
 
-# ─────────────────────────────────────────────
 # INICIALIZACIÓN DE LA APLICACIÓN
-# ─────────────────────────────────────────────
-
 UIF.wire_commands(
     on_adjuntar=adjuntar_documento,
     on_iniciar=iniciar_revision,

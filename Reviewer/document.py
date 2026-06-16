@@ -41,7 +41,7 @@ class DocumentManager:
     def __init__(self, state: RevisionState) -> None:
         self._state = state
 
-    # ── Lectura de documentos ─────────────────────────────────────────────
+    # Lectura de documentos
 
     def extraer_texto(self, ruta_archivo: str) -> Union[str, None]:
         """
@@ -82,7 +82,7 @@ class DocumentManager:
             print(f"Error al leer DOCX: {e}")
             return None
 
-    # ── Escritura de archivos ─────────────────────────────────────────────
+    # Escritura de archivos
 
     def guardar_reporte(self, reporte: str) -> None:
         """Persiste el reporte Markdown en disco con encabezado de metadatos."""
@@ -100,7 +100,7 @@ class DocumentManager:
             f.write(texto)
         UIF.cargar_textos()
 
-    # ── Utilidades de nombres ─────────────────────────────────────────────
+    # Utilidades de nombres
 
     @staticmethod
     def sanitizar_nombre(name: str) -> str:

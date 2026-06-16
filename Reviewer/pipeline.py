@@ -41,7 +41,7 @@ class ReviewPipeline:
         self._doc = DocumentManager(state)
         self._prompt_engine = PromptEngine()
 
-    # ── Etapas individuales ───────────────────────────────────────────────
+    # Etapas individuales
 
     def _obtener_texto(self) -> str | None:
         """
@@ -84,8 +84,6 @@ class ReviewPipeline:
         UIF._buffer.clear()
         UIF.escribir_salida("_Generando revisión..._")
 
-        system_prompt = self._prompt_engine.completar_prompt(texto=texto)
-
         UIF.reportar_etapa("revision", 0.0)
         reporte_completo: list[str] = []
         inicio, fin = UIF.ETAPAS["revision"]["progreso"]
@@ -101,6 +99,11 @@ class ReviewPipeline:
             top_p=1.0,
             num_predict=4096,
         )
+
+        # Pasar el LLM a completar_prompt para que ChecklistRAG
+        # pueda usar HyDE y Multi-Query con el mismo modelo del usuario.
+        system_prompt = self._prompt_engine.completar_prompt(texto=texto, llm=llm)
+
         messages = [
             SystemMessage(content=system_prompt),
             HumanMessage(content=f"Here is the paper to review:\n\n{texto}"),
@@ -128,7 +131,7 @@ class ReviewPipeline:
             UIF.escribir_salida(f"**Error al comunicarse con Ollama:**\n\n{e}")
             return None
 
-    # ── Pipeline principal ────────────────────────────────────────────────
+    # Pipeline principal
 
     def ejecutar(self) -> None:
         """
@@ -183,7 +186,7 @@ class ReviewPipeline:
         finally:
             self._restaurar_botones()
 
-    # ── Helpers de control ────────────────────────────────────────────────
+    # Helpers de control
 
     def _restaurar_botones(self) -> None:
         """Restaura el estado de los botones al terminar o interrumpir un proceso."""
