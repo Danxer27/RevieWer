@@ -12,7 +12,6 @@ from typing import Union
 import re, unicodedata
 from datetime import datetime
 from pathlib import Path
-from Promt import promt as PROMT
 from agentes import revisar_multiagente
 
 cliente = ollama.Client(host='http://localhost:11434')
@@ -170,16 +169,15 @@ def _pipeline_hilo():
             UIF.set_estado,
             UIF.set_progreso
         )
+        
+        print(f"=== REPORTE RECIBIDO ===")
+        print(f"Tipo: {type(reporte)}")
+        print(f"Contenido (primeros 200 chars): {repr(reporte)[:200] if reporte else 'None o vacío'}")
+        print("=== FIN ===")
 
         if reporte is None:
             return _cancelado()
-        
-        # Validar estructura
-        es_valido, faltantes = validar_reporte(reporte)
-        if not es_valido:
-            UIF.set_estado("Advertencia: reporte incompleto", Color_alerta["amarillos"])
-            advertencia = f"\n\n---\n **Secciones no generadas:** {', '.join(faltantes)}"
-            reporte += advertencia
+
 
         UIF.set_estado("Guardando reporte...", "#4cc9f0")
         UIF.set_progreso(90)
@@ -225,15 +223,6 @@ def _pipeline_hilo():
         proceso_activo = False
     finally:
         _restaurar_botones()
-
-
-def validar_reporte(reporte: str) -> tuple[bool, list[str]]:
-    """
-    Verifica que el reporte contenga todas las secciones requeridas.
-    Retorna (es_valido, secciones_faltantes).
-    """
-    faltantes = [s for s in SECCIONES_REQUERIDAS if s not in reporte]
-    return len(faltantes) == 0, faltantes
 
 
 def abrir_revision(event):

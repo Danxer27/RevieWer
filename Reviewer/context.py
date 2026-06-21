@@ -13,8 +13,8 @@ def extraer_keywords(texto: str)->list[str]:
     )
     if match:
         bloque = match.group(1).strip()
-        keywords = re.split(r'[,;\n]+', bloque)
-        keywords = [k.split() for k in keywords if k.strip()]
+        keywords = re.split(r'[,;·\n]+', bloque)
+        keywords = [k.strip() for k in keywords if k.strip()]
         keywords = [k for k in keywords if 3 < len(k) < 50]
         if keywords:
             return keywords[:6]
