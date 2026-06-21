@@ -1,14 +1,33 @@
-import tkinter as tk
-from tkinter import filedialog, ttk
-from PIL import Image, ImageTk
+import sys
 from pathlib import Path
-from tkinterweb import HtmlFrame
-import markdown
 
-_buffer = [] 
+import markdown
+from PySide6.QtCore import Qt, QTimer, QUrl
+from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QListWidget,
+    QMainWindow,
+    QProgressBar,
+    QPushButton,
+    QSizePolicy,
+    QStackedWidget,
+    QTextEdit,
+    QVBoxLayout,
+    QWidget,
+)
+from PySide6.QtWebEngineWidgets import QWebEngineView
+
+_buffer = []
 after_display = False
 REVIEW_DIR = None
 TEXTOS_DIR = None
+
+_IMGS = Path(__file__).parent / "imgs"
 
 
 #  MARKDOWN - HTML
@@ -20,114 +39,235 @@ def _md_a_html(texto: str) -> str:
 <meta charset="utf-8">
 <style>
   body {{
-    background: #0d0d1a;
-    color: #dde1e7;
-    font-family: Consolas, 'Courier New', monospace;
+    background: #0F2C59;
+    color: #F4F6F9;
+    font-family: 'Segoe UI', Calibri, sans-serif;
     font-size: 13px;
-    padding: 14px 18px;
-    line-height: 1.7;
+    padding: 18px;
+    line-height: 1.75;
     margin: 0;
   }}
-  h1 {{ color: #e94560; font-size: 18px; border-bottom: 1px solid #0f3460; padding-bottom: 4px; }}
-  h2 {{ color: #e94560; font-size: 15px; margin-top: 18px; }}
-  h3 {{ color: #4cc9f0; font-size: 13px; margin-top: 14px; }}
-  strong {{ color: #ffffff; }}
-  em {{ color: #a0a0c0; }}
+  h1 {{ color: #F4F6F9; font-size: 20px; border-bottom: 1px solid #17365F; padding-bottom: 6px; }}
+  h2 {{ color: #E2E8F0; font-size: 16px; margin-top: 18px; }}
+  h3 {{ color: #CBD5E1; font-size: 14px; margin-top: 14px; }}
+  strong {{ color: #FFFFFF; }}
+  em {{ color: #CBD5E1; }}
   code {{
-    background: #0f3460;
-    color: #06d6a0;
-    padding: 1px 5px;
-    border-radius: 3px;
+    background: rgba(255,255,255,0.08);
+    color: #F4F6F9;
+    padding: 2px 6px;
+    border-radius: 4px;
     font-size: 12px;
   }}
   pre {{
-    background: #0f3460;
-    color: #06d6a0;
-    padding: 10px;
-    border-radius: 4px;
+    background: rgba(255,255,255,0.08);
+    color: #F4F6F9;
+    padding: 12px;
+    border-radius: 6px;
     overflow-x: auto;
   }}
   blockquote {{
-    border-left: 3px solid #e94560;
-    margin: 8px 0;
-    padding-left: 12px;
-    color: #a0a0c0;
+    border-left: 3px solid #7A1C20;
+    margin: 10px 0;
+    padding-left: 14px;
+    color: #CBD5E1;
   }}
-  ul, ol {{ padding-left: 20px; }}
-  li {{ margin: 3px 0; }}
-  li::marker {{ color: #e94560; }}
-  hr {{ border: none; border-top: 1px solid #0f3460; margin: 14px 0; }}
-  p {{ margin: 6px 0; }}
+  ul, ol {{ padding-left: 22px; }}
+  li {{ margin: 4px 0; }}
+  li::marker {{ color: #7A1C20; }}
+  hr {{ border: none; border-top: 1px solid rgba(255,255,255,0.12); margin: 16px 0; }}
+  p {{ margin: 8px 0; }}
 </style>
 </head>
 <body>{cuerpo}</body>
 </html>"""
 
 
-# UI HELPERS 
+COLORES = {
+    "fondo_principal": "#F4F6F9",
+    "fondo_menu": "#E2E8F0",
+    "fondo_carta": "#0F2C59",
+    "fondo_notas": "#F4F6F9",
+    "boton_acento": "#7A1C20",
+    "texto_principal": "#1E293B",
+    "texto_secundario": "#475569",
+    "blanco_crisp": "#FFFFFF",
+    "gris_claro": "#CBD5E1",
+}
+
+
+# --- Adaptadores (API compatible con tkinter para reviewer.py) ---
+
+class _LabelAdapter:
+    def __init__(self, label: QLabel):
+        self._w = label
+
+    def config(self, **kwargs):
+        if "text" in kwargs:
+            self._w.setText(kwargs["text"])
+        if "fg" in kwargs:
+            self._w.setStyleSheet(f"color: {kwargs['fg']};")
+
+
+class _ButtonAdapter:
+    def __init__(self, button: QPushButton):
+        self._w = button
+
+    def config(self, state=None, command=None, **kwargs):
+        if state == "normal":
+            self._w.setEnabled(True)
+        elif state == "disabled":
+            self._w.setEnabled(False)
+        if command is not None:
+            try:
+                self._w.clicked.disconnect()
+            except RuntimeError:
+                pass
+            self._w.clicked.connect(command)
+
+    def pack(self, **kwargs):
+        self._w.show()
+
+    def pack_forget(self):
+        self._w.hide()
+
+
+class _ListAdapter:
+    def __init__(self, widget: QListWidget):
+        self._w = widget
+
+    def delete(self, start, end):
+        self._w.clear()
+
+    def insert(self, end, item):
+        self._w.addItem(item)
+
+    def curselection(self):
+        row = self._w.currentRow()
+        return () if row < 0 else (row,)
+
+    def get(self, index):
+        item = self._w.item(index)
+        return item.text() if item else ""
+
+    def bind(self, event, callback):
+        if event == "<<ListboxSelect>>":
+            self._w.itemSelectionChanged.connect(lambda: callback(None))
+
+
+class _ComboAdapter:
+    def __init__(self, combo: QComboBox, var: "_StringVarAdapter"):
+        self._w = combo
+        self._var = var
+
+    def __setitem__(self, key, value):
+        if key == "values":
+            self._w.blockSignals(True)
+            self._w.clear()
+            self._w.addItems(value)
+            self._w.blockSignals(False)
+
+    def bind(self, event, callback):
+        if event == "<<ComboboxSelected>>":
+            self._w.activated.connect(lambda _i: callback(None))
+
+
+class _StringVarAdapter:
+    def __init__(self, combos: list[QComboBox]):
+        self._combos = combos
+
+    def get(self):
+        if not self._combos:
+            return ""
+        return self._combos[0].currentText()
+
+    def set(self, value: str):
+        for combo in self._combos:
+            combo.blockSignals(True)
+            idx = combo.findText(value)
+            if idx >= 0:
+                combo.setCurrentIndex(idx)
+            combo.blockSignals(False)
+
+
+class _HtmlAdapter:
+    def __init__(self, view: QWebEngineView):
+        self._w = view
+
+    def load_html(self, html: str):
+        self._w.setHtml(html, QUrl("about:blank"))
+
+
+class _ProgressAdapter:
+    def __init__(self, bar: QProgressBar):
+        self._w = bar
+
+    def config(self, value=None, **kwargs):
+        if value is not None:
+            self._w.setValue(value)
+
+
+# UI HELPERS
+
 def _ui(fn):
-    root.after(0, fn)
+    QTimer.singleShot(0, fn)
+
 
 def set_estado(texto: str, color: str = "#4a4a8a"):
     _ui(lambda: lbl_estado.config(text=texto, fg=color))
 
+
 def set_modelo_first(texto: str, color: str = "#4a4a8a"):
     _ui(lambda: lbl_text_first_model.config(text=texto, fg=color))
+
 
 def set_modelo_after(texto: str, color: str = "#4a4a8a"):
     _ui(lambda: lbl_text_model_mini.config(text=texto, fg=color))
 
+
 def set_progreso(valor: int):
     _ui(lambda: progress_bar.config(value=valor))
 
+
 def escribir_salida(texto: str):
-    #Renderiza texto como Markdown en el HtmlFrame.
     def _w():
         salida_html.load_html(_md_a_html(texto))
+
     _ui(_w)
+
 
 def escribir_plano(texto: str):
-    #Texto plano durante streaming (sin procesar MD).
     def _w():
         salida_html.load_html(_md_a_html(texto))
+
     _ui(_w)
 
+
 def append_salida(token: str):
-    #Acumula token y refresca la vista cada 40 tokens.
     _buffer.append(token)
     if len(_buffer) % 40 == 0:
         texto_hasta_ahora = "".join(_buffer)
         _ui(lambda t=texto_hasta_ahora: salida_html.load_html(_md_a_html(t)))
 
+
 def _finalizar_streaming():
-    #Al terminar el stream, hace el render final completo.
     texto_completo = "".join(_buffer)
     _buffer.clear()
     _ui(lambda: salida_html.load_html(_md_a_html(texto_completo)))
+
 
 def _restaurar_botones():
     def _do():
         btn_iniciar.config(state="normal")
         btn_stop.config(state="disabled")
+
     _ui(_do)
 
 
-
-# Funciones
-def _cancelado():
-    set_estado("Proceso interrumpido.", "#e94560")
-    set_progreso(0)
-    _buffer.clear()
-    _restaurar_botones()
-
-def interrumpir():
-    set_estado("Interrumpiendo...", "#e94560")
-
 def display_inicial():
-    frame_right.pack_forget()
-    frame_right_first.pack()
+    volver_display_inicial()
 
-# Historial de reportes
+
 def cargar_historial():
     lista_historial.delete(0, "end")
     archivos = sorted(REVIEW_DIR.glob("*.md"), reverse=True)
@@ -136,6 +276,7 @@ def cargar_historial():
         return
     for f in archivos:
         lista_historial.insert("end", f"{f.stem}")
+
 
 def cargar_textos():
     lista_textos.delete(0, "end")
@@ -147,320 +288,384 @@ def cargar_textos():
         lista_textos.insert("end", f"{f.stem}")
 
 
-
-# Interfaz grafica
-root = tk.Tk()
-root.title("Reviewer")
-root.geometry("1200x720")
-root.configure(bg="#1a1a2e")
-root.resizable(True, True)
-
-
-frame_main = tk.Frame(root, bg="#1a1a2e")
-frame_main.pack(fill="both", expand=True)
-
-#  Panel izquierdo — Historial
-frame_left = tk.Frame(frame_main, bg="#141438", width=230)
-frame_left.pack(side="left", fill="y", padx=(10, 0), pady=10)
-frame_left.pack_propagate(False)
-
-_img = Image.open(Path(__file__).parent / "imgs/logo.png").resize((142, 70), Image.LANCZOS)
-logo_img = ImageTk.PhotoImage(_img)
-
-btn_logo = tk.Button(
-    frame_left,
-    image=logo_img,
-    bg="#1a1a2e",
-    command=display_inicial
-)
-btn_logo.pack(anchor="center", padx=10, pady=(12, 8))
-
-
-tk.Label(
-    frame_left, text="HISTORIAL",
-    bg="#0f3460", fg="#a5a5ee",
-    font=("Consolas", 9, "bold")
-).pack(anchor="w", padx=10, pady=(12, 4))
-
-tk.Frame(frame_left, bg="#1a1a2e", height=1).pack(fill="x", padx=8, pady=2)
-
-frame_lista = tk.Frame(frame_left, bg="#0f3460")
-frame_lista.pack(fill="both", expand=True, padx=6, pady=6)
-
-frame_ltxt = tk.Frame(frame_left, bg="#0f3460")
-frame_ltxt.pack(fill="x", expand=False, padx=6, pady=(0, 6))
-
-# Scrolbar
-style = ttk.Style()
-style.theme_use("clam")
-style.configure(
-    "Historial.Vertical.TScrollbar",
-    troughcolor="#0d0d1a",
-    background="#0f3460",
-    bordercolor="#0d0d1a",
-    lightcolor="#0d0d1a",
-    darkcolor="#0d0d1a",
-    arrowcolor="#0d0d1a",
-    relief="flat",
-    thickness=8
-)
-style.map(
-    "Historial.Vertical.TScrollbar",
-    background=[("active", "#e94560"), ("disabled", "#0d0d1a")],
-    arrowcolor=[("active", "#0d0d1a"), ("disabled", "#0d0d1a")]
-)
-scroll_hist = ttk.Scrollbar(frame_lista, style="Historial.Vertical.TScrollbar", orient="vertical")
-scroll_hist.pack(side="right", fill="y")
-
-lista_historial = tk.Listbox(
-    frame_lista,
-    bg="#0d0d1a", fg="#dde1e7",
-    font=("Consolas", 12),
-    relief="flat",
-    selectbackground="#e94560", selectforeground="white",
-    borderwidth=0, highlightthickness=0,
-    yscrollcommand=scroll_hist.set,
-    activestyle="none", cursor="hand2",
-    selectmode="single",
-)
-lista_historial.pack(fill="both", expand=True)
-scroll_hist.config(command=lista_historial.yview)
-
-# tk.Button(
-#     frame_left, text="↻  Recargar historial",
-#     command=cargar_historial,
-#     bg="#1a1a2e", fg="#a5a5ee",
-#     font=("Consolas", 8), relief="flat", pady=6,
-#     cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
-# ).pack(fill="x", padx=6, pady=(0, 8))
-
-#Sección Textos
-tk.Label(
-    frame_ltxt, text="TEXTOS",
-    bg="#0f3460", fg="#a5a5ee",
-    font=("Consolas", 9, "bold")
-).pack(anchor="w", padx=10, pady=(12, 4))
-
-tk.Frame(frame_ltxt, bg="#1a1a2e", height=1).pack(fill="x", padx=8, pady=2)
-
-scroll_text = ttk.Scrollbar(frame_ltxt, style="Historial.Vertical.TScrollbar", orient="vertical")
-scroll_text.pack(side="right", fill="y")
-
-lista_textos = tk.Listbox(
-    frame_ltxt,
-    bg="#0d0d1a", fg="#dde1e7",
-    font=("Consolas", 12),
-    relief="flat",
-    selectbackground="#e94560", selectforeground="white",
-    borderwidth=0, highlightthickness=0,
-    yscrollcommand=scroll_text.set,
-    activestyle="none", cursor="hand2",
-    selectmode="single",
-)
-lista_textos.pack(fill="both", expand=True)
-scroll_text.config(command=lista_textos.yview)
-
-# tk.Button(
-#     frame_ltxt, text="↻  Recargar textos",
-#     command=cargar_textos,
-#     bg="#1a1a2e", fg="#a5a5ee",
-#     font=("Consolas", 8), relief="flat", pady=6,
-#     cursor="hand2", activebackground="#0f3460", activeforeground="#dde1e7"
-# ).pack(fill="x", padx=6, pady=(0, 8))
-
-
-
-# ── Panel derecho ──
-frame_right = tk.Frame(frame_main, bg="#1a1a2e")
-frame_right.pack(side="left", fill="both", expand=True, padx=10, pady=10)
-frame_right.pack_forget()
-
-frame_right_first = tk.Frame(frame_main, bg="#1a1a2e")
-frame_right_first.pack(side="left", fill="both", expand=True, padx=10, pady=10)
-
-
-
-    # Panel derecho al inicio
-img_f = Image.open(Path(__file__).parent / "imgs/logo.png").resize((355, 175), Image.LANCZOS)
-logo_imgf = ImageTk.PhotoImage(img_f)
-tk.Label(
-    frame_right_first,
-    image=logo_imgf,
-    bg="#1a1a2e",
-).pack(pady=(200, 50), padx=8, side="top", anchor="center")
-
-lbl_title = tk.Label(
-    frame_right_first, text="RevieWer",
-    bg="#1a1a2e" , fg="#c73652",
-    font=("Consolas", 32, "bold")
-).pack(pady=(8, 8), padx=8, side="top", anchor="center")
-
-lbl_text_first = tk.Label(
-    frame_right_first, text="Adjunta tu documento",
-    bg="#1a1a2e",fg="#a5a5ee",
-    font=("Consolas", 12, "bold")
-)
-lbl_text_first.pack(pady=(0, 8), padx=8, side="top", anchor="center")
-
-btn_adjuntar_prev = tk.Button(
-    frame_right_first, text="+  Adjuntar PDF",
-    command=None,
-    bg="#e94560", fg="white",
-    font=("Consolas", 11, "bold"),
-    relief="flat", padx=16, pady=8,
-    cursor="hand2", activebackground="#c73652"
-)
-btn_adjuntar_prev.pack(pady=(50, 8), padx=8, side="top", anchor="center")
-
-lbl_text_first_model = tk.Label(
-    frame_right_first, text="Selecciona un modelo",
-    bg="#1a1a2e",fg="#a5a5ee",
-    font=("Consolas", 12, "bold")
-)
-lbl_text_first_model.pack(pady=(0, 8), padx=8, side="top", anchor="center")
-
-    # Seleccion de modelo mediante listbox
-# style.configure(
-#     "TCombobox*Listbox",
-#     fieldbackground="#0d0d1a",
-#     background="#0f3460",
-#     foreground="white",
-#     arrowcolor="#e94560",
-#     padding=5
-# )
-
-# style.map(
-#     "TCombobox*Listbox",
-#     fieldbackground=[("readonly", "#0d0d1a")],
-#     background=[("active", "#e94560"), ("disabled", "#0d0d1a")],
-#     arrowcolor=[("active", "white"), ("disabled", "#0d0d1a")]
-# )
-var_modelo = tk.StringVar()
-combo_first = ttk.Combobox(frame_right_first, textvariable=var_modelo, state="readonly")
-combo_first['values'] = []
-combo_first.pack()
-
-root.option_add("*TCombobox*Listbox.background", "#0d0d1a")
-root.option_add("*TCombobox*Listbox.foreground", "white")
-root.option_add("*TCombobox*Listbox.selectBackground", "#e94560")
-root.option_add("*TCombobox*Listbox.selectForeground", "#0f3460")
-
-
 def iniciar_display_derecho():
     global after_display
-    frame_right_first.pack_forget()
-    frame_right.pack(side="left", fill="both", expand=True, padx=10, pady=10)
+    stacked_right.setCurrentIndex(1)
     after_display = True
 
-# Botones
-frame_btns = tk.Frame(frame_right, bg="#1a1a2e")
-frame_btns.pack(fill="x", pady=(10, 6))
 
-btn_adjuntar = tk.Button(
-    frame_btns, text="+  Adjuntar PDF",
-    command=None,
-    bg="#e94560", fg="white",
-    font=("Consolas", 11, "bold"),
-    relief="flat", padx=16, pady=8,
-    cursor="hand2", activebackground="#c73652"
+def volver_display_inicial():
+    global after_display
+    stacked_right.setCurrentIndex(0)
+    after_display = False
+
+
+def ask_open_file(title: str, file_filter: str) -> str:
+    """Diálogo de archivo compatible con filedialog.askopenfilename."""
+    from PySide6.QtWidgets import QFileDialog
+
+    ruta, _ = QFileDialog.getOpenFileName(_main, title, "", file_filter)
+    return ruta or ""
+
+
+def _btn_style(bg, fg, hover=None, padding="10px 16px"):
+    hover = hover or bg
+    return (
+        f"QPushButton {{ background-color: {bg}; color: {fg}; border: none;"
+        f" padding: {padding}; font-family: 'Segoe UI'; font-size: 11px;"
+        f" font-weight: bold; border-radius: 4px; }}"
+        f"QPushButton:hover {{ background-color: {hover}; }}"
+        f"QPushButton:disabled {{ background-color: #94A3B8; color: #E2E8F0; }}"
+    )
+
+
+def _list_style():
+    return (
+        f"QListWidget {{ background: {COLORES['blanco_crisp']}; color: {COLORES['texto_principal']};"
+        f" border: none; font-family: 'Segoe UI'; font-size: 11px; }}"
+        f"QListWidget::item:selected {{ background: {COLORES['boton_acento']};"
+        f" color: {COLORES['blanco_crisp']}; }}"
+    )
+
+
+class _RootAdapter:
+    """Expone mainloop() y after() como en tkinter."""
+
+    def __init__(self, window: QMainWindow, application: QApplication):
+        self._window = window
+        self._app = application
+
+    def mainloop(self):
+        self._window.show()
+        self._app.exec()
+
+    def after(self, _ms, fn):
+        QTimer.singleShot(0, fn)
+
+
+def _separator(parent, color=None):
+    line = QFrame(parent)
+    line.setFrameShape(QFrame.Shape.HLine)
+    line.setStyleSheet(f"background: {color or COLORES['gris_claro']}; max-height: 1px;")
+    return line
+
+
+# --- Construcción de la interfaz ---
+
+app = QApplication.instance() or QApplication(sys.argv)
+
+_main = QMainWindow()
+_main.setWindowTitle("Revisor de PDF")
+_main.resize(1240, 760)
+_main.setStyleSheet(f"background-color: {COLORES['fondo_principal']};")
+
+_central = QWidget()
+_main.setCentralWidget(_central)
+_layout_main = QHBoxLayout(_central)
+_layout_main.setContentsMargins(14, 14, 14, 14)
+_layout_main.setSpacing(8)
+
+# Panel izquierdo
+frame_left = QWidget()
+frame_left.setFixedWidth(300)
+frame_left.setStyleSheet(f"background-color: {COLORES['fondo_menu']};")
+_layout_left = QVBoxLayout(frame_left)
+_layout_left.setContentsMargins(18, 18, 18, 18)
+_layout_left.setSpacing(8)
+
+_logo_small = QPixmap(str(_IMGS / "logo.png")).scaled(
+    180, 80, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
 )
-btn_adjuntar.pack(side="left", padx=(0, 8))
+btn_logo_sidebar_w = QPushButton()
+btn_logo_sidebar_w.setFlat(True)
+btn_logo_sidebar_w.setIcon(QIcon(_logo_small))
+btn_logo_sidebar_w.setIconSize(_logo_small.size())
+btn_logo_sidebar_w.setStyleSheet(f"background: {COLORES['fondo_menu']}; border: none;")
+btn_logo_sidebar_w.setCursor(Qt.CursorShape.PointingHandCursor)
+btn_logo_sidebar_w.clicked.connect(volver_display_inicial)
+_layout_left.addWidget(btn_logo_sidebar_w, alignment=Qt.AlignmentFlag.AlignHCenter)
+_layout_left.addWidget(_separator(frame_left))
 
+frame_left_actions = QWidget()
+_layout_actions = QVBoxLayout(frame_left_actions)
+_layout_actions.setContentsMargins(0, 0, 0, 0)
+_layout_actions.setSpacing(10)
 
-btn_iniciar = tk.Button(
-    frame_btns, text="▶  Iniciar Revisión",
-    command=None,
-    bg="#4f7dfd", fg="#ffffff",
-    font=("Consolas", 11, "bold"),
-    relief="flat", padx=16, pady=8,
-    cursor="hand2", activebackground="#04a87d",
-    state="disabled"
+_btn_adj_style = _btn_style(COLORES["blanco_crisp"], COLORES["texto_principal"], "#F8FAFC")
+btn_adjuntar_prev = QPushButton("Nuevo Archivo")
+btn_adjuntar_prev.setStyleSheet(_btn_adj_style)
+btn_adjuntar_prev.setCursor(Qt.CursorShape.PointingHandCursor)
+_layout_actions.addWidget(btn_adjuntar_prev)
+
+btn_adjuntar = QPushButton("Buscar PDF")
+btn_adjuntar.setStyleSheet(_btn_adj_style)
+btn_adjuntar.setCursor(Qt.CursorShape.PointingHandCursor)
+_layout_actions.addWidget(btn_adjuntar)
+_layout_left.addWidget(frame_left_actions)
+
+_lbl_recientes = QLabel("ARCHIVOS RECIENTES")
+_lbl_recientes.setStyleSheet(
+    f"color: {COLORES['texto_principal']}; font-family: 'Segoe UI';"
+    f" font-size: 9px; font-weight: bold; background: {COLORES['fondo_menu']};"
 )
-btn_iniciar.pack(side="left", padx=(0, 8))
+_layout_left.addWidget(_lbl_recientes)
+_layout_left.addWidget(_separator(frame_left))
 
-btn_stop = tk.Button(
-    frame_btns, text="⏹  Interrumpir",
-    command=None,
-    bg="#a5a5ee", fg="#888",
-    font=("Consolas", 11, "bold"),
-    relief="flat", padx=16, pady=8,
-    cursor="hand2", state="disabled",
-    activebackground="#6a2040"
+_lista_hist_w = QListWidget()
+_lista_hist_w.setStyleSheet(_list_style())
+_lista_hist_w.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+_layout_left.addWidget(_lista_hist_w, stretch=1)
+
+_lbl_textos = QLabel("Textos Guardados")
+_lbl_textos.setStyleSheet(
+    f"color: {COLORES['texto_secundario']}; font-family: 'Segoe UI';"
+    f" font-size: 8px; font-style: italic; background: {COLORES['fondo_menu']};"
 )
-btn_stop.pack(side="left")
+_layout_left.addWidget(_lbl_textos)
 
-btn_procesar_texto = tk.Button(
-    frame_btns, text="  Procesar Texto",
-    command=None,
-    bg="#06d6a0", fg="#ffffff",
-    font=("Consolas", 11, "bold"),
-    relief="flat", padx=16, pady=8,
-    cursor="hand2", activebackground="#04a87d"
+_lista_txt_w = QListWidget()
+_lista_txt_w.setMaximumHeight(120)
+_lista_txt_w.setStyleSheet(_list_style())
+_layout_left.addWidget(_lista_txt_w)
+
+_layout_main.addWidget(frame_left)
+
+# Panel derecho (stacked: bienvenida / trabajo)
+stacked_right = QStackedWidget()
+stacked_right.setStyleSheet(f"background-color: {COLORES['fondo_principal']};")
+
+# --- Pantalla inicial ---
+frame_right_first = QWidget()
+_layout_welcome = QVBoxLayout(frame_right_first)
+_layout_welcome.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignTop)
+_layout_welcome.setContentsMargins(8, 80, 8, 8)
+
+_logo_large = QPixmap(str(_IMGS / "logo.png")).scaled(
+    320, 140, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation
 )
-# Inicialmente oculto
-btn_procesar_texto.pack_forget()
+btn_logo = QLabel()
+btn_logo.setPixmap(_logo_large)
+btn_logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
+_layout_welcome.addWidget(btn_logo)
 
-# Mini frame para el modelo
-frame_mini_model = tk.Frame(frame_btns, bg="#0d0d1a")
-frame_mini_model.pack(fill="x", pady=(0, 4), side="right")
-
-lbl_text_model_mini = tk.Label(
-    frame_mini_model, text="Selecciona un modelo",
-    bg="#0d0d1a",fg="#a5a5ee",
-    font=("Consolas", 14, "bold")
+lbl_title = QLabel("Revisor de PDF")
+lbl_title.setAlignment(Qt.AlignmentFlag.AlignCenter)
+lbl_title.setStyleSheet(
+    f"color: {COLORES['texto_principal']}; font-family: 'Segoe UI';"
+    f" font-size: 32px; font-weight: bold; background: transparent;"
 )
-lbl_text_model_mini.pack(pady=(0, 8), padx=8, side="top", anchor="center")
+_layout_welcome.addWidget(lbl_title)
 
-combo_after = ttk.Combobox(frame_mini_model, textvariable=var_modelo, state="readonly")
-combo_after['values'] = []
-combo_after.pack()
-
-
-# Archivo seleccionado
-lbl_archivo = tk.Label(
-    frame_right, text="Ningún archivo seleccionado",
-    bg="#1a1a2e", fg="#a5a5ee",
-    font=("Consolas", 9)
+lbl_text_first = QLabel("Cargue un archivo PDF para iniciar el análisis académico.")
+lbl_text_first.setAlignment(Qt.AlignmentFlag.AlignCenter)
+lbl_text_first.setWordWrap(True)
+lbl_text_first.setMaximumWidth(560)
+lbl_text_first.setStyleSheet(
+    f"color: {COLORES['texto_secundario']}; font-family: 'Segoe UI';"
+    f" font-size: 12px; background: transparent;"
 )
-lbl_archivo.pack(anchor="w", padx=2, pady=(0, 6))
+_layout_welcome.addWidget(lbl_text_first)
 
-# Barra de progreso + estado
-frame_prog = tk.Frame(frame_right, bg="#1a1a2e")
-frame_prog.pack(fill="x", pady=(0, 4))
-
-# Usa el ttk.Style para scrollbar ya definido arriba
-style.configure(
-    "R.Horizontal.TProgressbar",
-    troughcolor="#0d0d1a", background="#e94560",
-    bordercolor="#0f3460", lightcolor="#4a4a8a", darkcolor="#e94560",
-    thickness=8
+lbl_text_first_model = QLabel("Seleccione un modelo para comenzar.")
+lbl_text_first_model.setAlignment(Qt.AlignmentFlag.AlignCenter)
+lbl_text_first_model.setStyleSheet(
+    f"color: {COLORES['texto_secundario']}; font-family: 'Segoe UI';"
+    f" font-size: 11px; background: transparent;"
 )
-progress_bar = ttk.Progressbar(
-    frame_prog, orient="horizontal",
-    mode="determinate", style="R.Horizontal.TProgressbar",
-    maximum=100
+_layout_welcome.addWidget(lbl_text_first_model)
+
+_combo_first_w = QComboBox()
+_combo_first_w.setMinimumWidth(280)
+_combo_style = (
+    f"QComboBox {{ background: {COLORES['blanco_crisp']}; color: {COLORES['texto_principal']};"
+    f" padding: 8px; border: 1px solid {COLORES['gris_claro']}; border-radius: 4px;"
+    f" font-family: 'Segoe UI'; }}"
+    f"QComboBox QAbstractItemView {{ background: {COLORES['blanco_crisp']};"
+    f" selection-background-color: {COLORES['boton_acento']};"
+    f" selection-color: {COLORES['blanco_crisp']}; }}"
 )
-progress_bar.pack(fill="x", pady=(0, 4))
+_combo_first_w.setStyleSheet(_combo_style)
+_layout_welcome.addWidget(_combo_first_w, alignment=Qt.AlignmentFlag.AlignHCenter)
+_layout_welcome.addStretch()
 
-lbl_estado = tk.Label(
-    frame_prog, text="En espera...",
-    bg="#1a1a2e", fg="#a5a5ee",
-    font=("Consolas", 8), anchor="w"
+stacked_right.addWidget(frame_right_first)
+
+# --- Pantalla de trabajo ---
+frame_right = QWidget()
+_layout_right = QVBoxLayout(frame_right)
+_layout_right.setContentsMargins(0, 0, 0, 0)
+_layout_right.setSpacing(16)
+
+frame_top_card = QWidget()
+frame_top_card.setStyleSheet(
+    f"background-color: {COLORES['fondo_carta']}; border-radius: 8px;"
 )
-lbl_estado.pack(fill="x")
+_layout_card = QVBoxLayout(frame_top_card)
+_layout_card.setContentsMargins(24, 24, 24, 24)
+_layout_card.setSpacing(12)
 
-# Separador
-tk.Frame(frame_right, bg="#0f3460", height=1).pack(fill="x", pady=6)
+frame_btns = QWidget()
+_layout_btns = QHBoxLayout(frame_btns)
+_layout_btns.setContentsMargins(0, 0, 0, 0)
+_layout_btns.setSpacing(12)
 
-tk.Label(
-    frame_right, text="Salida / Respuesta",
-    bg="#1a1a2e", fg="#a5a5ee",
-    font=("Consolas", 9)
-).pack(anchor="w", padx=2)
+btn_iniciar_w = QPushButton("▶ Iniciar Revisión")
+btn_iniciar_w.setStyleSheet(_btn_style(COLORES["boton_acento"], COLORES["blanco_crisp"], "#94161D"))
+btn_iniciar_w.setEnabled(False)
+btn_iniciar_w.setCursor(Qt.CursorShape.PointingHandCursor)
+_layout_btns.addWidget(btn_iniciar_w)
 
-# HtmlFrame en lugar de Text
-frame_text = tk.Frame(frame_right, bg="#0f3460", padx=2, pady=2)
-frame_text.pack(fill="both", expand=True, pady=(4, 0))
+btn_stop_w = QPushButton("⏹ Detener")
+btn_stop_w.setStyleSheet(_btn_style("#D9E2EC", COLORES["texto_principal"], "#BAC8D6"))
+btn_stop_w.setEnabled(False)
+btn_stop_w.setCursor(Qt.CursorShape.PointingHandCursor)
+_layout_btns.addWidget(btn_stop_w)
 
-salida_html = HtmlFrame(frame_text, horizontal_scrollbar="auto", messages_enabled=False)
-salida_html.pack(fill="both", expand=True)
+btn_procesar_texto_w = QPushButton("Procesar Texto")
+btn_procesar_texto_w.setStyleSheet(_btn_style("#475569", COLORES["blanco_crisp"], "#344A5E"))
+btn_procesar_texto_w.setCursor(Qt.CursorShape.PointingHandCursor)
+btn_procesar_texto_w.hide()
+_layout_btns.addWidget(btn_procesar_texto_w)
+
+_layout_btns.addStretch()
+
+frame_mini_model = QWidget()
+_layout_mini = QVBoxLayout(frame_mini_model)
+_layout_mini.setAlignment(Qt.AlignmentFlag.AlignRight)
+lbl_text_model_mini_w = QLabel("Seleccionar modelo")
+lbl_text_model_mini_w.setAlignment(Qt.AlignmentFlag.AlignRight)
+lbl_text_model_mini_w.setStyleSheet(
+    f"color: {COLORES['gris_claro']}; font-family: 'Segoe UI';"
+    f" font-size: 11px; background: transparent;"
+)
+_layout_mini.addWidget(lbl_text_model_mini_w)
+
+_combo_after_w = QComboBox()
+_combo_after_w.setStyleSheet(_combo_style)
+_combo_after_w.setMinimumWidth(200)
+_layout_mini.addWidget(_combo_after_w)
+_layout_btns.addWidget(frame_mini_model)
+
+btn_volver_header_w = QPushButton("← Volver")
+btn_volver_header_w.setStyleSheet(_btn_style("#475569", COLORES["blanco_crisp"], "#344A5E", "8px 14px"))
+btn_volver_header_w.setCursor(Qt.CursorShape.PointingHandCursor)
+btn_volver_header_w.clicked.connect(volver_display_inicial)
+_layout_btns.addWidget(btn_volver_header_w)
+
+_layout_card.addWidget(frame_btns)
+
+lbl_archivo_w = QLabel("Ningún archivo seleccionado")
+lbl_archivo_w.setStyleSheet(
+    f"color: {COLORES['gris_claro']}; font-family: 'Segoe UI';"
+    f" font-size: 9px; background: transparent;"
+)
+_layout_card.addWidget(lbl_archivo_w)
+
+frame_prog = QWidget()
+_layout_prog = QVBoxLayout(frame_prog)
+_layout_prog.setContentsMargins(0, 0, 0, 0)
+
+progress_bar_w = QProgressBar()
+progress_bar_w.setRange(0, 100)
+progress_bar_w.setValue(0)
+progress_bar_w.setTextVisible(False)
+progress_bar_w.setStyleSheet(
+    f"QProgressBar {{ background: #23406F; border: none; border-radius: 5px; height: 10px; }}"
+    f"QProgressBar::chunk {{ background: {COLORES['boton_acento']}; border-radius: 5px; }}"
+)
+_layout_prog.addWidget(progress_bar_w)
+
+lbl_estado_w = QLabel("Esperando acción...")
+lbl_estado_w.setStyleSheet(
+    f"color: {COLORES['gris_claro']}; font-family: 'Segoe UI';"
+    f" font-size: 9px; background: transparent;"
+)
+_layout_prog.addWidget(lbl_estado_w)
+_layout_card.addWidget(frame_prog)
+
+_salida_w = QWebEngineView()
+_salida_w.setMinimumHeight(280)
+_layout_card.addWidget(_salida_w, stretch=1)
+
+_layout_right.addWidget(frame_top_card, stretch=3)
+
+frame_notes_card = QWidget()
+frame_notes_card.setStyleSheet(
+    f"background-color: {COLORES['fondo_notas']}; border-radius: 8px;"
+)
+_layout_notes = QVBoxLayout(frame_notes_card)
+_layout_notes.setContentsMargins(22, 22, 22, 22)
+
+lbl_notes_title_w = QLabel(" Notas")
+lbl_notes_title_w.setStyleSheet(
+    f"color: {COLORES['texto_principal']}; font-family: 'Segoe UI';"
+    f" font-size: 14px; font-weight: bold;"
+)
+_layout_notes.addWidget(lbl_notes_title_w)
+
+lbl_notes_sub_w = QLabel(
+    "Capture observaciones y anotaciones de la revisión en esta sección."
+)
+lbl_notes_sub_w.setWordWrap(True)
+lbl_notes_sub_w.setStyleSheet(
+    f"color: {COLORES['texto_secundario']}; font-family: 'Segoe UI'; font-size: 10px;"
+)
+_layout_notes.addWidget(lbl_notes_sub_w)
+
+txt_notas_w = QTextEdit()
+txt_notas_w.setPlainText("Notas de revisión académica...")
+txt_notas_w.setStyleSheet(
+    f"background: {COLORES['blanco_crisp']}; color: {COLORES['texto_principal']};"
+    f" border: none; font-family: 'Segoe UI'; font-size: 11px; padding: 14px;"
+)
+_layout_notes.addWidget(txt_notas_w)
+
+_layout_right.addWidget(frame_notes_card, stretch=1)
+stacked_right.addWidget(frame_right)
+
+_layout_main.addWidget(stacked_right, stretch=1)
+
+def _sync_combo_from_first(index: int):
+    if index < 0 or index >= _combo_after_w.count():
+        return
+    _combo_after_w.blockSignals(True)
+    _combo_after_w.setCurrentIndex(index)
+    _combo_after_w.blockSignals(False)
+
+
+def _sync_combo_from_after(index: int):
+    if index < 0 or index >= _combo_first_w.count():
+        return
+    _combo_first_w.blockSignals(True)
+    _combo_first_w.setCurrentIndex(index)
+    _combo_first_w.blockSignals(False)
+
+
+_combo_first_w.activated.connect(_sync_combo_from_first)
+_combo_after_w.activated.connect(_sync_combo_from_after)
+
+# Adaptadores exportados (misma API que tkinter)
+root = _RootAdapter(_main, app)
+var_modelo = _StringVarAdapter([_combo_first_w, _combo_after_w])
+
+lbl_archivo = _LabelAdapter(lbl_archivo_w)
+lbl_estado = _LabelAdapter(lbl_estado_w)
+lbl_text_first_model = _LabelAdapter(lbl_text_first_model)
+lbl_text_model_mini = _LabelAdapter(lbl_text_model_mini_w)
+
+btn_iniciar = _ButtonAdapter(btn_iniciar_w)
+btn_stop = _ButtonAdapter(btn_stop_w)
+btn_procesar_texto = _ButtonAdapter(btn_procesar_texto_w)
+btn_adjuntar_prev = _ButtonAdapter(btn_adjuntar_prev)
+btn_adjuntar = _ButtonAdapter(btn_adjuntar)
+btn_volver_header = _ButtonAdapter(btn_volver_header_w)
+btn_logo_sidebar = _ButtonAdapter(btn_logo_sidebar_w)
+# btn_logo es QLabel en pantalla de bienvenida
+
+lista_historial = _ListAdapter(_lista_hist_w)
+lista_textos = _ListAdapter(_lista_txt_w)
+combo_first = _ComboAdapter(_combo_first_w, var_modelo)
+combo_after = _ComboAdapter(_combo_after_w, var_modelo)
+salida_html = _HtmlAdapter(_salida_w)
+progress_bar = _ProgressAdapter(progress_bar_w)
+txt_notas = txt_notas_w
