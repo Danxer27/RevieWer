@@ -5,6 +5,7 @@ from prompts import ESTRUCTURA, METODOLOGIA, REDACCION, SINTESIS
 from context import obtener_contexto
 
 cliente = ollama.Client(host='http://localhost:11434')
+USAR_OPENALEX = True
 
 AGENTES = {
     "estructura" : ESTRUCTURA,
@@ -19,14 +20,14 @@ def _correr_agente(nombre: str, modelo: str, texto: str, resultados: dict, error
         # Armar contenido con o sin contexto de OpenAlex
         contenido = f"Document to review:\n\n{texto}"
         if contexto_arte:
-            contenido = f"{contexto_arte}\n\n---\n\n{contenido}"
+            contenido = f"{contenido}\n\n---\n\nRelated literature from OpenAlex (use this to compare and contextualize your assessment):\n\n{contexto_arte}"  # contexto después
         respuesta = cliente.chat(
             model = modelo,
             messages = [
                 {'role': 'system', 'content': AGENTES[nombre]},
                 {'role': 'user', 'content': contenido}
             ],
-            options = {'num_ctx': 32000, 'temperature': 0.2}
+            options = {'num_ctx': 32000, 'temperature': 0.0}
         )
         resultados[nombre] = respuesta['message']['content']
     except Exception as e:
@@ -35,8 +36,13 @@ def _correr_agente(nombre: str, modelo: str, texto: str, resultados: dict, error
 
 def revisar_multiagente(texto: str, modelo: str, set_estado, set_progreso) -> Union[str, None]:
     
-    set_estado("Consultando estado del arte...", "#4cc9f0")
-    contexto_arte = obtener_contexto(texto)
+    
+    if USAR_OPENALEX:
+        set_estado("Consultando estado del arte...", "#4cc9f0")
+        contexto_arte = obtener_contexto(texto)
+    else:
+        contexto_arte = ""
+    
     
     print(f"=== CONTEXTO OPENALEX ===")
     print(contexto_arte[:500] if contexto_arte else "VACÍO")
@@ -66,6 +72,9 @@ def revisar_multiagente(texto: str, modelo: str, set_estado, set_progreso) -> Un
         h.join()
     
     if errores:
+        print(f"=== ERRORES EN AGENTES ===")
+        print(errores)  # ← agrega esto
+        print("=== FIN ===")
         set_estado(f"Error en agente: {list(errores.keys())}", "#e94560")
         return None
     

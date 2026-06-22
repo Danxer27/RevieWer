@@ -163,7 +163,7 @@ def _pipeline_hilo():
             return _cancelado()
 
         # Genera reporta
-        reporte = revisar_multiagente(        # ← agrega estas
+        reporte = revisar_multiagente(     
             texto,
             MODELO_OL,
             UIF.set_estado,

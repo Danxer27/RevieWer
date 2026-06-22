@@ -145,4 +145,4 @@ def obtener_contexto(texto: str)-> str:
     print(f"Papers encontrados: {len(papers)}")
     
     contexto = formatear_contexto(papers)
-    return contexto[:2000] if contexto else ""
+    return contexto[:6000] if contexto else ""
