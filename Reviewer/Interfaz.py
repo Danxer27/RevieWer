@@ -121,7 +121,7 @@ class _ButtonAdapter:
         if command is not None:
             try:
                 self._w.clicked.disconnect()
-            except RuntimeError:
+            except (RuntimeError, TypeError):
                 pass
             self._w.clicked.connect(command)
 
