@@ -8,6 +8,7 @@ race conditions, facilitar testing, y mejorar mantenibilidad.
 import threading
 from pathlib import Path
 from typing import Optional
+from dotenv import load_dotenv
 
 # Directorios y rutas de la aplicación
 PDF_DIR = Path(__file__).parent / "pdfs"
@@ -21,6 +22,12 @@ OLLAMA_HOST = 'http://localhost:11434'
 PDF_DIR.mkdir(exist_ok=True)
 REVIEW_DIR.mkdir(exist_ok=True)
 TEXTOS_DIR.mkdir(exist_ok=True)
+
+# LangSmith API
+import os
+os.environ['LANGCHAIN_TRACING_V2'] = 'true'
+os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
+os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
 
 
 

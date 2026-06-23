@@ -22,9 +22,12 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.load import dumps, loads
 from langchain_community.vectorstores import Chroma
 from langchain_ollama import ChatOllama
+from pydantic import BaseModel, Field
+from typing import Literal, List
+from nltk.corpus import stopwords
+import re
 
-
-# ── Configuración
+# Configuración
 
 CONFIDENCE_THRESHOLD = 0.3   # score mínimo del keyword router antes de usar LLM fallback
 N_FUSION_QUERIES     = 4     # queries generados en RAG-Fusion
@@ -32,7 +35,8 @@ RRF_K                = 60    # constante de suavizado RRF (estándar)
 N_RESULTS            = 8     # chunks recuperados por query en Chroma
 N_FINAL              = 5     # chunks finales tras fusión
 
-# Keywords por tipo de estudio — vocabulario diagnóstico claro
+
+# Keywords por tipo de estudio
 ROUTES: dict[str, list[str]] = {
     "rct": [
         "randomized", "randomised", "rct", "double-blind", "single-blind",
@@ -73,77 +77,66 @@ ROUTES: dict[str, list[str]] = {
     ],
 }
 
+areas = Literal[
+    "rct",
+    "systematic_review",
+    "observational",
+    "diagnostic",
+    "nlp_ml",
+    "case_report",
+    "animal_study",
+    "general",
+]
+keywords_instruction = "\n".join([f"- {area}: {', '.join(words)}" for area, words in ROUTES.items()])
 
-# Semantic Router
+# Routing
+class FieldRouting(BaseModel):
+    """Route a piece of academic paper to its most related field"""
 
-def keyword_route(text: str) -> tuple[str, float]:
-    """
-    Detecta study_type por conteo de keywords en los primeros 3000 chars.
-    Retorna (study_type, confidence) donde confidence = fracción de keywords hallados.
-    """
-    sample = text[:3000].lower()
-    scores: dict[str, float] = {}
+    reasoning: str = Field(
+        description="Analyze the text and closely inspect the methodology to decide which field of study it belongs to."
+    )
+    
+    datasource: areas = Field(
+        description="Choose the most relevant field of study for this paper based on the keywords found."
+    )
 
-    for study_type, keywords in ROUTES.items():
-        hits = sum(kw.lower() in sample for kw in keywords)
-        scores[study_type] = hits / len(keywords)   # fracción normalizada
-
-    best = max(scores, key=scores.get)
-    return best, round(scores[best], 3)
-
-
-# Prompt para el fallback LLM — structured output simple
-_LOGICAL_ROUTING_PROMPT = ChatPromptTemplate.from_template(
-    """You are an expert in research methodology.
-Classify the following paper excerpt into exactly one study type.
-
-Study types: rct, systematic_review, observational, diagnostic,
-             nlp_ml, case_report, animal_study, general
-
-Respond with ONLY the study type key, nothing else.
-
-Paper excerpt:
-{text}
-
-Study type:"""
-)
+    detected_keywords: List[str] = Field(
+        description=f"Extract all the specific technical keywords found in the text that belong to the chosen area.\n"
+                    f"Use these mapped keywords as a reference guide:\n{keywords_instruction}"
+    )
 
 
 def build_semantic_router(llm: ChatOllama):
     """
-    Retorna una función que detecta study_type.
-    Usa keywords como primera línea; si confidence < THRESHOLD, cae al LLM.
-
     Args:
         llm: instancia de ChatOllama (Qwen u otro modelo local)
 
     Returns:
-        Función route(text) -> str con el study_type detectado
+        str con el study_type detectado
     """
-    llm_router_chain = (
-        _LOGICAL_ROUTING_PROMPT
-        | llm
-        | StrOutputParser()
-        | (lambda x: x.strip().lower().split()[0])   # tomar solo la primera palabra
+
+    # Definimos el procesamiento del LLM para trabajar con el modelo de Routing establecido con BaseModel de Pydantic
+    structured_llm = llm.with_structured_output(FieldRouting)
+
+    #Prompt
+    routing_prompt = ChatPromptTemplate.from_template(
+    """You are an expert in research methodology and academic paper classification.
+
+    Analyze the following paper excerpt to determine its study design, methodology, and key technical terminology. 
+
+    Carefully evaluate the context:
+    - Look for procedural words that define the architecture of the study.
+    - Ensure that the keywords you identify are actively part of the study's design, and not just mentioned in passing or negated (e.g., "no placebo was used").
+
+    Paper excerpt:
+    {text}"""
     )
 
-    def route(text: str) -> str:
-        study_type, confidence = keyword_route(text)
-
-        if confidence < CONFIDENCE_THRESHOLD:
-            # Fallback: dejar que el LLM clasifique
-            try:
-                study_type = llm_router_chain.invoke({"text": text[:1500]})
-                # Validar que sea una clave conocida
-                if study_type not in ROUTES:
-                    study_type = "general"
-            except Exception:
-                study_type = "general"
-
-        return study_type
+    router = routing_prompt | structured_llm
+    route = router.invoke({"text": text})
 
     return route
-
 
 # 2. Query Translation 
 # Reformula fragmentos del paper al vocabulario formal de checklists.
@@ -207,7 +200,6 @@ Queries:"""
 def reciprocal_rank_fusion(results: list[list], k: int = RRF_K) -> list:
     """
     Fusiona múltiples listas de documentos rankeados con RRF.
-    Igual que en prag02.ipynb pero retorna solo documentos (sin scores).
     """
     fused_scores: dict[str, float] = {}
 
