@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "RevieWer",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/Reviewer/main.py",
+            "cwd": "${workspaceFolder}/Reviewer",
+            "console": "integratedTerminal"
+        }
+    ]
+}

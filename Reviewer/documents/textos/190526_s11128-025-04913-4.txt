@@ -1,0 +1,1623 @@
+Quantum Information Processing (2025) 24:291
+https://doi.org/10.1007/s11128-025-04913-4
+Mapping the frontier: a review of quantum and
+evolutionary game theory for complex decision-making
+Laura Sanz-Martín1 · Guillermo Rivas1 · Nicolás Clavijo-Buriticá2 ·
+Marcela Herrera3 · Javier Parra-Domínguez1
+Received: 30 May 2025 / Accepted: 14 August 2025 / Published online: 28 August 2025
+© The Author(s) 2025, corrected publication 2025
+Abstract
+In the current context, where the productivity paradox coexists with growing concerns
+about inequality, quantum economics and quantum game theory are emerging as novel
+frameworks to address inherent uncertainty and complex strategic interactions. Quan-
+tum game theory applies the principles of quantum mechanics to model strategic
+interactions, providing new insights into decision-making, optimization and conﬂict
+resolution. In this article, we conduct a systematic review following the PRISMA
+methodology and a bibliometric analysis of the literature on quantum game theory
+to assess its development, methodologies and applications. We examine the growing
+interest in quantum technologies such as quantum computing, quantum communica-
+tion and quantum simulation, which have had a signiﬁcant impact on both theoretical
+models and practical economic and social systems. By mapping trends in the quantum
+game theory research landscape, this article aims to identify key advances, highlight
+important milestones and propose future directions for research in this emerging ﬁeld.
+This comprehensive mapping not only elucidates the dynamic evolution and interdis-
+ciplinary convergence of quantum and evolutionary game theory, but also establishes
+B Laura Sanz-Martín
+laurasanzmartin@usal.es
+Guillermo Rivas
+guillerivas@usal.es
+Nicolás Clavijo-Buriticá
+nicolasclbr@gmail.com
+Marcela Herrera
+alba.herrera@correounivalle.edu.co
+Javier Parra-Domínguez
+javierparra@usal.es
+1
+BISITE Research Group, University of Salamanca, I+D+i Building, Calle Espejo s/n, 37007
+Salamanca, Spain
+2
+Department of Industrial Engineering and Management, Faculty of Engineering, University of
+Porto, 10587 Porto, Portugal
+3
+Centre for Bioinformatics and Photonics—CIBioFi and Department of Physics, Universidad del
+Valle, Cali 760032, Colombia
+123
+
+
+291
+Page 2 of 34
+L. Sanz-Martín et al.
+a foundation for future research, fostering innovative approaches to complex decision-
+making in increasingly uncertain and interconnected environments.
+Keywords Quantum theory · Game theory · Quantum economics · Systematic
+bibliometric analysis
+1 Introduction
+Quantum theory [1] is one of the most surprising expressions of modern physics,
+not only due to the extraordinary and counterintuitive nature of its postulates but
+also because of its disruptive potential in the development of new technologies as
+well as in the creation of new theoretical models that better describe certain aspects
+of reality. Over the past few decades, this theory has given rise to a wide range of
+quantum technologies including quantum computing [2, 3], quantum communica-
+tions [4], and quantum sensors [5] and quantum simulation [6]. Among these, quantum
+computing stands out for its potential is undoubtedly quantum computing, which is
+divided into two distinct computing paradigms: adiabatic quantum computing [7],
+with its most popular expression being quantum annealing [8], and gate-based quan-
+tum computing, with its many physical implementations: superconducting circuits
+[9], trapped ions [10], diamond nitrogen-vacancy (NV) centres [11], photons [12],
+NMR [13], among others. These technologies have diverse applications, such as cryp-
+tography [14], quantum machine learning (QML) [15], optimization problems [16],
+quantum communication, which transmits secure information using quantum states,
+quantum sensors and metrology, which exploit quantum sensitivity for high-precision
+measurements in navigation, medicine and materials science; and quantum simula-
+tion, which uses controllable quantum systems to simulate other complex quantum
+systems, crucial for designing new materials and drugs [17, 18].
+In recent years, there has been growing interest in applying quantum theory beyond
+physics, particularly in ﬁelds that involve uncertainty, complex dynamics, and strategic
+decision-making. One such area is economics, where quantum theory has inspired the
+development of quantum economics [19, 20] and, more speciﬁcally, quantum game
+theory (QGT). More generally, in their relation to economics, quantum technologies
+offer powerful tools for solving complex economic problems [21–23]. Quantum com-
+puting optimizes ﬁnance, logistics and energy. Quantum simulation improves market
+modelling and consumer behaviour. Quantum AI and machine learning accelerate
+model training for fraud prediction and detection. Quantum communication provides
+unconditional security for transactions and data. Speciﬁcally, quantum game theory
+analyses how quantum mechanics affects strategic interactions, enabling quantum
+strategies incorporating features as superposition and entanglement that improve equi-
+libria and solve classical dilemmas [24]. Quantum information inﬂuences outcomes.
+In addition, new types of games could be formulated based on quantum phenomena,
+with potential economic applications in market design, negotiation, voting and secure
+communication.
+From the perspective of the new economy, profoundly shaped by digital transfor-
+mation and technological advancement, signiﬁcant expectations for economic growth
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 3 of 34
+291
+and increased productivity are observed. The invention of new machines or technolo-
+gies, such as those associated with the digital revolution, holds the potential to generate
+far-reaching changes in the economy. It has been argued that technological innovations
+can drive growth along the trajectory of transitional dynamics.
+However, this technological transition is not without its challenges. There is concern
+that automation driven by new technologies could affect the labour market [25]. While
+historically automation has been linked to the replacement of routine and arduous
+tasks, new waves of innovation, such as artiﬁcial intelligence (AI), are also impacting
+white-collar, executive, and professional jobs. Despite optimism about the potential
+of new technologies to increase productivity, a signiﬁcant slowdown in productivity
+growth has been observed in recent decades, known as the productivity paradox [26].
+One possible explanation is that time is needed for new technologies to be fully imple-
+mented and for businesses and the economy to restructure to maximize their potential,
+a phenomenon similar to what occurred with the diffusion of electricity.
+The new economy also faces the challenge of managing the beneﬁts and risks of
+technological innovations. There is concern that the beneﬁts of new technologies may
+be concentrated in a few companies or individuals, which would limit their impact
+on overall productivity and could increase inequality. The regulation of the digital
+economy and the implementation of appropriate policies are crucial to prevent market
+concentration and ensure that the beneﬁts of productivity growth are shared more
+equitably. AI is a key driver of these economic shifts, with signiﬁcant implications for
+both economic growth and the future of work [25, 27, 28]. Understanding its impact
+is crucial in navigating the complexities of the modern economy.
+In a global landscape marked by increasing digitisation, interconnectedness, and
+the emergence of disruptive technologies such as AI, the foundations of traditional
+economic theory are facing ever greater scrutiny [29]. Recent economic challenges and
+the growing complexity of today’s world have highlighted the limitations of conven-
+tional models in offering comprehensive explanations and solutions [30]. This juncture
+has motivated the exploration of new theoretical and methodological perspectives that
+can better capture the dynamics of the digital age. In this sense, the Cobb-Douglas
+production function has been key to model the relationship between capital, labour
+and production, under assumptions of constant returns to scale and ﬁxed elasticities.
+However, in the current context of digitization and accelerated technological change,
+both its usefulness and limitations have become apparent. Rather than explicitly incor-
+porating new intangible or digital factors, recent debate has focussed on the model’s
+ability to adequately reﬂect the role of technology and efﬁciency, which are often
+represented as an external multiplicative factor rather than as a separate input. These
+limitations have prompted critical revisions and proposed extensions to the model,
+seeking to better capture the growing importance of innovation and intangible assets
+in the contemporary economy [31].
+In this context, innovative proposals are emerging, such as quantum economics,
+inspired by the principles of quantum physics, which advocates for a paradigm shift
+from the traditional macroeconomic approach towards a microeconomic vision that
+recognizes the uncertainty, nonlinearity, and complexity inherent in global economic
+systems [32]. In parallel, a re-evaluation of political economy is observed, seeking
+to transcend neoclassical and autocratic postulates to reintegrate social, institutional,
+123
+
+
+291
+Page 4 of 34
+L. Sanz-Martín et al.
+ethical, and humanistic considerations into the economic analysis of digitisation [29,
+33].
+The profound current economic transformations are intrinsically linked to the rise
+of disruptive technologies and successive technological revolutions. These are not
+only reshaping entire sectors and automating complex processes, but they also raise
+fundamental questions about the future of employment, the distribution of wealth,
+and social sustainability. Fully understanding these implications requires an interdis-
+ciplinary approach that goes beyond economics, drawing on knowledge from various
+social sciences, as well as computer science and other disciplines. The urgency to
+develop mechanisms for a more equitable sharing of the prosperity generated by these
+technological innovations stands as a crucial challenge and a primary focus of research.
+Ultimately, the motivation for this exploration lies in the pressing need to adapt and
+enrich our economic understanding to address the challenges and seize the opportu-
+nities presented by the digital age, marked by these waves of technological change.
+Within this framework of technology-driven transformation, it is useful to anal-
+yse economic and social dynamics through the lens of game theory. This discipline
+provides us with conceptual tools to understand the strategic interactions between
+different actors. Two fundamental concepts are Zero-Sum Games and Non-Zero-Sum
+Games.
+In Zero-Sum Games, such as chess or poker (without rake), one participant’s gain
+directly implies another’s loss. The total value at stake remains constant. In contrast,
+most economic and social situations are NonZero-Sum Games. Here, actions can
+generate additional value (positive sum), such as a trade agreement beneﬁcial to both
+parties, or destroy value (negative sum). The famous Prisoner’s Dilemma illustrates
+how the individual pursuit of the best strategy can lead to a suboptimal outcome for
+everyone, demonstrating the complexity of nonzero-sum game.
+Furthermore, we can distinguish between Competitive Games (Non-Cooperative),
+where actors seek to maximize their own beneﬁt without binding agreements (such
+as competition between companies), and Collaborative Games (Cooperative), where
+coalitions can be formed to achieve common goals and distribute the gains (such as
+wage negotiations).
+In strategic decision-making, players can employ Pure Strategies, choosing a spe-
+ciﬁc action with certainty, or Mixed Strategies, assigning probabilities to different
+actions to make them unpredictable. A central concept for analysing the stability of
+these strategies is the Nash Equilibrium, where no player has an incentive to unilat-
+erally change their strategy given those of the others. In the speciﬁc area of transport
+networks, the Wardrop Equilibrium describes a situation where no driver can improve
+their travel time by changing route.
+Finally, the concept of Pareto Optimality helps us to evaluate the efﬁciency of an
+outcome. An outcome is Pareto optimal if it is not possible to improve one individ-
+ual’s situation without worsening another’s. It is crucial to understand that efﬁciency
+(Paretooptimality) does not necessarilyimplyfairness inthedistributionof thebeneﬁts
+generated by new technologies and technological revolutions.
+In the context of digital transformation and disruptive technologies, understanding
+these concepts from game theory helps us to analyse how individual and collective
+decisions in an environment of constant technological change can lead to different
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 5 of 34
+291
+outcomes in terms of wealth distribution, employment opportunities, and social well-
+being. The key will be to design mechanisms that foster nonzero-sum games with
+Pareto optimal and, as far as possible, equitable outcomes, to maximize the potential
+of these waves of technological innovation.
+The aim of this study is to carry out a systematic review and a bibliometric analysis
+of quantum game theory in order to provide a comprehensive view of its evolution and
+applications. Through the systematic review, we seek to identify the main advances,
+methodological approaches and results obtained in the research of this emerging disci-
+pline. In addition, through bibliometric analysis, we aim to evaluate publication trends,
+collaboration networks between authors and institutions, and the areas of greatest
+impact within quantum game theory. This approach will allow us to position quantum
+game theory in the current context, identify knowledge gaps and suggest directions
+for future research in the area.
+This paper is structured as follows: ﬁrst, we outline the methodology employed,
+which includes a systematic review and bibliometric analysis of quantum game the-
+ory. In this section, we describe the process of selecting relevant studies, the criteria
+for inclusion, and the methods used for clustering and analysing the data. Next, we
+present the results, starting with the clustering of the literature, where we identify and
+categorize key themes and areas of research within the ﬁeld. We then examine the evo-
+lution of quantum game theory, highlighting signiﬁcant trends, milestones, and shifts
+in focus over time. Following this, we present a detailed discussion of the clusters,
+providing an in-depth analysis of the key topics within each cluster and their intercon-
+nections. Finally, we conclude the paper by summarizing the key ﬁndings, discussing
+the implications of the study, and suggesting avenues for future research in quantum
+game theory.
+2 Methodology
+A systematic review was carried out following PRISMA methodology [34] in which
+articles were selected from one of the most widely used databases in the scientiﬁc
+community: Scopus. The initial search equation was (“QUANTUM”) AND (“GAME
+THEORY”) OR ("QUANTUM GAME THEORY"). With the initial search equation,
+we found 5320 documents. In order to focus on the most relevant papers, a stronger
+restriction was necessary, so we limited the types of documents to articles, set as
+keywords "Game Theory", "Quantum Theory", "Quantum Game Theory", and deter-
+mined English as the language, since most of the articles were written in that language.
+This new search was formulated as ( ALL ( "quantum" ) AND ALL ( "game theory"
+) OR ALL ( "quantum game theory" ) ) AND PUBYEAR > 1988 AND PUBYEAR
+< 2025 AND ( LIMIT-TO ( EXACTKEYWORD , "Game Theory" ) OR LIMIT-TO
+( EXACTKEYWORD , "Quantum Theory" ) OR LIMIT-TO ( EXACTKEYWORD ,
+"Quantum Game Theory" ) ) AND ( LIMIT-TO ( DOCTYPE , "ar" ) ) AND ( LIMIT-
+TO ( LANGUAGE , "English" ) ) resulting in 957 articles (Fig. 1).
+To reﬁne the selection of the most relevant articles for our topic, additional
+restriction criteria were implemented alongside our primary search strategy. A core
+principle of the PRISMA (Preferred Reporting Items for Systematic Reviews and
+123
+
+
+291
+Page 6 of 34
+L. Sanz-Martín et al.
+Meta-Analyses) methodology, to which we adhered, is that a systematic review must
+be thorough and reproducible. This is underpinned by the rigorous application of pre-
+deﬁned and transparent inclusion and exclusion criteria, which are based primarily on
+the direct relevance of the content to the research question.
+Initially, we calculated the average number of citations (25) for articles published
+in the relevant research ﬁeld. It is important to clarify that this bibliometric calculation
+was not applied as a strict inclusion or exclusion criterion. Instead, it served as a
+complementary tool to identify potentially inﬂuential studies while preserving the
+primary selection process, which was based on content relevance and methodological
+rigor in accordance with PRISMA methodology.
+To address the most recent scholarly outputs in our ﬁeld, a complementary criterion
+was applied speciﬁcally for articles published in 2023 and 2024. We calculated the
+average annual number of citations for these articles (10 and 5, respectively) and used
+this bibliometric metric as an additional ﬁlter to focus on those with greater impact.
+Once again, this ﬁlter was supplementary to, and not a replacement for, the core
+PRISMA-based selection process.
+Additionally, snowball sampling was employed as a supplementary search tech-
+nique. While this method complements primary database searches, it is neither
+considered a central search strategy nor explicitly endorsed as a primary method
+within PRISMA guidelines. Its use was clearly described in the methods section, and
+any studies identiﬁed through this approach were documented in the PRISMA ﬂow
+diagram. The overarching principle remained the transparency and reproducibility of
+the entire study identiﬁcation processes.
+3 Results
+3.1 Clustering
+The dataset used comprised 1738 different keywords and was ﬁrst imported to
+VOSviewer using the criterion of co-occurrence of all keywords and was limited
+to a minimum of nine occurrences, resulting in 29 keywords that were organized in
+four clusters of nine, eight, seven and ﬁve items, respectively, as is shown in Fig. 2.
+The clusters were named according to the keywords they had. Each node signiﬁes a
+keyword, its size reﬂecting the frequency of occurrences. Lines between keywords
+represent their co-occurrences, forming clusters denoted by distinct colours.
+3.2 Evolution
+In Fig. 3, we can see the evolution over the years of the publication of articles on the
+topic under study. The ﬁgure shows a signiﬁcant increase in the number of publications
+from 1989 to 2024, particularly from 2000 onwards. While the ﬁrst years show a
+steady decline in article production, interest in these ﬁelds has grown since 2002,
+with notable peaks in 2002, 2010, 2020, 2023, and 2024. Please note that in 2025,
+we have collected two articles by snowball, but as the year has not yet concluded, we
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 7 of 34
+291
+Fig. 1 Flow diagram of the PRISMA methodology. Adaptation from [35]
+have not included them in the graph to avoid any potential bias. The year 2020 stands
+out with the third-highest number of publications, likely driven by the COVID-19
+pandemic and the growing interest in interdisciplinary research. Despite some declines
+in certain years, the overall trend suggests an increasing relevance and development in
+quantum theory and game theory, reﬂecting an expanding and dynamic ﬁeld of study.
+Additionally, 2023 and 2024 shows a signiﬁcant peak in the number of publications,
+reaching the highest point in the graph. This surge is likely driven by the ongoing
+developments in these ﬁelds, as well as the continued evolution of research across
+various interdisciplinary domains, further emphasizing the growing momentum and
+expanding interest in quantum theory and game theory.
+The evolution of keywords in game theory and quantum theory over time can be
+seen in Fig. 4 and demonstrates the diversiﬁcation and expansion of research in these
+ﬁelds. From the early years (2010–2014), keywords primarily focussed on traditional
+themes such as game theory and quantum theory, with an emphasis on theoretical
+bases like quantum mechanics and quantum entanglement. These concepts reﬂect
+the ﬁrst applications of quantum theory and the exploration of its foundations. From
+2015–2018, research began to expand into new areas, with key terms such as deci-
+sion theory, evolutionary games, and random processes becoming more prominent.
+123
+
+
+291
+Page 8 of 34
+L. Sanz-Martín et al.
+Fig. 2 Map of the clusters
+Fig. 3 Evolution of the publication of the papers selected
+These ﬁelds focus on the dynamics of agent interactions and modelling complex and
+stochastic situations, becoming fundamental areas in research. There was also a grow-
+ing interest in topics related to sustainability and efﬁciency, such as energy efﬁciency
+and resource allocation, reﬂecting practical applications of game theory. In recent
+years (2019–2020), emerging areas have been consolidated, with an emphasis on
+optimization, learning algorithms, and energy utilization. This trend indicates a strong
+integration of game theory with applications in AI and sustainability, speciﬁcally in
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 9 of 34
+291
+Fig. 4 Evolution of keywords
+improving energy efﬁciency and resource optimization. Key terms like quantum the-
+ory and quantum games are increasingly linked to classic game theory topics, such as
+Nash equilibrium, and emerging areas like computation theory and quantum optics,
+reﬂecting a deeper integration of quantum theory in computer and system optimization
+contexts. In conclusion, the evolution of keywords in game theory and quantum theory
+highlights a clear trend towards integrating game theory with practical applications in
+areas like resource optimization and sustainability. This evolution has led to a more
+comprehensive application of game models in these ﬁelds, demonstrating how game
+theory has evolved towards interdisciplinary approaches to solve contemporary social
+and scientiﬁc problems.
+Figure 5 shows that a few authors dominate the publications in our database. Wang
+H. leads with 7 publications, followed by Iqbat A., Abbott D., and Cheong KH. with
+6 each. Li Y., Zhang H., Li H., Wang Y. Flitney AP., Li H., Sładkowski J., and Li C.
+have 5 articles each. This suggests that these authors have signiﬁcantly contributed to
+the advancement of quantum theory and game theory.
+Figure 6 shows the geographical distribution of articles on "Quantum and Game
+Theory." China leads with 110 publications, followed by the USA with 59, and Ger-
+many with 27. Australia and the UK contribute 22 and 21 articles, while Canada and
+Singapore each have 18. Japan, France, and Italy also contribute, with smaller numbers
+from Spain, Switzerland, and India. This highlights a strong concentration of research
+in both Asian and Western countries.
+In Fig. 7 we see the word cloud of the most repeated words. Key concepts such
+as game theory and quantum theory appear most frequently, reﬂecting their impor-
+tance in strategic analysis and quantum phenomena. Words such as ‘game theory’
+and ‘quantum theory’ will be the most prominent, indicating their central role. Topics
+related to decision and probability, as well as models and algorithms, will also be
+emphasized, highlighting their relevance in research and simulation. Other notable
+123
+
+
+291
+Page 10 of 34
+L. Sanz-Martín et al.
+Fig. 5 Authors with most publications
+Fig. 6 Map of the geographical distribution
+concepts include cooperation in games and aspects of computation, providing a clear
+overview of the predominant approaches in strategy analysis and quantum theory.
+4 Development of the identiﬁed clusters
+The signiﬁcance of quantum game theory lies in its ability to extend classical game
+theory into the quantum realm, offering new perspectives on strategic interactions in
+systems where quantum mechanics plays a role. This ﬁeld has not only theoretical
+implications but also practical applications in areas such as cryptography, algorithm
+design, and complex systems modelling.
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 11 of 34
+291
+Fig. 7 Wordcloud of the most used words
+To further explore and harness the potential of quantum game theory, the following
+sections will develop clusters focussed on key areas of research. These clusters will
+delve into the optimized dynamics in evolutionary and stochastic game theory, as well
+as other emerging intersections within the ﬁeld, providing a structured approach to
+advancing both the theoretical and practical aspects of quantum game theory.
+4.1 Quantum game theory: Nash equilibria and entanglement in computational
+systems
+Historically, this ﬁeld of study began with two articles that were developed and pub-
+lished almost simultaneously. The ﬁrst article (published on 01/02/1999) by David
+A. Meyer [36] introduced the ﬁrst scheme for quantizing a game (hereafter referred
+to as the Meyer scheme), the Penny Flip (PF) game. Later that year (published on
+11/10/1999), Eisert, Wilkens, and Lewenstein introduced a quantization scheme (here-
+after referred to as the EWL scheme) for a different game, the Prisoner’s Dilemma
+(PD) [21]. The EWL scheme is arguably the most successful and impactful. Shortly
+thereafter (published on 07/08/2000), Luca Marinatto and Tullio Weber [37] proposed
+a third quantization scheme (hereafter referred to as the M&W scheme) for the Battle
+of Sexes (BOS) game. This third scheme, as the authors themselves admit, has much
+in common with the EWL scheme and is clearly inspired by it, although it has its own
+characteristics, as will be shown later.
+All these schemes were conceived to offer better performance in competitive games.
+Without a doubt, the most successful of the three over the years has been the EWL
+scheme, as evidenced by its higher number of citations and as we will see in the
+development of this literature review.
+The quantum coin game, described in Meyer’s scheme, involves two players, A
+and B, who must decide whether or not to ﬂip a coin. Initially, the coin is in the
+‘heads’ position. Player A has access to quantum strategies, while player B can only
+use classical strategies. The goal is for player A to win if the coin ends in ‘heads’
+and B to win if it ends in ‘tails’. When A uses a quantum strategy, in particular the
+Hadamard operator, he will always win, regardless of the strategy of B. This happens
+123
+
+
+291
+Page 12 of 34
+L. Sanz-Martín et al.
+Fig. 8 On the left, coin heads up (↑) and tails down (↓), where F refers to the action of ﬂipping. On the
+right, a table with all the possible game outcomes, where the different columns show A’s possible strategies,
+and the rows show B’s possible strategies
+Fig. 9 Diagram of the EWL Scheme
+because the Hadamard operator creates a quantum superposition that is not affected by
+the classical strategies of B. Thus, even if B applies the classical strategies of inversion
+or identity, the ﬁnal result will always be ‘heads’, which guarantees the victory of A
+[36], as can be seen in Fig. 8.
+Furthermore, the quantum advantage in this game is analysed, suggesting that in
+systems with only one qubit it is not possible to achieve a quantum advantage, as they
+can be described by classical models. However, by considering more than one qubit,
+the possibility of obtaining a real quantum advantage opens up. On the other hand,
+decoherence, which is a phenomenon that degrades quantum states when interacting
+with the environment, can affect the actual implementation of the game. If B delays its
+strategy sufﬁciently, the game may revert to its classical behaviour, which represents
+a challenge in the practical implementation of quantum games [38]. Finally, although
+the strategies used by B (identity and Pauli σx) are called classical, they are actually
+quantum strategies because they can act on superposition states. It is also discussed
+that there are tools to simulate quantum games, which can be useful for educational
+and popularization purposes.
+The EWL (Eisert, Wilkens and Lewenstein) [21] scheme was proposed to quantify
+the prisoner’s dilemma using quantum tools. In the classical dilemma, players must
+decide whether to cooperate or betray, and although betrayal is a Nash equilibrium,
+cooperation is the optimal outcome for both players. In the quantum scheme, a judge
+preparestwoqubits,andtheplayersapplyquantumoperationstotheirrespectivequbits
+before the judge measures the outcome. Cooperation and betrayal are represented by
+speciﬁc quantum operators, and players can mix these operations, giving them access
+to a wider quantum strategy space than players with classical strategies (Fig. 9).
+The use of quantum strategies allows players to choose from a wider range of
+options, giving them an advantage over players who only use classical strategies. This
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 13 of 34
+291
+Fig. 10 Payoff table for the
+Prisoner’s Dilemma game with 2
+players, A and B, adding the
+quantum strategy Q
+scheme ensures that, under certain conditions of quantum entanglement, the dilemma
+is resolved, as the game reaches a Nash equilibrium that coincides with the Pareto
+optimal, where both players can obtain the best possible outcome by cooperating (Fig.
+10).
+The concept of ‘miracle move’ refers to a quantum strategy that allows a player to
+obtain good results regardless of what the other player does, which generates debates
+about the validity of these strategies compared to classical ones. Furthermore, quantum
+entanglement plays a crucial role in the outcome of the game, since, according to the
+study by Eisert et al. [21], a certain threshold of entanglement is necessary to achieve a
+quantum advantage. However, it has been pointed out that the use of quantum strategies
+also generates controversy, especially when the available strategies are extended or
+when the entanglement conditions are modiﬁed. For example, in papers such as [39],
+it is argued that, when considering pure and mixed strategies, the Nash equilibrium
+may disappear in some situations, although it can be restored in cases with mixed
+strategies.
+The EWL scheme proposes a quantum version of the prisoner’s dilemma that solves
+the classical dilemma by using quantum strategies, but it also generates debates about
+its applicability and the inﬂuence of quantum entanglement on the outcomes of the
+game. Criticisms and extensions of this work have been addressed in articles such as
+[40, 41], which question certain aspects of the model and its relation to classical strate-
+gies. As for the practical implementation of the quantum scheme, it has been tested
+on quantum computers, such as nuclear magnetic resonance (NMR) and optical com-
+puters (as mentioned in [42, 43]). However, decoherence remains a challenge in real
+implementation, as it degrades quantum states when interacting with the environment,
+as discussed in [44].
+The role of entanglement in the outcome of quantum games is crucial. In the original
+article by [21], its effect on the quantum advantage of miracle moves was studied, but
+it is also important for reaching new Nash-like equilibria or not. Several studies,
+such as [42], have addressed this issue, highlighting that for strategies belonging to
+general unitary operations, an entanglement threshold is found, beyond which the
+Nash equilibrium ceases to exist. This result suggests that, by controlling the degree
+123
+
+
+291
+Page 14 of 34
+L. Sanz-Martín et al.
+of entanglement, a Nash equilibrium superior to the traditional one could be achieved
+for pure strategies of this set of general unitary operations.
+In more general strategy spaces, some authors have delved into the existence of
+miracle moves, as proposed by [21]. The article [45] reiterates that a player in this
+strategy space has the ability to undo the action of the other player in the global state
+through local operations and then implement a betrayal strategy [39]. In addition,
+this paper explores the role of the degree of entanglement in quantum advantage,
+identifying new thresholds for different games: gamma > √1/3 for the Chicken
+Game, and gamma = √2/3 for the Stalemate Game. For the Deer Hunting Game, no
+quantum advantage was found, and for the Battle of the Sexes Game no clear threshold
+was identiﬁed. It underlines the difﬁculty of analytically studying quantum advantage
+in games with more players, where no quantum player can reach the desired ﬁnal state,
+even knowing the strategies of the other players.
+A more fundamental critique of the quantum game theory model and the EWL
+scheme is raised in [41], which argues that the EWL scheme neither solves the tradi-
+tional game nor does it do so through quantum mechanics. It is argued that, since the
+payoff table in the quantum scheme does not match that of the traditional game, the
+proposed game is not a quantum version of the original, but a new game in which the
+traditional game is a subgame. Other authors, as in [46], have addressed this issue,
+arguing that the extension of the game is as valid as considering mixed strategies.
+Regarding the second criticism, it is argued that extension can be done classically by
+considering a new classical strategy Q and generating a new payoff table. Although,
+as acknowledged in [21], the quantum model is more efﬁcient in terms of communi-
+cation resources, since four real variables must be transmitted, and it is more complex
+to simulate situations with more players and strategies classically. However, for [41],
+efﬁciency is not relevant in game theory and a traditional model is considered valid.
+As for the physical implementation of the EWL scheme in a quantum computer,
+remarkable examples have been achieved in nuclear magnetic resonance (NMR) com-
+puters [47] and in optical computers [48]. Other studies have also investigated how
+decoherence affects the performance of the [44] scheme. All previous implementa-
+tions on physical hardware use quantum computers. However, implementing quantum
+games requires a delocalised architecture that enables players A and B to be in different
+locations. The paper [49] addresses this issue by implementing a delocalised circuit
+of the EWL scheme using an auxiliary qubit for the game of prisioner’s dilemma. An
+application of this proposal for the magic square game can be ﬁnd in [50].
+The scheme proposed by Marinatto and Weber [51] to quantise the Battle of Sexes
+(BOS) game, as opposed to the Prisoner’s Dilemma quantization. This scheme uses a
+quantum entangled state as a starting point, with the aim of obtaining more balanced
+results than in the traditional game. In this game, Alice and Bob must decide between
+two plans (one male and one female). If they both choose the same plan, they get a
+reward, although whoever chooses their preferred activity receives a higher reward.
+However, payoffs are asymmetric in Nash equilibria.
+Marinatto and Weber’s scheme uses a maximally entangled state and considers
+pure quantum strategies as the identity(I) and σx, with associated probabilities. This
+allows both players to receive the same payoff in the Nash equilibrium, eliminating
+the asymmetry of the traditional game.
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 15 of 34
+291
+However, this scheme has been criticized. Benjamin [52] points out the limitation of
+the strategy space, restricted to only I and σx, which could result in behaviour similar
+to that of the classical game if general unitary strategies were employed. In addition, a
+coordination problem persists, as players still depend on each other’s choices to decide
+which strategy to use.
+Marinatto and Weber respond to these criticisms by arguing that the restriction of
+strategies ensures that the game recovers classical behaviour when a non-interlocked
+state is used, such as |00⟩. On the other hand, [53] highlights the dependence on the
+initial state, as certain initial states solve the coordination problem, making players
+choose the same strategy. The scheme has also been criticized for not correctly reﬂect-
+ing the paytable of the traditional game and for the insufﬁciency of the strategy space.
+To address this, Marinatto and Weber’s extended proposal (eM&W) allows players to
+choose different initial states, not just limiting themselves to|00⟩[54]. In summary,
+Marinatto and Weber’s scheme for quantifying the BOS game has advantages, but
+faces criticisms about the limitation of strategies and the dependence on the initial
+state.
+Another equally important extension is the one made to consider games with strate-
+gies consisting of continuous variables. All that can be found on quantum game theory
+with continuous variables is applied to the problem of the Cournot Duopoly. For the
+quantization of the game, the scheme proposed by Li et al. [55] is practically iden-
+tical to the EWL scheme [21] Fig. 9, though it presents some modiﬁcations. Now,
+the valid strategies are of the form U j = exp(−ix j Pj) with Pj = i(a† −a)/
+√
+2,
+where x j ∈[0, ∞] and a and a† are the creation and annihilation operators of the
+electromagnetic ﬁeld. In other words, now the strategies correspond to displacement
+operators in the phase space. The main difference is that in this extension of the game,
+there is no ﬁxed J operator that satisﬁes certain commutation relations with the “clas-
+sical” strategies; instead, the J operator considered will determine whether the game
+is quantum or not. Thus, with J = J † = I, we recover the results of the classical
+game. The general form of the J operator will be J = exp(−γ (a†
+1a†
+2 −a1a2)), where
+as before, γ ∈[0, ∞] can be interpreted as the degree of entanglement. In the article,
+the new Nash equilibrium is found as a function of the strategies X1 and x2 of each
+player, as well as the parameter γ . It is found that when γ →∞, the new Nash
+equilibrium coincides with the Pareto optimum. Some extensions, such as [56], study
+the case of the previous quantum game when the distribution of information is asym-
+metric, with the second company knowing the production costs of both, while the ﬁrst
+company only knows its own production costs. In this case, it is found that the effect
+of quantum entanglement is not clearly positive and can reduce the resulting payoffs
+for both players, even for the one with more information. Other mathematical models
+for describing duopolies, such as the Stackelberg duopoly, have also been quantized
+[57]. The fundamental difference between the Cournot model and the Stackelberg
+model is that in the latter, the game is sequential, as is the case with the Penny Flip
+game; one company ﬁrst sets a production quantity q1, and knowing this decision,
+the second company sets its production quantity q2. In this case, the previous article
+uses the M&W scheme for quantization. Other works [58] focus on the different roles
+played by entanglement in the two models. We can also ﬁnd articles comparing the
+123
+
+
+291
+Page 16 of 34
+L. Sanz-Martín et al.
+performance of different schemes for the quantization of the Cournot duopoly [59]. On
+the one hand, they consider the scheme proposed in the previous article [57], based on
+the M&W scheme, and apply it to the Cournot model. On the other hand, they explain
+again the Li Du Massar scheme [55], based on the EWL scheme. Additionally, a new
+extension of the EWL scheme is introduced for the Cournot duopoly problem. This
+highlights the various valid ways to quantize a game, with the only condition being
+that the traditional game is contained as a particular case. In this way, the lack of a
+general formulation for quantum game theory is evident (Fig. 10).
+Regarding the study of the Evolutionary Stable Strategies (ESS) concept in quantum
+game theory, we can highlight, for example [60], where the M&W scheme is employed.
+As with the Nash equilibrium in this scheme, a strong dependence on the initial state’s
+entanglement is observed, ﬁnding that depending on how entangled the state is, some
+strategies will be ESS, while others will not. The same authors also considered the
+ESS idea in the case of the EWL quantization scheme [61]. As we have just seen
+above, classically in the Prisoner’s Dilemma game, defecting is an ESS. In this article,
+they studied whether a population of mutants equipped with quantum strategies could
+invade a population of defectors. It is shown that if the mutants can access the set
+of strategies, the invasion can occur. The results of this article again highlight the
+importance of the initial state for the ESS in the M&W scheme. The same authors,
+in another article [22], again used the M&W scheme to study the ESS now for the
+RPS game. The results show how the entanglement of the initial state causes the Nash
+equilibrium associated with the mixed strategy consisting of each pure strategy with
+probability 1/3 to also be an ESS, unlike in the classical case or similarly in the
+unentangled initial state. The potential of these results for evolutionary theory at the
+molecular level is also discussed. A similar approach is used in the paper [62] for the
+hawks-and-doves game, with a similar result showing strong dependency on initial
+quantum state.
+In addition to the three schemes discussed in detail before, there are alternative
+schemes created ad hoc for speciﬁc games. Therefore, they are proposals that are
+difﬁcult to generalize, although they can be useful in their particular use case. One
+notable example is the quantization of the Monty Hall game [63, 64]. In this quan-
+tization scheme, which deviates somewhat from the usual, qutrits are used instead
+of qubits. It bears a greater resemblance to the M&W scheme since quantization is
+performed by considering an entangled state as the starting point, a state on which no
+operation is performed at the end to invert the ﬁrst, as happens in the EWL scheme. In
+this case, general unitary operations are considered, unlike in the M&W scheme. The
+results show that the outcomes of the quantum and classical versions are the same,
+except in the case where the player has access to quantum strategies, but the person
+running the game does not, in which case the player has a winning strategy. Another
+more innovative and counterintuitive proposal for quantizing the Monty Hall game
+can be found in [65]. Another game with more direct application that has sparked
+interest for being quantized is auctions. Noteworthy works here include [66–68]. In
+the ﬁrst one [66], a quantization scheme is proposed where players can encode their
+bid in a quantum state so that a quantum algorithm can then search for the highest
+bid. A possible advantage lies in the ability to choose a quantum superposition state
+as a bidding strategy that involves several items. Another possibility is to introduce
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 17 of 34
+291
+entangled states to encode bids involving several items in one package or to encode
+bids coordinated for multiple products with other players who may be partners. A
+point the authors highlight is that after the quantum search algorithm, losing bids dis-
+appear, thus maintaining privacy. An important issue emphasized is that players may
+be tempted not to follow the scheme’s instructions to deceive the search algorithm
+and win with a lower bid. The precautions the auctioneer must take to prevent these
+failures from happening are also explained. In the second work [68], an alternative
+general scheme is introduced for the same purpose using a continuous state space,
+although it is clariﬁed that the previous proposal is much easier to implement.
+In the realm of quantum game theory, one of the most pressing and unresolved
+challenges is determining how players can autonomously reach the Nash equilibrium.
+This paves the way for the integration of a range of techniques pertinent to the ﬁeld
+of AI, which have the potential to redeﬁne the methods employed to identify and
+enhance equilibria. Variational methods, for instance, provide a systematic approach
+to approximate quantum states that minimize certain objective functions, which could
+be tailored to ﬁnding Nash equilibria in quantum games. Parametric quantum circuits,
+on the other hand, offer a ﬂexible framework for exploring the vast landscape of
+quantum states that may correspond to an equilibrium, leveraging quantum gates and
+parameters that can be ﬁne-tuned to approach the optimal strategy. The integration of
+these methods into the analysis of quantum games is particularly intriguing because,
+upon reviewing the extensive body of literature on quantum game theory, there is
+a notable lack of studies addressing the process by which players might actively
+discover the equilibrium in the absence of prior knowledge. This gap in the literature
+underscores the novelty and relevance of exploring how quantum-enhanced techniques
+could facilitate the discovery of Nash equilibria. In the future research, we aim to
+address this gap in the current state of the art by exploring how players in quantum
+games can autonomously discover the Nash equilibrium without prior knowledge of
+the equilibrium parameters.
+Inspired by previous literature [69], we have identiﬁed some more realistic cases
+where quantum game theory could play a role in the future. These problems are related
+to trafﬁc effects when transporting "something" from one point to another in a network
+or network. This "something" can be anything from vehicles in a road network, to data
+in a ﬁbre optic network, to electricity or fuels. An example of this type of problem is the
+Braess paradox. The problem can be understood through the Braess paradox, which
+shows that adding a new road to a transportation network can, counter-intuitively,
+make trafﬁc worse. This phenomenon reﬂects a situation in which players (drivers)
+who make selﬁsh decisions end up with a worse outcome than if they considered the
+common good. Similar to the Prisoner’s Dilemma, quantum game theory can offer new
+solutions to this type of congestion problems in transportation networks by applying
+quantum tools to manage and optimize decision-making in complex trafﬁc systems.
+In addition, quantum game theory can be extended to more general networks where
+players must choose among several alternative routes depending on congestion and
+trafﬁcineachsegment.Here,quantumstrategiescanhelpoptimizeuserdecisionsinthe
+network, improving efﬁciency and reducing congestion. Several works are advancing
+this direction. For example [70], proposes a solution to the Braess paradox based on
+quantum game theory. In particular, the multiplayer EWL scheme with three players
+123
+
+
+291
+Page 18 of 34
+L. Sanz-Martín et al.
+and a three-parameter strategy set is used. An iterative method to adjust each parameter
+and reach Nash equilibrium is also presented. Interestingly, the best results, which
+coincide with the Pareto optimum, are not achieved with maximal entanglement, but
+with γ = π/4. Another notable work is [71], which develops an algorithm based
+on constructive interference of the desired end state and destructive interference of
+the less favourable end state. The originality of the scheme lies in the fact that it
+requires an initial state speciﬁcally intertwined with a parameter that the judge can
+modify to favour or hinder the outcome of certain ﬁnal states, and where all players
+must implement a single strategy, without any degree of freedom. This scheme is
+applied to solve the spectrum allocation problem in cognitive radio systems. Although
+the problem addressed by this game is interesting, it cannot be considered a true
+game, since the players do not have different strategies to choose from. Similarly,
+[72] presents a situation where N packets wish to travel from one point to another
+in a network through the fastest channel. On congested channels, these packets can
+continue on the same channel or switch to the second best option. The payoff of the
+game is the total time, which is the sum of the path time and the travel time. The
+quantum game scheme used is the multiplayer EWL scheme. The results show that
+quantum game theory could offer solutions to trafﬁc congestion problems in networks.
+The relevance of applying quantum game theory to Braess paradox extends beyond
+previous problems, encompassing critical issues related to demographic challenges,
+including those faced by large cities but also by sparsely populated regions and areas
+with low population density. As global populations continue to grow and urbanization
+accelerates, the demand for efﬁcient infrastructure and resource management becomes
+more pressing. Problems such as urban mobility [73], congestion management [74],
+and smart grid optimization [75] are increasingly critical in the context of both high-
+density urban centres and sparsely populated regions. On the other hand, efﬁcient
+routing of vehicles [76] and energy distribution networks [77] are relevant to rural
+settings where the allocation of shared resources becomes a complex balancing act.
+4.2 Optimized dynamics in evolutionary and stochastic game theory for
+decision-making
+The application of optimisation methods in dynamic systems, essential for game the-
+ories and decision-making, is encompassed by the cluster "Optimized Dynamics in
+Evolutionary and Stochastic Game Theory for Decision Making". Evolutionary game
+theory, which analyses strategies and adaptive behaviours over time, is combined
+with stochastic game theory, focussing on gaming scenarios with elements of uncer-
+tainty and randomness. This concept’s primary focus is on improving and optimizing
+decision-making. This integrated approach is particularly relevant for a cluster or
+research group dedicated to exploring these interdisciplinary ﬁelds, providing a holis-
+tic perspective that ranges from theoretical foundations to practical application in
+decision-making processes.
+Game theory focuses on decision-making, examining how different parties make
+decisions based on their personal interests. It explores situations of competition, rival-
+ity, or struggle, and has proven useful in social sciences, biology, and economics. It
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 19 of 34
+291
+is particularly relevant for incomplete information games, where parties can choose
+their action plan based on rational knowledge but lack understanding of the others’
+decisions [78]. Nowadays, game theory deﬁnes a wide range of human-computer
+interactions and is already a science of logical decision-making, which assumes that
+players act rationally [79]. In game theory, a player’s strategy usually considers what
+they have learned about the tactics of the other players. Probability is a signiﬁcant
+subgroup of interactions in each of these domains [80]. Group decision-making is
+a complex procedure involving humans selecting an optimal alternative based on
+desired criteria, such as cost and beneﬁt. However, uncertainty and complexity are
+common in real-world environments. To address these issues, domain experts evalu-
+ate alternatives, but uncertainty and subjectivity limit their ability to provide accurate
+evaluations [81]. With the competition of an adversary, dynamic game theory has
+attracted much interest as a potentially useful method for developing agent action plans
+in such a complicated scenario [82]. Large-Scale Group Decision-Making (LSGDM)
+has emerged as a key research topic in the ﬁeld of decision-making, standing out for
+its unique advantages in solving complex decision-making problems due to the large
+number of participants (DMs). In this sense, [83] proposes a new optimal consen-
+sus mechanism, emphasizing fairness and rationality in consensus allocation, in order
+to improve the efﬁciency and cooperation of participants. In the future, we plan to
+extend this method to more complex situations, such as LSGDM with fuzzy informa-
+tion in decision-making, LSGDM in social networks, LSGDM with heterogeneous
+decision information, and LSGDM considering individual behaviour. Furthermore, it
+is suggested to apply this new method in various ﬁelds, such as decision-making in
+large-scale emergencies, COVID-19 pandemic, e-waste recycling, and environmental
+performance evaluation, among others.
+Two signiﬁcant assumptions of classical game theory are completely rational
+players and complete information. However, players’ rationality is often bounded,
+especially when facing complex situations, which limits the real-world application
+of traditional game theory. Evolutionary game theory is an important breakthrough
+in game theory, emphasizing bounded rationality and dynamic equilibrium. It com-
+bines traditional game theory and dynamic evolution, adopting bounded rationality
+as an analysis framework, which is closer to the reality that decision-makers in the
+real world are not entirely rational. The evolutionary game theory holds that people’s
+decision-making behaviours in a real-life situation reach dynamic equilibrium through
+continuous learning, imitation, and trial and error. It has two essential concepts: repli-
+cator dynamics and evolutionarily stable strategy (ESS) [84].
+The techniques of quantum theory are employed merely for taking into account
+the hidden variables, such as emotions and biases of decision makers. The possibility
+of considering hidden variables is at the heart of the quantum-theory techniques that
+allow for their existence by modifying the rules of calculating the quantum proba-
+bilities. This is why the quantum techniques make it possible to characterize human
+decision making, incorporating in it the existence of such hidden variables as sub-
+conscious feelings and behavioural biases. The efﬁciency of quantum techniques for
+human decision-making is not because humans are quantum objects, but because these
+techniques are mathematically designed to accommodate the existence of hidden vari-
+ables, which can be of a very different nature [85].
+123
+
+
+291
+Page 20 of 34
+L. Sanz-Martín et al.
+The concepts of optimization and game theory overlap. Put it differently, game
+theory can be considered an approximation of optimization [86]. Optimization is
+a decision-making process that consists of maximizing or minimizing a predeﬁned
+function. Classical optimisation techniques, based on mathematical and probabilis-
+tic principles, have difﬁculties in providing adequate solutions to complex problems.
+Examples are gradient-based methods, which require the gradient of the objective
+function. These shortcomings have led to the introduction of new optimization tech-
+niques called ‘metaheuristics’ [87]. Metaheuristic optimization algorithms (MOAs)
+are widely used to solve real-world problems by ﬁnding optimal decision variables
+and solving engineering problems due to their high computational efﬁciency and com-
+plexity. MOAs consist of two main phases: exploration and exploitation, the angular
+balance being the key. If scanning is effective, random operators generate different
+regions of the search space, but the MOA may be stuck in the optimal locale. If
+exploitation is effective, the optimization method determines the most suitable solu-
+tion in the search ﬁeld. However, the MOA may still be trapped in the minimum local
+tramp, making the balance critical for convergence to the global optimum. Over the
+past decade, many new MOAs have been proposed to balance the exploitation and
+exploration phases [88].
+Zhu et al. [89] Adressed the challenge of multirobot task assignment in coop-
+erative robotics. It introduces a modiﬁed optimization method, which combines
+static optimization with evolutionary game theory to improve multirobot task assign-
+ment performance. The method uses an autoadaptive strategy based on evolutionary
+game theory and optimization by particulate enjection. It also provides a convergent
+parameter selection principle and a viability-based rule for handling multirobot task
+assignment restrictions. The method outperforms competitors in terms of solution
+quality and time computation time. The method’s simulation results show a 126.41s
+average computation time. Intermittent Brownian ratchets, in which diffusive parti-
+cles exhibit unexpected drift when exposed to alternating periodic potentials, were
+the original idea behind Parrondo’s paradox. It has since been used in a variety of
+disciplines in the physical and engineering sciences, such as diffusive and granular
+ﬂow dynamics, information hermodynamics, chaos theory, switching problems and
+quantum phenomena. The paradox has also been widely used in the life sciences, such
+as ecology and evolutionary biology, social dynamics, and collaborative work [90].
+Stochastic approximation theory also deals with computational procedures in which
+test results are error-prone. in which test results are error-prone. However, in this con-
+text, errors are deﬁned as are understood as measurement inaccuracies. The problem
+is to ﬁnd zeros and extreme values of real functions of one variable. The values of
+functions are to be determined by measurements subject to random errors. The objec-
+tive is to construct a process that, under certain assumptions, stochastically converts
+to the zero value to be found. The question of efﬁciency is addressed by studying the
+speed of convergence [91]. The main difﬁculty associated with the stochastic min-
+imax dynamic games is due to the presence of white noise and square integrable
+disturbances in both dynamics and observations. These games are more general than
+risk-sensitive stochastic control problems and deterministic minimax dynamic games.
+Risk-sensitive control problems are equivalent to minimax stochastic dynamic games,
+where white noise inputs and disturbances affect dynamics and observations through
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 21 of 34
+291
+the same channel. These games result in robust controllers but cannot model physical
+phenomena where white noise affects dynamics and measurements through different
+channels. Thepresenceof bothwhitenoiseandstochasticdisturbances is crucial for the
+mathematical value and generalization of the H1 rule to stochastic systems [92]. In this
+context [93] propose a framework that integrates quantum and classical approaches to
+decision-making, focussing on quantum stochastic walkers within classical networks.
+This approach investigates how behavioural choice probabilities emerge as the unique
+stationary distribution, shedding light on the interplay between unitary and irreversible
+dynamics, quantum coherence and cognitive realism. The applicability of the model
+is extended to large-scale surveys and games with incomplete information. The appli-
+cability of the model is extended to large-scale surveys and games with incomplete
+information. The paper analyses the theoretical connections between Bell’s notion of
+non-locality and Harsanyi’s theory of games with incomplete information. It proposes
+a complete formulation of quantum stochastic walks.
+Bohl et al. [94] Analysed the application of game theory to cell and molecular
+biology, focussing on molecular scenarios involving RNA, genes, molecules, trans-
+posable elements, viruses and proteins. The strategies of genetic elements, their social
+behaviour and the application of Shapley’s value concept to measure the contribu-
+tion of enzymes are analysed. The article concludes that game theory can effectively
+analyse molecular scenarios, reveal unexpected results and highlight the important
+contribution of genes in metabolic pathways. It also suggests that game theory can be
+applied to macromolecules such as DNA, RNA and proteins.
+Zhang et al. [95] Proposed a new approach to optimize subcarrier allocation in
+Filter-Based Multichannel Modulation (FBMC) systems, which leads to signiﬁcant
+improvements in energy efﬁciency. The main technique used is evolutionary theory,
+which considers competition between subcarriers in FBMC systems. The method also
+analyses interference suppression in cognitive radio networks and resource allocation
+strategies. The method achieves optimal energy efﬁciency and system performance,
+while reducing interference and competition between subcarriers. Future research
+should focus on more complex scenarios and advanced techniques.
+Cui et al. [96] Proposed a new method for multi-user computation on mobile devices
+using evolutionary gaming strategies for IoT devices. This approach can signiﬁcantly
+reduce delay and energy consumption, making it a promising solution for IoT net-
+works. The techniques used include Evolutionary Game Theory (EGT), dynamic
+replicator dynamics, reinforcement learning, genetic algorithms and Q-learning. The
+proposed game is effective in reducing computational costs and improving overall
+utility, with a stable and optimal strategy for multi-user computation.
+The integration of evolutionary and stochastic game theory in decision optimization
+has proven to be a valuable tool for analysing and improving dynamic processes in
+various disciplines. Game theory, which studies decisions in competitive and uncer-
+tain situations, has been enriched by evolutionary and stochastic theories, adapting
+its models to more realistic situations where players may not always act rationally.
+The incorporation of quantum techniques has allowed for a better understanding of
+human decision making, considering hidden variables like emotions and cognitive
+biases. Optimization, viewed as a process of maximization or minimization of pre-
+deﬁned functions, has evolved towards the use of metaheuristics, which are useful
+123
+
+
+291
+Page 22 of 34
+L. Sanz-Martín et al.
+in solving complex and large-scale problems. These approaches have been applied
+in various ﬁelds, from cooperative robotics to molecular biology and IoT communi-
+cation, demonstrating their effectiveness in task assignment, energy efﬁciency, and
+problem resolution in uncertain scenarios.
+The future of research in these ﬁelds should focus on improving optimization
+techniques applied to complex systems, especially in adapting to rapid changes and
+integrating various uncertainty sources. The application of game theory in complex
+environments, such as communication networks and AI, presents an area for further
+exploration. The interaction between quantum game theory and advanced optimization
+methods, such as quantum metaheuristics, could open new possibilities for decision-
+making in uncertain and dynamic contexts. The study of multiagent systems and
+cooperation analysis is crucial for achieving sustainable and collaborative equilibri-
+ums. Lastly, the practical implementation of these theories in real systems, such as the
+Internet of Things (IoT), cooperative robotics, and biological systems, should advance
+towards more efﬁcient and robust solutions, addressing the challenges inherent in these
+environments.
+4.3 Simulated human evolution and cooperation in computational games
+The utilization of computational simulations for studying and modelling human evolu-
+tion, with a focus on the crucial role of cooperation in this process, is encompassed by
+the cluster "Simulated Human Evolution and Cooperation in Computational Games".
+The importance of cooperation within the context of computational games, a key
+aspect in the research of human evolution and social interactions, is highlighted by
+this approach. This comprehensive approach allows a deeper understanding of how
+cooperation has inﬂuenced and shaped human development.
+The multidisciplinary topic of evolutionary game theory (EGT) combines game
+theory with evolutionary biology, emphasizing the dynamics of player tactics and the
+evolutionary mechanisms that drive change, such as natural selection and mutation.
+In biology, interactions can be characterized by stochastic processes or deterministic
+laws, and strategies are inherited algorithms that control individual behaviour. Evo-
+lutionary game theory is situated in the domain of nonlinear dynamics and stochastic
+processes, and this dynamic process may be seen as an iterative map or stochastic pro-
+cess. The idea of an evolutionary stable strategy (ESS), which stops mutant strategies
+from proliferating, is introduced by EGT. Furthermore, given symmetric information
+circumstances, classical games can develop into quantum games, as demonstrated by
+evolutionary quantum games. Nonetheless, entanglement may cause perturbations to
+the equilibrium of ESS [97, 98]. In this context [99], explores the interrelationships
+and evolution of strategic decisions in green construction sectors, focussing on the
+proposed three-part evolutionary model that simulates how actors adjust their strate-
+gies over time, considering factors like government subsidies and additional beneﬁts
+of innovation in green building projects (GBTs). It also explores how actors within
+this ecosystem interact and how their decisions can lead to a high-level mutualis-
+tic innovation ecosystem, optimizing collaboration for sustainable construction. The
+study highlights the effects of government subsidies and the distribution of beneﬁts
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 23 of 34
+291
+and penalties on different actors’ strategies. The study provides valuable theoreti-
+cal and practical insights into integrating evolutionary game theory with innovation
+ecosystems.
+There are many hostile situations in real life, where cooperation is not favoured
+and collective behaviour requires intervention to improve the efﬁciency of the system
+[100]. Cooperation between agents is a common phenomenon in biological, economic
+and social systems, despite the fact that competition and natural selection drive evo-
+lution. Scientiﬁc researchers from various ﬁelds study cooperative behaviours using
+evolutionary game theory as a framework [101]. The emergence of cooperation in
+multi-agent games has generated a great deal of interest. These games typically have
+NAll agents connected. Most multi-agent games rely on two-person outcomes in which
+tçhe agent competes with each of its N connected neighbours. Recent attempts have
+been made to incorporate the real effects of N persons in multi-person games where
+the interactions of N persons directly inﬂuence the outcomes [102]. The prisioner’s
+dilemma is a model to explain cooperative behaviour through peer interactions. Most
+studies in experimental economics focussed on the Positive Group Games (PGG)
+for group interactions [103]. Individuals in (PGG) prefer cooperation if others also
+cooperate, contradicting the self-interest argument. However, later studies found that
+conditional cooperation can be explained by other preferences, such as inequity aver-
+sion or conformity. In the repeated PGG, conditional cooperators who observe that
+others take advantage of others will reduce their contributions, leading to a decline in
+cooperation [104]. Cooperative game theory suggests that a coalition should be formed
+in which each microgrid beneﬁts from participating. A large coalition, a single coali-
+tion, maximizes the beneﬁts to the players, but is practically impossible because it does
+not take into account the distance between microgrids. A similar approach, using the
+merge/split operation, provides stable partitions, but is NP-hard and has exponential
+computational complexity in the worst case [105]. Among the collective phenomena
+that can be examined within the theoretical framework of evolutionary games, the
+development of cooperation is probably the most intriguing. So-called social dilem-
+mas are composed of a number of evolutionary games, the best known of which is
+the prisoner’s dilemma game, in which it remains very difﬁcult to understand how
+cooperation evolved. A social dilemma suggests that the success of each individual is
+not aligned with the welfare of the group, regardless of the particularities of the game
+[106].
+Xu and Yu [107] Present a game theoretic resource allocation algorithm for cloud
+computing, aiming to improve fairness and optimize resource utilization. The algo-
+rithm balances efﬁciency and fairness, enhancing traditional methods. Experimental
+results show superior performance compared to Max–Min and Min–Max Algorithms.
+The algorithm requires fewer iterations, reducing computation time and emphasiz-
+ing the importance of balancing efﬁciency and fairness in cloud resource allocation.
+This paper contributes to the advancement of resource allocation strategies in cloud
+computing.
+Zhang and Huang [108] Introduce a conﬁguration game model for optimizing sup-
+ply chain management in the Simultaneous Conﬁguration Space for Platform Products
+and Supply Chains (SCPPSC) problem. It analyses cooperative and non-cooperative
+supplier scenarios using a game-theoretic approach, highlighting their beneﬁts for all
+123
+
+
+291
+Page 24 of 34
+L. Sanz-Martín et al.
+parties involved. The paper introduces a global search algorithm to solve the SCPPSC
+game and evaluates its performance through numerical analysis. The results show that
+cooperative supplier scenarios improve supply chain management, customisation, cost
+reduction, price discounts and extended ordering intervals for suppliers.
+Genetic algorithms and other evolutionary computation techniques can be easily
+parallelised, making it signiﬁcantly easier to obtain competitive human results. Many
+results use parallel computing techniques, including quantum, electronic, analytical,
+optical and mechanical systems. The ability to compute in time, according to Moore’s
+Law, has signiﬁcantly facilitated genetic programming. The number and complexity
+of competing human outputs have slowly increased in recent decades [109].
+From the development of this cluster, we can draw the following conclusions:
+cooperation is a central phenomenon in human evolution and modern social systems.
+Evolutionary game theory provides a suitable framework for modelling cooperative
+strategies, even in scenarios where individual interests are in conﬂict with collective
+welfare. The study of these behaviours in biological and social contexts allows for
+the development of more effective strategies to promote cooperation and innovation
+in areas such as sustainability and resource management. The application of game
+theory in practical areas such as sustainable construction, cloud computing and supply
+chain management means that evolutionary models can optimize cooperation between
+stakeholders. The results suggest that, through factors such as government subsidies,
+innovation incentives and cooperation between actors, a more efﬁcient and sustainable
+ecosystem can be created. The ability to parallelise evolutionary algorithms, such as
+genetic algorithms, improves efﬁciency in information processing and optimizes the
+use of computational resources. This feature is especially relevant in the era of quantum
+computing and AI, where speed in obtaining solutions to complex problems is crucial.
+4.4 Quantum probability and algorithmic models
+In the context of quantum economics, the application of mathematical models [110],
+probability [111–114], algorithms [65, 111, 113], and quantum theory [111, 115–
+120] represents a groundbreaking approach to understanding economic systems. The
+synthesis of quantum probability and economic theory, underpinned by the interdisci-
+plinary cluster "Quantum Probability and Algorithmic Models", opens new frontiers
+for analysing and predicting complex economic behaviours.
+This approach leverages the probabilistic nature of quantum systems [121] to model
+uncertainties and ﬂuctuations that are inherent in economic markets [122]. Traditional
+economic models often rely on classical probability theory, assuming deterministic
+outcomes or simple stochastic processes. However, quantum economics introduces
+a more sophisticated understanding of uncertainty, where economic agents and mar-
+ket behaviours can exist in superpositions of multiple states—analogous to quantum
+superposition in physics. The probabilistic phenomena in quantum mechanics offer
+new ways to conceptualize and model market volatility, investment decisions, and
+economic forecasts, which may be inﬂuenced by a variety of overlapping factors.
+At the heart of this quantum approach is the use of quantum algorithms to process
+and analyse economic data in ways that classical algorithms cannot. Quantum comput-
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 25 of 34
+291
+ing’s ability to handle vast datasets and perform parallel computations exponentially
+faster than classical computers is crucial in economic modelling, where large-scale
+simulations and optimizations are needed. These algorithms can solve complex prob-
+lems such as portfolio optimization, risk assessment, and resource allocation in a more
+efﬁcient and potentially more accurate manner than classical methods.
+Furthermore, the intersection of quantum mechanics and algorithmic models pro-
+vides a framework for understanding phenomena like market entanglement, where the
+actions of one economic agent can instantaneously affect others, resembling quantum
+entanglement. Quantum probability theories allow for more dynamic models of inter-
+dependent markets, incorporating non-local correlations that are absent from classical
+economic theories. This creates a richer and more holistic view of economic interac-
+tions, addressingthelimitations of traditional models that fail tocapturethecomplexity
+of modern ﬁnancial systems.
+The application of these quantum principles in economics is not merely theoreti-
+cal but has practical implications. Quantum-inspired models could redeﬁne how we
+approach economic policies, risk management, and ﬁnancial technologies (FinTech).
+By uniting advanced quantum theory with cutting-edge algorithmic approaches, the
+ﬁeldofquantumeconomicsaimstotransformeconomicanalysisanddecision-making,
+offering a novel lens through which to view the uncertainties and complexities of the
+global economy. Quantum economics also opens up new lines of research by rein-
+terpreting classical concepts such as supply and demand curves, using tools such as
+Wigner pseudoprobailities. This allows us to model market behaviours that do not
+conform to traditional laws, such as Giffen goods, and explore the existence of opti-
+mal strategies in complex scenarios through adiabatic approximations and “Giffen
+strategies.” These theoretical and methodological proposals broaden the range of pos-
+sibilities for economic modelling and suggest that, as technologies advance, quantum
+economics could provide innovative answers to structural challenges that persist in
+global markets today [68].
+A key concept that connects quantum probability to game theory is the non-
+factorizability of probabilities. In classical game theory, the probabilities of the
+outcomes of players’ actions are factorizable, meaning that they can be expressed as
+the product of each player’s individual probabilities. However, in quantum mechan-
+ics, entanglement can lead to non-factorizable probabilities, where the outcomes of
+measurements in an entangled system are correlated in a way that cannot be explained
+classically [112–114]. This non-factorizability can have a signiﬁcant impact on the
+Nash equilibria (NEs) of a game [113, 115, 123–125]. NEs are sets of strategies in
+which no player can improve his outcome by unilaterally changing his strategy. In
+some quantum games, the non-factorizability of probabilities can lead to the emer-
+gence of new NEs that do not exist in the classical version of the game [113, 114]. A
+famous example is the Prisoner’s Dilemma [111, 113, 126]. In the classical version
+of the game, the dominant strategy for both players is to “betray” the other, leading
+to a suboptimal outcome for both. However, in the quantum version of the game,
+with the use of entangled states and unfactorizable probabilities, a new NE can be
+found where both players “cooperate”, leading to a better outcome for both. Quantum
+Games and EPR (Einstein–Podolsky–Rosen) experiments provide a platform to study
+and utilize unfactorizable probabilities in quantum games [113]. In these experiments,
+123
+
+
+291
+Page 26 of 34
+L. Sanz-Martín et al.
+measurements on entangled particles show correlations that violate Bell inequalities,
+demonstrating the nonlocal nature of quantum mechanics. It is important to note that in
+order to ensure that the classical game is embedded within the quantum game, certain
+restrictions are imposed on the joint probabilities in EPR models. These restrictions
+ensure that when the probabilities are factorizable, the quantum game reduces to the
+classical game. This means that non-factorizability is an essential ingredient to obtain
+new outcomes in quantum games.
+In the face of increasingly complex, uncertain, and interconnected economic sys-
+tems, emerging interdisciplinary approaches are reshaping the analytical tools used
+to understand strategic decision-making and system dynamics. The integration of
+computational techniques for economic models [124, 125, 127–131], quantum con-
+textuality [132, 133], and chaotic dynamics in quantum game theory [134, 135]
+offers a novel and powerful framework for exploring economic behaviour beyond
+the limitations of classical models. Computational methods—such as the calculation
+of minimum energy paths—allow for the simulation and prediction of dynamic transi-
+tions and structural changes in economic systems, revealing how economies navigate
+between equilibrium states under stress or innovation [131]. At the same time, the
+concept of quantum contextuality introduces a fundamentally different understand-
+ing of causality and dependence, where the outcome of economic decisions depends
+intrinsically on contextual variables, challenging the classical assumptions of sepa-
+rability and independence among agents [132]. This quantum lens provides a richer
+modelling language for describing market entanglement, inter-agent correlations, and
+the probabilistic nature of preferences and expectations [133]. Complementing these
+insights, the study of chaotic dynamics within quantum game theory highlights the
+interplay between randomness and order in strategic environments, where nonlinear
+interactions and feedback loops can generate emergent behaviour not captured by static
+or deterministic models [134]. Quantum game theory, with its inclusion of superposi-
+tion, entanglement, and non-factorizable probabilities, offers a strategic space where
+new equilibria—sometimes Pareto-optimal—can emerge in situations traditionally
+constrained by classical dilemmas [113, 126]. Taken together, these three domains
+point towards a unifying paradigm in which economic systems are viewed as com-
+plex adaptive entities shaped by computation, context, and strategic uncertainty, thus
+opening new pathways for modelling, optimization, and policy design in the digital
+and quantum age.
+5 Discussion
+Traditionally framed within the logic of rationality and utility maximization, game
+theory is undergoing a profound transformation thanks to the incursion of concepts
+and tools from diverse ﬁelds.
+However, this quantum incursion into game theory is not without its challenges. The
+threat of decoherence in practical implementation and the debate surrounding the inter-
+pretation of concepts such as the ’miracle move’ remind us that translating quantum
+theory to the strategic sphere requires careful consideration of physical and conceptual
+limitations. Despite these caveats, the potential of quantum game theory to offer novel
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 27 of 34
+291
+solutions to complex problems is undeniable. The capacity to model strategic inter-
+actions with a greater richness of possibilities, thanks to quantum states and unitary
+operations, opens new avenues for optimizing and understanding multi-agent systems.
+Quantum theory is expanding the boundaries of game theory, offering improvements
+in the outcomes of classical games and conceptual tools to address strategic challenges
+in an increasingly complex and interconnected world. Future research must focus on
+overcoming current limitations and fully exploring the potential of this fascinating
+fusion of two fundamental ﬁelds of science and decision-making.
+Still, introducing quantum theory into this landscape represents a paradigm shift.
+Quantifying subjective and ’irrational’ aspects of decision-making challenges tradi-
+tional game theory’s fundamental assumptions. While this approach is still in its early
+stages, its potential to offer a deeper understanding of human behaviour in strate-
+gic contexts is signiﬁcant. Ultimately, the convergence of evolutionary and stochastic
+game theory with optimisation techniques and the emerging inﬂuence of quantum
+theory signal a promising direction for future research.
+Theseintegratedapproachesareexpectedtoenablethedevelopmentofmoreprecise
+and applicable decision-making models for a broader range of complex systems, from
+resource management to understanding social and biological behaviour. The key will
+be reﬁning these methodologies and demonstrating their practical value in solving real-
+world problems. The capacity of evolutionary computation to parallelise algorithms
+introducesadimensionofcomputationalefﬁciencycrucialforaddressingthecomplex-
+ity inherent in evolutionary models and real-world problems. This synergy between
+evolutionary modelling and computational power opens new avenues for research and
+the practical application of cooperative strategies in various ﬁelds. Cooperation is not
+merely an accident of evolution but a complex and multifaceted phenomenon that can
+be modelled, understood, and promoted by combining evolutionary game theory and
+computational simulation tools. Understanding the underlying mechanisms of coop-
+eration has profound implications for addressing humanity’s social, economic, and
+environmental challenges. The non-factorisation of probabilities in quantum game
+theory is not just a theoretical curiosity; it can redeﬁne the outcomes of strategic inter-
+actions, as exempliﬁed in the quantum resolution of the Prisoner’s Dilemma. This
+could have profound implications for policy design and understanding cooperative
+behaviour in economic contexts. Ultimately, by merging the sophistication of quan-
+tum theory with the rigour of economic and algorithmic models, quantum economics
+does not simply seek to reﬁne existing models but offers an entirely new lens through
+which to analyse the uncertainties and complexities of the global economy. While still
+in its initial stages, its potential to transform economic analysis, risk management, and
+ﬁnancial technologies is undeniable, marking a paradigm shift in how we conceive
+and model the economic world. In consideration of the aforementioned factors, and in
+accordance with the provisions outlined in Sect. 4.1, these advances have the potential
+to play a pivotal role in addressing the demographic challenges that lie ahead. This is
+due to the fact that game theory addresses the interaction among individuals, and its
+quantum version possesses the capacity to enhance conventional performance.
+123
+
+
+291
+Page 28 of 34
+L. Sanz-Martín et al.
+6 Conclusions
+In the current climate, where the productivity paradox coexists with growing concerns
+about inequality, quantum economics and quantum game theory are emerging as novel
+frameworks for addressing inherent uncertainty and complex strategic interactions.
+In contrast to classical game theory, ﬁrmly anchored in probabilistic strategies
+within a Boolean logical framework, the application of quantum theory introduces an
+unprecedented dimension of complexity and potentiality. The pioneering schemes that
+have been analysed convincingly demonstrate that the incorporation of fundamental
+quantum principles, such as superposition and entanglement, not only radically trans-
+forms the strategic landscape but also, in speciﬁc paradigm-shifting scenarios like the
+quantum resolution of the Prisoner’s Dilemma using the EWL scheme, even enables
+the overcoming of limitations imposed by classical equilibria, allowing for the achieve-
+ment of Pareto-optimal and, therefore, more efﬁcient outcomes for all participants.
+Unlike the static approach based on complete rationality that characterizes classical
+game theory, the integration of evolutionary dynamics and the explicit consideration
+of stochastic uncertainty provide a considerably richer perspective closer to the reality
+of decision-making processes. Evolutionary game theory empowers us to understand
+how strategies adapt and evolve, more accurately reﬂecting the bounded rationality
+exhibited by real agents in their interactions. The subsequent incorporation of powerful
+optimisation tools within this dynamic framework provides the necessary mechanisms
+to identify and achieve superior outcomes in scenarios characterized by their complex-
+ity and constant change. In this regard, metaheuristics have proven their great utility
+in tackling problems where traditional analytical methods often encounter signiﬁcant
+limitations, offering solutions that, while they may not be optimal in an absolute sense,
+are eminently practical and applicable.
+Contrary to purely analytical approaches, computational simulation, solidly
+grounded in the principles of evolutionary game theory, presents an inherently dynamic
+and exploratory methodology for unraveling the intricate evolution of human cooper-
+ation. This approach allows us to transcend the rigidity of classical equilibria, offering
+the ability to observe directly how strategies modify and emerge in response to repeated
+interactions and the various evolutionary pressures acting on agents. Evolutionary
+game theory provides a robust conceptual framework for modelling cooperation, strip-
+ping it of the simplistic notion of a mere altruistic trait and revealing it as a strategy
+that can be evolutionarily advantageous under certain conditions. The exploration of
+diverse practical scenarios, ranging from sustainable ecological construction to the
+efﬁcient allocation of cloud resources and the optimization of supply chain manage-
+ment, highlights the broad applicability of these models for improving collaboration
+and efﬁciency in complex systems operating in the real world both in big cities and in
+regions with low population density.
+Finally, in contrast to traditional economics, which is based on classical prob-
+ability and the assumption of complete rationality on the part of agents, quantum
+economics proposes a radical transformation in our fundamental understanding of
+economic systems. By importing the essential principles of quantum mechanics, such
+as superposition and entanglement, this new discipline offers innovative conceptual
+tools for modelling uncertainty and complex economic interdependencies in a fun-
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 29 of 34
+291
+damentally novel way. The promising ability of quantum algorithms to overcome the
+signiﬁcant computational limitations faced by classical methods in economic analysis
+opens up a vast horizon of unprecedented possibilities for optimizing and predicting
+economic phenomena. The ability to model non-local correlations through market
+entanglement suggests achieving a much deeper and more accurate understanding of
+the intricate dynamics that govern global ﬁnancial systems.
+Acknowledgements This research is part of the International Chair Project on Trustworthy Artiﬁcial Intel-
+ligence and Demographic Challenge within the National Strategy for Artiﬁcial Intelligence (ENIA), in the
+framework of the European Recovery, Transformation and Resilience Plan. Referencia: TSI-100933–2023-
+0001. This project is funded by the Secretary of State for Digitalization and Artiﬁcial Intelligence and by
+the European Union(Next Generation).
+Author Contributions All authors—L.S.M., G.R., N.C.B., M.H., and J.P.D.—contributed to writing the
+manuscript. L.S.M and G.R. prepared the ﬁgures. All authors reviewed and approved the ﬁnal version of
+the manuscript.
+Funding Open access funding provided by FEDER European Funds and the Junta de Castilla y León under
+the Research and Innovation Strategy for Smart Specialization (RIS3) of Castilla y León 2021-2027.
+Data Availability No datasets were generated or analysed during the current study.
+Declarations
+Conﬂict of interest The authors declare no Conﬂict of interest.
+OpenAccess ThisarticleislicensedunderaCreativeCommonsAttribution4.0InternationalLicense,which
+permits use, sharing, adaptation, distribution and reproduction in any medium or format, as long as you give
+appropriate credit to the original author(s) and the source, provide a link to the Creative Commons licence,
+and indicate if changes were made. The images or other third party material in this article are included
+in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If
+material is not included in the article’s Creative Commons licence and your intended use is not permitted
+by statutory regulation or exceeds the permitted use, you will need to obtain permission directly from the
+copyright holder. To view a copy of this licence, visit http://creativecommons.org/licenses/by/4.0/.
+References
+1. Bohm, D.: Quantum Theory. Dover Books on Physics Series. Dover Publications, New York (1951)
+2. Nielsen, M.A., Chuang, I.L.: Quantum Computation and Quantum Information, anniversary 10th.
+Cambridge University Press, Cambridge (2010)
+3. Preskill, J.: Lecture Notes on Quantum Computation. Online lecture notes. http://theory.caltech.edu/
+~preskill/ph219/ (1998)
+4. Gisin, N., Thew, R.: Quantum communication. Nat. Photon. 1(3), 165–171 (2007)
+5. Degen, C.L., Reinhard, F., Cappellaro, P.: Quantum sensing. Rev. Mod. Phys. 89(3), 035002 (2017)
+6. Lloyd, S.: Universal quantum simulators. Science 273(5278), 1073–1078 (1996). https://doi.org/10.
+1126/science.273.5278.1073
+7. Albash, T., Lidar, D.A.: Adiabatic quantum computation. Rev. Mod. Phys. 90(1), 015002 (2018)
+8. Rajak, A., Suzuki, S., Dutta, A., Chakrabarti, B.K.: Quantum annealing: an overview. Phil. Trans. R.
+Soc. A 381(2241), 20210417 (2023)
+9. Kwon, S., Tomonaga, A., Lakshmi Bhai, G., Devitt, S.J., Tsai, J.-S.: Gate-based superconducting
+quantum computing. J. Appl. Phys. 129(4), 041102 (2021)
+10. Bruzewicz, C.D., Chiaverini, J., McConnell, R., Sage, J.M.: Trapped-ion quantum computing:
+progress and challenges. Appl. Phys. Rev. 6(2), 021314 (2019)
+123
+
+
+291
+Page 30 of 34
+L. Sanz-Martín et al.
+11. Pezzagna, S., Meijer, J.: Quantum computer based on color centers in diamond. Appl. Phys. Rev.
+8(1), 011308 (2021)
+12. Zhong, H.-S., Wang, H., Deng, Y.-H., Chen, M.-C., Peng, L.-C., Luo, Y.-H., Qin, J., Wu, D., Ding,
+X., Hu, Y., et al.: Quantum computational advantage using photons. Science 370(6523), 1460–1463
+(2020)
+13. Jones, J.A.: Nmr quantum computation. Prog. Nucl. Magn. Reson. Spectrosc. 38(4), 325–360 (2001)
+14. Bennett, C.H., Brassard, G.: Quantum cryptography: public key distribution and coin tossing. In:
+Proceedings of IEEE International Conference on Computers, Systems and Signal Processing, pp.
+175–179. IEEE (1984)
+15. Biamonte, J., Wittek, P., Pancotti, N., Rebentrost, P., Wiebe, N., Lloyd, S.: Quantum machine learning.
+Nature 549(7671), 195–202 (2017)
+16. Li, Y., Tian, M., Liu, G., Peng, C., Jiao, L.: Quantum optimization and quantum learning: a survey.
+IEEE Access 8, 23568–23593 (2020)
+17. Dowling, J.P., Milburn, G.J.: Quantum technology: the second quantum revolution. Philos. Trans. R.
+Soc. Lond. Ser A: Math. Phys. Eng. Sci. 361, 1655–1674 (2003). https://doi.org/10.1098/rsta.2003.
+1227
+18. Arizaga, Gil, G., Ayerbe, A., Arnal, J., Ricart, R.J.: Tecnologías cuánticas: cómo apostar y acertar
+desde españa y la ue elcano policy paper (2025)
+19. Orrell, D.: Quantum uncertainty and the black-scholes formula. Quant. Econ. Financ. 1(1), 82–91
+(2024)
+20. Orrell, D.: A quantum model of implied volatility. Orrell D (2024) A quantum model of implied
+volatility. Wilmott (2024)
+21. Eisert, J., Wilkens, M., Lewenstein, M.: Quantum games and quantum strategies. Phys. Rev. Lett.
+83(15), 3077 (1999)
+22. Iqbal, A., Toor, A.H.: Quantum mechanics gives stability to a nash equilibrium. Phys. Rev. A 65(2),
+022306 (2002). https://doi.org/10.1103/PhysRevA.65.022306
+23. Wang, N., Yang, Z.: Quantum mixed duopoly games with a nonlinear demand function. Quant. Inf.
+Process. 22, 1–14 (2023). https://doi.org/10.1007/S11128-023-03894-6/FIGURES/6
+24. Piotrowski, E.W., Sladkowski, J.: Quantum game theoretical frameworks in economics. In: The Pal-
+grave Handbook of Quantum Models in Social Science: Applications and Grand Challenges (2017).
+https://doi.org/10.1057/978-1-137-49276-0_3
+25. Ernst, E., Merola, R., Samaan, D., et al.: Economics of artiﬁcial intelligence: implications for the
+future of work. IZA J. Lab. Policy 9(1), 1–35 (2019)
+26. Brynjolfsson, E., Rock, D., Syverson, C.: In: Agrawal, A., Gans, J., Goldfarb, A. (eds.) 1. Artiﬁcial
+Intelligence and the Modern Productivity Paradox: A Clash of Expectations and Statistics, pp. 23–60.
+University of Chicago Press, Chicago (2019).https://doi.org/10.7208/9780226613475-003
+27. Aghion, P., Jones, B.F., Jones, C.I.: In: Agrawal, A., Gans, J., Goldfarb, A. (eds.) 9. Artiﬁcial Intel-
+ligence and Economic Growth, pp. 237–290. University of Chicago Press, Chicago (2019). https://
+doi.org/10.7208/9780226613475-011
+28. Lu, C.-H.: The impact of artiﬁcial intelligence on economic growth and welfare. J. Macroecon. 69,
+103342 (2021). https://doi.org/10.1016/j.jmacro.2021.103342
+29. Torrent-Sellens, J.: Digital transition, data-and-tasks crowd-based economy, and the shared social
+progress: unveiling a new political economy from a european perspective. Technol. Soc. 79, 102739
+(2024). https://doi.org/10.1016/j.techsoc.2024.102739
+30. Vukoti´c, V.: Quantum economics. Panoeconomicus 58(2), 267–276 (2011). (Article)
+31. Jerzmanowski, M.: Total factor productivity differences: appropriate technology versus efﬁciency.
+Eur. Econ. Rev. 51(8), 2080–2110 (2007)
+32. Holtfort, T., Horsch, A.: Quantum economics: a systematic literature review. SocioEcon. Chall. 8,
+62–77 (2024). https://doi.org/10.61093/sec.8(1).62-77.2024
+33. Torrent-Sellens, J.: Homo digitalis: narrative for a new political economy of digital transformation and
+transition. New Polit. Econ. 29, 125–143 (2024). https://doi.org/10.1080/13563467.2023.2227577
+34. Page, M.J., McKenzie, J.E., Bossuyt, P.M., Boutron, I., Hoffmann, T.C., Mulrow, C.D., Shamseer,
+L., Tetzlaff, J.M., Akl, E.A., Brennan, S.E., Chou, R., Glanville, J., Grimshaw, J.M., Hróbjartsson,
+A., Lalu, M.M., Li, T., Loder, E.W., Mayo-Wilson, E., McDonald, S., McGuinness, L.A., Stewart,
+L.A., Thomas, J., Tricco, A.C., Welch, V.A., Whiting, P., Moher, D., Yepes-Nuñez, J.J., Urrútia, G.,
+Romero-García, M., Alonso-Fernández, S.: Declaración prisma 2020: una guía actualizada para la
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 31 of 34
+291
+publicación de revisiones sistemáticas. Rev. Esp. Cardiol. 74(9), 790–799 (2021). https://doi.org/10.
+1016/j.recesp.2021.06.016
+35. Haddaway, N.R., Page, M.J., Pritchard, C.C., McGuinness, L.A.: Prisma 2020: an r package and
+shiny app for producing prisma 2020-compliant ﬂow diagrams, with interactivity for optimised digital
+transparency and open synthesis. Campbell Syst. Rev. 18(2), 1230 (2022). https://doi.org/10.1002/
+cl2.1230
+36. Meyer, D.A.: Quantum strategies. Phys. Rev. Lett. 82(5), 1052 (1999)
+37. Marinatto, L., Weber, T.: A quantum approach to static games of complete information. Phys. Lett.
+A 272(5–6), 291–303 (2000). https://doi.org/10.1016/S0375-9601(00)00441-2
+38. Chen, J.-L., Kwek, L.C., Oh, C.H.: Noisy quantum game. Phys. Rev. A 65(5), 052320 (2002). https://
+doi.org/10.1103/PhysRevA.65.052320
+39. Benjamin, S.C., Hayden, P.M.: Comment on quantum games and quantum strategies.” Phys. Rev.
+Lett. 87(6), 069801 (2001)
+40. Flitney, A.P., Hollenberg, L.C.L.: Nash equilibria in quantum games with generalized two-parameter
+strategies. Phys. Lett. A 363(5–6), 381–388 (2007). https://doi.org/10.1016/j.physleta.2006.11.044
+41. Van Enk, S.J., Pike, R.: Classical rules in quantum games. Phys. Rev. A 66(2), 024306 (2002). https://
+doi.org/10.1103/PhysRevA.66.024306
+42. Du, J., Xu, X., Li, H., Zhou, X., Han, R.: Entanglement playing a dominating role in quantum games.
+Phys. Lett. A 289(1–2), 9–15 (2001). https://doi.org/10.1016/S0375-9601(01)00575-8
+43. Prevedel, R., Stefanov, A., Walther, P., Zeilinger, A.: Experimental realization of a quantum game on
+a one-way quantum computer. New J. Phys. (2007). https://doi.org/10.1088/1367-2630/9/6/205
+44. Chen, L.K., Ang, H., Kiang, D., Kwek, L.C., Lo, C.F.: Quantum prisoner dilemma under decoherence.
+Phys. Lett. A 316(5), 317–323 (2003). https://doi.org/10.1016/S0375-9601(03)01175-7
+45. Flitney, A.P., Abbott, D.: Advantage of a quantum player over a classical one in 2 × 2 quantum games.
+Proc. Royal Soc. London. Ser. Math. Phys. Eng. Sci. 459(2038), 2463–2474 (2003). https://doi.org/
+10.1098/rspa.2003.1136
+46. Fra˛ckiewicz, P.: Non-classical rules in quantum games. Entropy 23(5), 604 (2021). https://doi.org/
+10.3390/e23050604
+47. Du, J., Li, H., Xu, X., Shi, M., Wu, J., Zhou, X., Han, R.: Experimental realization of quantum
+games on a quantum computer. Phys. Rev. Lett. 88(13), 137902 (2002). https://doi.org/10.1103/
+PhysRevLett.88.137902
+48. Prevedel, R., Stefanov, A., Walther, P., Zeilinger, A.: Experimental realization of a quantum game
+on a one-way quantum computer. New J. Phys. 9(6), 205–205 (2007). https://doi.org/10.1088/1367-
+2630/9/6/205
+49. Altintas, A.A., Ozaydin, F., Bayindir, C., Bayrakci, V.: Prisoners’ dilemma in a spatially separated
+system based on spin–photon interactions. In: Photonics, vol. 9, pp. 617. MDPI (2022)
+50. Bugu, S., Ozaydin, F., Kodera, T.: Surpassing the classical limit in magic square game with distant
+quantum dots coupled to optical cavities. Sci. Rep. 10(1), 22202 (2020)
+51. Marinatto, L., Weber, T.: A quantum approach to static games of complete information q (2000).
+www.elsevier.nlrlocaterpla
+52. Benjamin, S.: Comment on:“ a quantum approach to static games of complete information”.
+arXiv:quant-ph/0008127 (2000)
+53. Nawaz, A., Toor, A.: Dilemma and quantum battle of sexes. J. Phys. A: Math. Gen. 37(15), 4437
+(2004)
+54. Situ, H.: A quantum approach to play asymmetric coordination games. Quant. Inf. Process. 13(3),
+591–599 (2014). https://doi.org/10.1007/s11128-013-0675-9
+55. Li, H., Du, J., Massar, S.: Continuous-variable quantum games. Phys. Lett. A 306(2–3), 73–78 (2002)
+56. Du, J., Li, H., Ju, C.: Quantum games of asymmetric information. Phys. Rev. E 68(1), 016124 (2003).
+https://doi.org/10.1103/PhysRevE.68.016124
+57. Iqbal, A., Toor, A.H.: Backwards-induction outcome in a quantum game. Phys. Rev. A 65(5), 052328
+(2002). https://doi.org/10.1103/PhysRevA.65.052328
+58. Lo, C., Kiang, D.: Quantum oligopoly. Europhys. Lett. 64(5), 592 (2003)
+59. Frackiewicz, P.: Remarks on quantum duopoly schemes. Quant. Inf. Process. 15, 121–136 (2016)
+60. Iqbal, A., Toor, A.H.: Entanglement and dynamic stability of nash equilibria in a symmetric quantum
+game. Phys. Lett. A 286(4), 245–250 (2001). https://doi.org/10.1016/S0375-9601(01)00428-5
+61. Iqbal, A., Toor, A.H.: Evolutionarily stable strategies in quantum games. Phys. Lett. A 280(5–6),
+249–256 (2001). https://doi.org/10.1016/S0375-9601(01)00082-2
+123
+
+
+291
+Page 32 of 34
+L. Sanz-Martín et al.
+62. Nawaz, A., Toor, A.H.: Evolutionarily stable strategies in quantum hawk-dove game. Chin. Phys.
+Lett. 27(5), 050303 (2010)
+63. Li, C.-F., Zhang, Y.-S., Huang, Y.-F., Guo, G.-C.: Quantum strategies of quantum measurements.
+Phys. Lett. A 280(5–6), 257–260 (2001)
+64. Flitney, A.P., Abbott, D.: Quantum version of the monty hall problem. Phys. Rev. A 65(6), 062318
+(2002). https://doi.org/10.1103/PhysRevA.65.062318
+65. D’Ariano, G.M., Gill, R.D., Keyl, M., Werner, R.F., Kümmerer, B., Maassen, H.: The quantum monty
+hall problem. Quant. Inf. Comput. 2(5), 355–366 (2002)
+66. Hogg, T., Harsha, P., Chen, K.-Y.: Quantum auctions. Int. J. Quant. Inf. 05(05), 751–780 (2007).
+https://doi.org/10.1142/S0219749907003183
+67. Piotrowski, E.W., Sładkowski, J.: Quantum auctions: facts and myths. XXPhys. A 387(15), 3949–
+3953 (2008). https://doi.org/10.1016/j.physa.2008.02.071
+68. Piotrowski, E.W., Sładkowski, J.: Quantum bargaining games. XXPhys. A 308(1–4), 391–401 (2002).
+https://doi.org/10.1016/S0378-4371(02)00592-7
+69. Khan, F.S., Solmeyer, N., Balu, R., Humble, T.S.: Quantum games: a review of the history, current
+state, and interpretation. Quant. Inf. Process. 17, 1–42 (2018)
+70. Solmeyer, N., Dixon, R., Balu, R.: Quantum routing games. J. Phys. A: Math. Theor. 51(45), 455304
+(2018)
+71. Zabaleta, O.G., Barrangú, J.P., Arizmendi, C.M.: Quantum game application to spectrum scarcity
+problems. XXPhys. A 466, 455–461 (2017)
+72. Silva, A., Zabaleta, O.G., Arizmendi, C.M.: Mitigation of routing congestion on data networks: a
+quantum game theory approach. Quant. Rep. 4(2), 135–147 (2022)
+73. Faliagka, E., Christopoulou, E., Ringas, D., Politi, T., Kostis, N., Leonardos, D., Tranoris, C.,
+Antonopoulos, C.P., Denazis, S., Voros, N.: Trends in digital twin framework architectures for smart
+cities: a case study in smart mobility. Sensors 24(5), 1665 (2024)
+74. Zainaddin, D., Hanapi, Z.M., Othman, M., Ahmad Zukarnain, Z., Abdullah, M.D.H.: Recent trends
+and future directions of congestion management strategies for routing in IoT-based wireless sensor
+network: A thematic review. Wireless Netw. 30(3), 1939–1983 (2024)
+75. Taherdoost, H.: A systematic review of big data innovations in smart grids. Res. Eng. 22, 102132
+(2024)
+76. Toth, P., Vigo, D.: An overview of vehicle routing problems. Veh. Rout. Probl. (2002). https://doi.
+org/10.1137/1.9780898718515.ch1
+77. Wang, D., Liu, L., Jia, H., Wang, W., Zhi, Y., Meng, Z., Zhou, B.: Review of key problems related to
+integrated energy distribution systems. CSEE J. Power Energy Syst. 4(2), 130–145 (2018)
+78. Eisert, J., Wilkens, M.: Game theory and incomplete information. J. Game Theory 12, 55–76 (2018)
+79. Abapour, S., Nazari-Heris, M., Mohammadi-Ivatloo, B., Hagh, M.T.: Game theory approaches for
+the solution of power system problems: a comprehensive review. Arch. Comput. Methods Eng. 27,
+81–103 (2020). https://doi.org/10.1007/s11831-018-9299-7
+80. Halpern, J.Y., Tuttle, M.R.: Probability in game theory. J. Theor. Probab. 10, 201–220 (1993)
+81. Han, Y., Deng, Y., Cao, Z., Lin, C.T.: An interval-valued pythagorean prioritized operator-based game
+theoretical framework with its applications in multicriteria group decision making. Neural Comput.
+Appl. 32, 7641–7659 (2020). https://doi.org/10.1007/s00521-019-04014-1
+82. Duan, H., Li, P., Yu, Y.: A Predator-prey Particle Swarm Optimization Approach to Multiple UCAV
+Air Combat Modeled by Dynamic Game Theory (2015)
+83. Meng, F.-Y., Wang, Z.-R., Pedrycz, W., Tan, C.-Q.: Consensus analysis for large-scale group decision
+making based on two-stage nash-bargaining game. IEEE Trans. Syst. Man Cybernet.: Syst. 54(1),
+556–567 (2024). https://doi.org/10.1109/TSMC.2023.3312377
+84. Yuan, M., Li, Z., Li, X., Li, L., Zhang, S., Luo, X.: How to promote the sustainable development of
+prefabricated residential buildings in china: a tripartite evolutionary game analysis. J. Clean. Prod.
+(2022). https://doi.org/10.1016/j.jclepro.2022.131423
+85. Yukalov, V.I., Sornette, D.: Quantum techniques in decision making. Quant. Inf. Process. 13, 2549–
+2568 (2014)
+86. Sohrabi, M., Azgomi, M.: Game theory as an approximation of optimization. Optim. Lett. 14, 1551–
+1568 (2020)
+87. Talatahari, S., Azizi, M.: Metaheuristic optimization algorithms: a review. Appl. Math. Model. 79,
+102–122 (2020)
+123
+
+
+Mapping the frontier: a review of quantum and evolutionary…
+Page 33 of 34
+291
+88. Kutlu Onay, G., Aydemir, A.: Balancing exploration and exploitation in metaheuristic optimization.
+Comput. Optim. Appl. 81, 57–73 (2022)
+89. Zhu, Z., Tang, B., Yuan, J.: Multirobot task allocation based on an improved particle swarm opti-
+mization approach. Int. J. Adv. Rob. Syst. (2017). https://doi.org/10.1177/1729881417710312
+90. Cheong, K.H., Wen, T., Lai, J.W.: Relieving cost of epidemic by parrondo’s paradox: a covid-19 case
+study. Adv. Sci. (2020). https://doi.org/10.1002/advs.202002324
+91. Pelc, A.: Fundamental Study Searching games with errors-ÿfty years of coping with liars (2002).
+www.elsevier.com/locate/tcs
+92. Charalambous, C.D.: Stochastic nonlinear minimax dynamic games with noisy measurements. IEEE
+Trans. Autom. Control 48, 261–266 (2003). https://doi.org/10.1109/TAC.2002.808475
+93. Martinez-Martinez, I., Sanchez-Burillo, E.: Quantum and classical decision-making frameworks.
+Phys. Rev. A 93, 032323 (2016)
+94. Bohl, K., Hummert, S., Werner, S., Basanta, D., Deutsch, A., Schuster, S., Theißen, G., Schroeter,
+A.: Evolutionary game theory: molecules as players. Mol. BioSyst. 10, 3066–3074 (2014). https://
+doi.org/10.1039/c3mb70601j
+95. Zhang, D., Chen, C., Cui, Y., Zhang, T.: New method of energy efﬁcient subcarrier allocation based
+on evolutionary game theory. Mob. Netw. Appl. 26, 523–536 (2021). https://doi.org/10.1007/s11036-
+018-1123-y
+96. Cui, Y., Zhang, D., Zhang, T., Chen, L., Piao, M., Zhu, H.: Novel method of mobile edge computation
+ofﬂoading based on evolutionary game strategy for IoT devices. AEU: Int. J. Electron. C. 1, 10 (2020).
+https://doi.org/10.1016/j.aeue.2020.153134
+97. Frey, E.: Evolutionary game theory: theoretical concepts and applications to microbial communities.
+XXPhys. A 389, 4265–4298 (2010). https://doi.org/10.1016/j.physa.2010.02.047
+98. Guo, H., Zhang, J., Koehler, G.J.: A survey of quantum games. Decis. Support Syst. 46, 318–332
+(2008). https://doi.org/10.1016/j.dss.2008.07.001
+99. Zhao, R., Peng, L., Zhao, Y., Feng, Y.: Coevolution mechanisms of stakeholder strategies in the
+green building technologies innovation ecosystem: an evolutionary game theory perspective. Environ.
+Impact Assess. Rev. 105, 107418 (2024). https://doi.org/10.1016/j.eiar.2024.107418
+100. Duan, H., Sun, C.: Swarm intelligence inspired shills and the evolution of cooperation. Sci. Rep.
+(2014). https://doi.org/10.1038/srep05210
+101. Wu, Y., Chang, S., Zhang, Z., Deng, Z.: Impact of social reward on the evolution of the cooperation
+behavior in complex networks. Sci. Rep. (2017). https://doi.org/10.1038/srep41076
+102. Chan, C.H., Yin, H., Hui, P.M., Zheng, D.F.: Evolution of cooperation in well-mixed n-person snow-
+drift games. XXPhys. A 387, 2919–2925 (2008). https://doi.org/10.1016/j.physa.2008.01.035
+103. Szabó, G., Hauert, C.: Phase transitions and volunteering in spatial public goods games. Phys. Rev.
+Lett. 89(11), 118101–11181014 (2002)
+104. Dong, Y., Zhang, B., Tao, Y.: The dynamics of human behavior in the public goods game with
+institutional incentives. Sci. Rep. (2016). https://doi.org/10.1038/srep28809
+105. Chakraborty, S., Nakamura, S., Okabe, T.: Real-time energy exchange strategy of optimally coop-
+erative microgrids for scale-ﬂexible distribution system. Expert Syst. Appl. 42, 4643–4652 (2015).
+https://doi.org/10.1016/j.eswa.2015.01.017
+106. Szolnoki, A., Xie, N.-G., Ye, Y., Perc, M.: Evolution of emotions on networks leads to the evolution
+of cooperation in social dilemmas. Rev. E. Stat. Nonlinear Soft Matter Phys. (2013). https://doi.org/
+10.1103/PhysRevE.87.042805
+107. Xu, X., Yu, H.: A game theory approach to fair and efﬁcient resource allocation in cloud computing.
+Math. Probl. Eng. (2014). https://doi.org/10.1155/2014/915878
+108. Zhang, X., Huang, G.Q.: Game-theoretic approach to simultaneous conﬁguration of platform products
+and supply chains with one manufacturing ﬁrm and multiple cooperative suppliers. Int. J. Prod. Econ.
+124, 121–136 (2010). https://doi.org/10.1016/j.ijpe.2009.10.016
+109. Koza, J.R.: Human-competitive results produced by genetic programming. Genet. Program Evolvable
+Mach. 11, 251–284 (2010). https://doi.org/10.1007/s10710-010-9112-3
+110. Erickson, P.: Mathematical models, rational choice, and the search for cold war culture. Isis 101(2),
+386–392 (2010). https://doi.org/10.1086/653105
+111. Flitney, A.P., Abbott, D.: Advantage of a quantum player over a classical one in 2 x 2 quantum games.
+Proc. R. Soc. A: Math. Phys. Eng. Sci. 459(2038), 2463–2474 (2003). https://doi.org/10.1098/rspa.
+2003.1136
+123
+
+
+291
+Page 34 of 34
+L. Sanz-Martín et al.
+112. Deutsch, D.: Quantum theory of probability and decisions. Proc. R. Soc. A: Math. Phys. Eng. Sci.
+455(1988), 3129–3137 (1999). https://doi.org/10.1098/rspa.1999.0443
+113. Iqbal, A., Cheon, T.: Constructing quantum games from nonfactorizable joint probabilities. Phys.
+Rev. E: Stat., Nonlin, Soft Matter Phys. (2007). https://doi.org/10.1103/PhysRevE.76.061122
+114. Iqbal, A., Cheon, T., Abbott, D.: Probabilistic analysis of three-player symmetric quantum games
+played using the Einstein–Podolsky–Rosen–Bohm setting. Phys. Lett. Sect. A: Gen. Atom. Solid
+State Phys. 372(44), 6564–6577 (2008). https://doi.org/10.1016/j.physleta.2008.09.026
+115. Roy, A., Mukherjee, A., Guha, T., Ghosh, S., Bhattacharya, S.S., Banik, M.: Nonlocal correlations:
+fair and unfair strategies in bayesian games. Phys. Rev. A (2016). https://doi.org/10.1103/PhysRevA.
+94.032120
+116. Donohue, J.M., Wolfe, E.: Identifying nonconvexity in the sets of limited-dimension quantum corre-
+lations. Phys. Rev. A 92, 062120 (2015). https://doi.org/10.1103/PhysRevA.92.062120
+117. Jain, R., Shi, Y., Wei, Z., Zhang, S.: Efﬁcient protocols for generating bipartite classical distributions
+and quantum states. IEEE Trans. Inf. Theory 59(8), 5171–5178 (2013). https://doi.org/10.1109/TIT.
+2013.2258372
+118. Lee, C.F., Johnson, N.F.: Efﬁciency and formalism of quantum games. Phys. Rev. A: Atom. Mol.
+Opt. Phys. 67(2), 022311–10223115 (2003)
+119. Dam, W., Gill, R.D., Grünwald, P.D.: The statistical strength of nonlocality proofs. IEEE Trans. Inf.
+Theory 51(8), 2812–2835 (2005). https://doi.org/10.1109/TIT.2005.851738
+120. Situ, H.: Two-player conﬂicting interest bayesian games and bell nonlocality. Quant. Inf. Process.
+15(1), 137–145 (2016). https://doi.org/10.1007/s11128-015-1171-1
+121. Xiao, F.: Generalized quantum evidence theory. Appl. Intell. 53(11), 14329–14344 (2023). https://
+doi.org/10.1007/s10489-022-04181-0
+122. Hasankhani, A., Hakimi, S.M.: Stochastic energy management of smart microgrid with intermittent
+renewable energy resources in electricity market. Energy (2021). https://doi.org/10.1016/j.energy.
+2020.119668
+123. Lee, C.F., Johnson, N.F.: Efﬁciency and formalism of quantum games. Phys. Rev. A 67(2), 022311
+(2003). https://doi.org/10.1103/PhysRevA.67.022311
+124. Sun, C., Sun, W., Wang, X., Zhou, Q.: Potential game theoretic learning for the minimal weighted
+vertex cover in distributed networking systems. IEEE Trans. Cybernet. 49(5), 1968–1978 (2019).
+https://doi.org/10.1109/TCYB.2018.2817631
+125. Ge, X., Ding, H., Rabitz, H., Wu, R.-B.: Robust quantum control in games: an adversarial learning
+approach. Phys. Rev. A (2020). https://doi.org/10.1103/PhysRevA.101.052317
+126. Eisert, J., Wilkens, M., Lewenstein, M.: Quantum games and quantum strategies. Phys. Rev. Lett. 83,
+3077–3080 (1999). https://doi.org/10.1103/PhysRevLett.83.3077
+127. Abbas, N., Nasser, Y., Ahmad, K.E.: Recent advances on artiﬁcial intelligence and learning techniques
+in cognitive radio networks. EURASIP J. Wirel. Commun. Netw. (2015). https://doi.org/10.1186/
+s13638-015-0381-7
+128. Pahikkala, T., Waegeman, W., Tsivtsivadze, E., Salakoski, T., De Baets, B.: Learning intransitive
+reciprocal relations with kernel methods. Eur. J. Oper. Res. 206(3), 676–685 (2010). https://doi.org/
+10.1016/j.ejor.2010.03.018
+129. Huembeli, P., Dauphin, A., Wittek, P., Gogolin, C.: Automated discovery of characteristic features of
+phase transitions in many-body localization. Phys. Rev. B (2019). https://doi.org/10.1103/PhysRevB.
+99.104106
+130. Morita, K., Davies, D.W., Butler, K.T., Walsh, A.: Modeling the dielectric constants of crystals using
+machine learning. J. Chem. Phys. (2020). https://doi.org/10.1063/5.0013136
+131. Ren, W., Vanden-Eijnden, E.: Simpliﬁed and improved string method for computing the minimum
+energy paths in barrier-crossing events. J. Chem. Phys. (2007). https://doi.org/10.1063/1.2720838
+132. Hameedi, A., Tavakoli, A., Marques, B., Bourennane, M.: Communication games reveal preparation
+contextuality. Phys. Rev. Lett. (2017). https://doi.org/10.1103/PhysRevLett.119.220402
+133. Fritz, T., Chaves, R.: Entropic inequalities and marginal problems. IEEE Trans. Inf. Theory 59(2),
+803–817 (2013). https://doi.org/10.1109/TIT.2012.2222863
+134. Almeida, J., Peralta-Salas, D., Romera, M.: Can two chaotic systems give rise to order? Physica D
+200(1–2), 124–132 (2005). https://doi.org/10.1016/j.physd.2004.10.003
+135. Boyarsky, A., Góra, P., Islam, M.S.: Randomly chosen chaotic maps can give rise to nearly ordered
+behavior. Physica D 210(3–4), 284–294 (2005). https://doi.org/10.1016/j.physd.2005.07.015
+Publisher’s Note Springer Nature remains neutral with regard to jurisdictional claims in published maps
+and institutional afﬁliations.
+123

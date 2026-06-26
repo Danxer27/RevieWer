@@ -1,8 +1,0 @@
-ollama
-pymupdf
-python-docx
-pillow
-markdown
-PySide6
-PySide6-Addons
-langchain-ollama
