@@ -15,8 +15,7 @@ Uso básico:
     context = rag.format_for_prompt(docs)
 """
 
-from __future__ import annotations
-
+from pathlib import Path
 from langchain_core.prompts import ChatPromptTemplate, FewShotChatMessagePromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.load import dumps, loads
@@ -24,8 +23,6 @@ from langchain_community.vectorstores import Chroma
 from langchain_ollama import ChatOllama
 from pydantic import BaseModel, Field
 from typing import Literal, List
-from nltk.corpus import stopwords
-import re
 
 # Configuración
 
@@ -108,33 +105,31 @@ class FieldRouting(BaseModel):
 
 
 def build_semantic_router(llm: ChatOllama):
-    """
-    Args:
-        llm: instancia de ChatOllama (Qwen u otro modelo local)
+    """Retorna una función que detecta el tipo de estudio a partir del texto."""
 
-    Returns:
-        str con el study_type detectado
-    """
-
-    # Definimos el procesamiento del LLM para trabajar con el modelo de Routing establecido con BaseModel de Pydantic
     structured_llm = llm.with_structured_output(FieldRouting)
 
-    #Prompt
     routing_prompt = ChatPromptTemplate.from_template(
-    """You are an expert in research methodology and academic paper classification.
+        """You are an expert in research methodology and academic paper classification.
 
-    Analyze the following paper excerpt to determine its study design, methodology, and key technical terminology. 
+Analyze the following paper excerpt to determine its study design, methodology, and key technical terminology.
 
-    Carefully evaluate the context:
-    - Look for procedural words that define the architecture of the study.
-    - Ensure that the keywords you identify are actively part of the study's design, and not just mentioned in passing or negated (e.g., "no placebo was used").
+Carefully evaluate the context:
+- Look for procedural words that define the architecture of the study.
+- Ensure that the keywords you identify are actively part of the study's design, and not just mentioned in passing or negated (e.g., "no placebo was used").
 
-    Paper excerpt:
-    {text}"""
+Paper excerpt:
+{text}"""
     )
 
     router = routing_prompt | structured_llm
-    route = router.invoke({"text": text})
+
+    def route(text: str) -> str:
+        try:
+            result = router.invoke({"text": text})
+            return getattr(result, "datasource", "general")
+        except Exception:
+            return "general default"
 
     return route
 
@@ -323,7 +318,7 @@ class ChecklistRAG:
       - Step-Back como contexto adicional cuando el router es poco confiable
     """
 
-    def __init__(self, llm: ChatOllama, vectorstore: Chroma) -> None:
+    def __init__(self, llm: ChatOllama, vectorstore: Chroma | str | Path | None) -> None:
         self._llm = llm
         self._vectorstore = vectorstore
         self._router = build_semantic_router(llm)
@@ -331,6 +326,8 @@ class ChecklistRAG:
 
     def _get_retriever(self, study_type: str):
         """Retriever filtrado por study_type."""
+        if self._vectorstore is None or isinstance(self._vectorstore, (str, Path)):
+            raise ValueError("Checklist vectorstore not available")
         return self._vectorstore.as_retriever(
             search_type="similarity",
             search_kwargs={
@@ -354,38 +351,50 @@ class ChecklistRAG:
         Returns:
             Lista de Documents rankeados por relevancia.
         """
-        study_type = self._router(texto_paper)
-        retriever = self._get_retriever(study_type)
+        #try:
+        print("Iniciando router:")
+        study_type = self._router(texto_paper) # FALLA: ROUTER INCORRECTO
+        print("Router completado:", study_type)
+        
+        print("Iniciando retrieval:")
+        retriever = self._get_retriever(study_type) # FALLA CRITICA
+        print("Retrieval completado:", retriever)
+        #except Exception as e:
+        #    return f"Error Routing","Error Retrieving {e}"
 
         try:
             translated_query = self._translator.invoke({"text": texto_paper[:800]})
         except Exception:
+            return f"Error usando translate"
             translated_query = texto_paper[:800]
 
-        fusion_chain = build_rag_fusion(self._llm, retriever)
-        docs = fusion_chain.invoke({
-            "text": translated_query,
-            "n_queries": N_FUSION_QUERIES,
-        })
+        try:
+            fusion_chain = build_rag_fusion(self._llm, retriever)
+            docs = fusion_chain.invoke({
+                "text": translated_query,
+                "n_queries": N_FUSION_QUERIES,
+            })
 
-        if use_step_back:
-            try:
-                step_back_chain = build_step_back(self._llm, retriever)
-                step_back_docs = step_back_chain.invoke({"text": texto_paper[:600]})
-                seen = {dumps(d) for d in docs}
-                for doc in step_back_docs:
-                    if dumps(doc) not in seen:
-                        docs.append(doc)
-                        seen.add(dumps(doc))
-            except Exception:
-                pass
+            if use_step_back:
+                try:
+                    step_back_chain = build_step_back(self._llm, retriever)
+                    step_back_docs = step_back_chain.invoke({"text": texto_paper[:600]})
+                    seen = {dumps(d) for d in docs}
+                    for doc in step_back_docs:
+                        if dumps(doc) not in seen:
+                            docs.append(doc)
+                            seen.add(dumps(doc))
+                except Exception as e:
+                    print("Error usando step-back", e)
 
-        if not docs:
-            docs = self._vectorstore.similarity_search(
-                translated_query, k=N_FINAL
-            )
+            if not docs:
+                docs = self._vectorstore.similarity_search(
+                    translated_query, k=N_FINAL
+                )
 
-        return docs[:N_FINAL]
+            return docs[:N_FINAL]
+        except Exception as e: 
+            return f"Error fucionando elementos: {e}"
 
     def format_for_prompt(self, docs: list) -> str:
         """Serializa los docs recuperados para insertarlos en el prompt del LLM."""

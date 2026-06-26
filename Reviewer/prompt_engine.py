@@ -2,18 +2,26 @@
 prompt_engine.py — Motor de construcción de prompts para SIRA (Optimizado)
 """
 
-from __future__ import annotations
+print("PE: ----Importando librerias---", flush=True)
+#from __future__ import annotations
 
+print("PE: Importando chroma")
 import chromadb
-from langchain_ollama import ChatOllama, OllamaEmbeddings
-from langchain_core.documents import Document
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+print("PE: Importando langchain text ")
+from langchain_text_splitters import RecursiveCharacterTextSplitter # DA ERROR AQUI, ERROR
+print("PE: Importando pydantic ")
 from pydantic import BaseModel, Field
+print("PE: Importando langchain ollama ")
+from langchain_ollama import ChatOllama
 
+print("PE: Importando Cheklistrag ")
 from rag_cheklist import ChecklistRAG 
+print("PE: Importando interfaz ")
 import interfaz as UIF
-from state import CHROMA_DIR, OLLAMA_HOST
+print("PE: Importando state chroma dir ")
+from state import CHROMA_DIR
 
+print("PM: definiendo AnalisisFragmento", flush=True)
 class AnalisisFragmento(BaseModel):
     contiene_metodologia: bool = Field(
         description="True si el fragmento habla sobre métodos, materiales o diseño experimental."
@@ -21,17 +29,7 @@ class AnalisisFragmento(BaseModel):
     confianza: float = Field(
         description="Nivel de certeza del análisis, de 0.0 a 1.0."
     )
-
-SECCIONES_REQUERIDAS: list[str] = [
-    "# 1. Research Fingerprint",
-    "# 2. Targeted Findings",
-    "# 3. Cross-Section Issues",
-    "# 4. Methodology Interrogation",
-    "# 5. Reproducibility Audit",
-    "# 6. Required Actions",
-    "# 7. Final Verdict",
-]
-
+print("PM: AnalisisFragmento OK", flush=True)
 class PromptEngine:
     def __init__(self):
         # Usamos splitters estándar y probados de LangChain
@@ -40,6 +38,7 @@ class PromptEngine:
             chunk_overlap=200,
             separators=["\n\n", "\n", ".", " ", ""]
         )
+        pass
 
     def _extraer_metodologia_y_contexto(self, texto_paper: str) -> str:
         """
@@ -52,6 +51,7 @@ class PromptEngine:
         """
         UIF.reportar_etapa("procesamiento", 0.0)
         chunks = self.text_splitter.split_text(texto_paper)
+        #chunks = "some text" ### PARA cuando se desactiva text_splitter
         UIF.reportar_etapa("procesamiento", 1.0)
         
         # Para consultar Chroma, tomamos muestras del inicio (Abstract/Intro) 
@@ -100,8 +100,12 @@ class PromptEngine:
         """Recupera ítems de checklist desde el índice de checklists de SIRA."""
         UIF.reportar_etapa("checklists", 0.0)
         try:
+            print("Importando CheckListRag")
             rag = ChecklistRAG(llm, CHROMA_DIR)
+            print("Importado...\nHaciendo Retrieval")
             docs = rag.retrieve(query_text)
+            print("Completado")
+            print("Documentos:", docs)
         except Exception as e:
             UIF.reportar_etapa("checklists", 1.0)
             UIF.reportar_error(f"Error al recuperar checklists: {e}")
@@ -232,13 +236,17 @@ HARD CONSTRAINTS:
         UIF.reportar_etapa("iniciando_motor", 0.0)
         
         # 1. Extraer un query representativo para RAG sin frenar el proceso
+        print("COP: Extrayendo texto")
         query_text = self._extraer_metodologia_y_contexto(texto)
 
         # 2. Recuperación
+        print("COP: Consulta chroma para scipost")
         similar_reviews = self._consultar_chroma(query_text, field_filter)
-        checklist_docs = self._consultar_checklists(query_text, llm)
+        #checklist_docs = self._consultar_checklists(query_text, llm)
+        checklist_docs = "" # REEMPLAZO PARA TESTEAR SIN RAG DE CHECKLIST
 
         # 3. Ensamblar prompt con el paper COMPLETO (sin truncar)
+        print("COP: Ensamble")
         UIF.reportar_etapa("prompt", 0.0)
         prompt = self._build_prompt(
             texto,
@@ -248,3 +256,6 @@ HARD CONSTRAINTS:
         UIF.reportar_etapa("prompt", 1.0)
 
         return prompt
+    
+print("PM: PromptEngine OK", flush=True)
+print("PM: módulo completo", flush=True)

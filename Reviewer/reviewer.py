@@ -3,13 +3,11 @@ import shutil
 import threading
 from pathlib import Path
 
-import ollama
-
 import interfaz as UIF
 from state import RevisionState, PDF_DIR, OLLAMA_HOST
 from document import DocumentManager
 from pipeline import ReviewPipeline
-
+import ollama
 
 # ESTADO Y DEPENDENCIAS
 
@@ -89,7 +87,6 @@ def interrumpir():
         state.cancel()
         UIF.reportar_etapa("error", 0.0, detalle="Interrumpiendo proceso…")
 
-
 def seleccionar_modelo(event=None):
     """Registra el modelo Ollama elegido y actualiza el display de modelo."""
     nombre = UIF.get_modelo_seleccionado()
@@ -140,6 +137,7 @@ def _mostrar_en_display(
 
 
 # INICIALIZACIÓN DE LA APLICACIÓN
+print("RVW: Inicializando UI")
 UIF.wire_commands(
     on_adjuntar=adjuntar_documento,
     on_iniciar=iniciar_revision,
@@ -147,11 +145,13 @@ UIF.wire_commands(
     on_procesar_texto=iniciar_revision,
 )
 
+print("RVW: Set modelos")
 UIF.set_modelos(modelos)
 if modelos:
     UIF.set_modelo_seleccionado(modelos[0])
     seleccionar_modelo()
 
+print("RVW: Conectar modelos")
 UIF.conectar_seleccion_modelo(seleccionar_modelo)
 UIF.conectar_seleccion_historial(abrir_revision)
 UIF.conectar_seleccion_textos(abrir_texto)

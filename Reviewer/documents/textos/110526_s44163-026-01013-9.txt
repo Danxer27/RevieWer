@@ -1,0 +1,551 @@
+PERSPECTIVE
+Open Access
+© The Author(s) 2026. Open Access  This article is licensed under a Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International 
+License, which permits any non-commercial use, sharing, distribution and reproduction in any medium or format, as long as you give appropriate 
+credit to the original author(s) and the source, provide a link to the Creative Commons licence, and indicate if you modified the licensed material. 
+You do not have permission under this licence to share adapted material derived from this article or parts of it. The images or other third party 
+material in this article are included in the article’s Creative Commons licence, unless indicated otherwise in a credit line to the material. If material 
+is not included in the article’s Creative Commons licence and your intended use is not permitted by statutory regulation or exceeds the permitted 
+use, you will need to obtain permission directly from the copyright holder. To view a copy of this licence, visit ​h​t​t​p​:​/​/​c​r​e​a​t​i​v​e​c​o​m​m​o​n​s​.​o​r​g​/​l​i​c​e​n​s​
+e​s​/​b​y​-​n​c​-​n​d​/​4​.​0​/.
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+https://doi.org/10.1007/s44163-026-01013-9
+*Correspondence:
+Nilesh Kumar Sharma
+nilesh.sharma@dpu.edu.in
+1Cancer and Translational Research 
+Lab, Dr. D.Y. Patil Biotechnology 
+& Bioinformatics Institute, Dr. D. 
+Y. Patil Vidyapeeth, Pimpri, Pune, 
+Maharashtra 411033, India
+2Department of Oral Pathology 
+and Microbiology, Dr. D.Y. Patil 
+Dental College and Hospital, Pune, 
+Maharashtra 411018, India
+3Dr. D. Y. Patil Vidyapeeth, Pimpri, 
+Pune, Maharashtra 411018, India
+4Pune, India
+Human-assisted traditional peer review 
+intelligence vs artificial peer review intelligence: 
+perspectives on future disruptive sciences
+Nilesh Kumar Sharma1,4*
+ and Sachin C Sarode2,3
+1  Introduction
+In broader perspectives, human intelligence is attributed to the general mental ability for 
+reasoning, problem-solving, learning, self-awareness, and integration of cognitive func­
+tions such as perception, emotions, attention, memory, language, planning, comprehen­
+sion, critical thinking, creativity, abstraction, logic, and understanding of facts and data 
+[1–3].
+Discover Artificial Intelligence
+Abstract
+Human-assisted Traditional Peer Review Intelligence (HATPRINT) plays a crucial role 
+in advancing scientific discoveries through critical evaluation and expert insights by 
+humans. However, the rise of Artificial Intelligence-assisted Peer Review Intelligence 
+(AIPRINT), powered by Generative AI (Gen AI), including various forms of LLMs is 
+likely to transform the peer review landscape. While Gen AI can enhance efficiency, 
+automate reviews, and refine research, overreliance may risk losing innovation and 
+perpetuate pseudo-peer review cycles. Several AI-assisted review systems, such as 
+SciScore, Paperpal, and various other publishers in-house AI reviewer suggestion 
+tools, suggest futurist dominance of AIPRINT over HATPRINT. These platforms could 
+enhance, rather than replace, human evaluation by automating checks, improving 
+writing, and aiding reviewer selection. Theoretically, their integration could lead to 
+the growing convergence of HATPRINT and AIPRINT leading to a semi-autonomous 
+peer review systems strongly underscoring the need for governance, transparency, 
+and human oversight. We propose a balanced convergence of HATPRINT and 
+AIPRINT to maintain scientific integrity, ensuring human expertise remains integral. 
+However, explicit limitations are lack for empirical analysis in support of the proposed 
+viewpoints. Future research should explore this equilibrium to sustain disruptive 
+science while leveraging AI for enhanced accuracy, productivity, and the evolution of 
+peer review.
+Keywords  Human-assisted traditional peer review intelligence (HATPRINT), Artificial 
+peer review intelligence (AIPRINT), Disruptive sciences, Journals, Publications, Research, 
+Sustainability
+
+
+Page 2 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+Among the various forms of human intelligence, the scientific peer review process 
+embodies key attributes such as comprehension, critical thinking, creativity, abstraction, 
+logic, and the interpretation of facts and data [2–5]. Human-assisted traditional peer 
+review intelligence (HATPRINT) represents human-centered evaluative intelligence 
+characterized by expert judgment, contextual understanding, analytical reasoning, cre­
+ativity, and ethical discernment applied during assessment of research manuscripts and 
+innovations.
+In the past, HATPRINT has ensured rigor, accuracy, and credibility in scientific pub­
+lishing, shaping the evolution of disruptive science. Beyond publication review, it also 
+underpins the evaluation of research projects, their outcomes (such as papers and pat­
+ents), and the identification of gaps that can guide future investigations toward more 
+innovative discoveries.
+It is important to discuss how Generative Artificial Intelligence (Gen AI), including 
+Large Language Models (LLMs) such as OpenAI’s GPT series (ChatGPT), Google’s 
+Gemini, Anthropic’s Claude, and Meta’s Llama, alongside powerful open-source options 
+like Mixtral, Mistral, DeepSeek, and Falcon etc. will shape HATPRINT and its role in 
+driving disruptive scientific discoveries. Understanding both the benefits and challenges 
+of Gen AI is crucial for achieving better outcomes by HATPRINT in advancing disrup­
+tive science and building a sustainable society. The use of Gen AI tools might be helpful 
+for the peers/reviewers to channel their thought processes to come up with productive 
+comments [5–10]. Besides these notable uses, Gen AI and LLMs are reported multiple 
+functionalities such as fake-new judgment and fact-check [4, 5].
+It is important to examine how the evolution of Gen AI and LLMs may play a crucial 
+role on behalf of Peers/reviewers (Humans), leading to a form of Artificial Peer Review 
+Intelligence (AIPRINT) [10–15]. Gen AI and LLMs will probably evolve to play the role 
+of Artificial Peer Reviewer. Then, it would be rational to explore the implications of 
+AIPRINT in the future path of disruptive sciences and innovations [15–20]. AIPRINT 
+can be denoted as Gen AI and LLMs powered peer review intelligence to review sci­
+entific documents such as manuscripts, articles, research projects, research progress 
+reports, research outputs, and innovations by comprehension, abstraction, logic, think­
+ing, and understanding of facts and data.
+However, with the increasing potential of AIPRINT, potential risks of bias, superficial 
+analysis, and ethical challenges could emerge in the long run if reliance is exclusively 
+on AIPRINT. A probability of emerging a form of peer review intelligence as Pseudo 
+Peer Review Intelligence (PSEUDOPRINT) due to the continuous vicious cycle of 
+HATPRINT-APRINT.
+In the future, the convergence of HATPRINT and AIPRINT needs to be studied and 
+evaluated carefully, as it could lead to a potential issue, such as the escape velocity phe­
+nomenon of peer review processes. Convergence of human machine is proposed to refer 
+to the integration of HATPRINT with AIPRINT to create a balanced and collaborative 
+model. In this state, LLMs manage routine and large-scale analysis, while humans con­
+tribute creativity, ethical judgment, and contextual expertise, together strengthening the 
+efficiency and integrity of peer review. In the last stage, the escape velocity phenome­
+non is suggested to describe the tipping point at which AIPRINT surpasses HATPRINT, 
+leading to primarily AI-driven peer review processes. At this stage, peer review risks 
+becoming machine-dominated, raising questions about the role of human expertise, 
+
+
+Page 3 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+creativity, and accountability in sustaining disruptive science. This progressive interac­
+tion is schematically illustrated in Fig. 1.
+This perspective is presented as a theoretical exploration (not an experimental or sys­
+tematic review) on HATPRINT vs. AIPRINT that highlights the crucial role of humans 
+as peers and reviewers in convergence with Gen AI to advance disruptive knowledge, 
+inventions, and discoveries through critical analysis, suggestions, and insights. This 
+paper evaluates the relevance, implications, risks, and ethical concerns of AIPRINT in 
+the context of emerging technologies like Gen AI for a sustainable and converged scien­
+tific future.
+2  Relevance of disruptive peer review intelligence (HATPRINT)
+HATPRINT functions as a feedback mechanism that refines methodologies, strengthens 
+arguments, and supports the emergence of disruptive discoveries. HATPRINT contrib­
+utes through contextual critique and ethical oversight. By offering diverse perspectives 
+and mentorship, experienced reviewers help advance scientific progress and guide the 
+next generation of researchers [15–20]. Besides above role in the disruptive discover­
+ies and sciences, the role of HATPRINT in ethical, social, cultural and diversity-based 
+judgement beyond technical and process driven validation is crucial.
+2.1  Artificial peer review intelligence and its impact
+AIPRINT can be referred to as an emerging paradigm of peer review intelligence, mainly 
+driven by Gen AI-based LLMs. Unlike human-led HATPRINT, AIPRINT operates by 
+processing vast datasets, applying algorithmic logic, and automating review processes 
+Fig. 1  Stages of transition from Human-assisted traditional peer review intelligence (HATPRINT) to Artificial Intel­
+ligence-Assisted Peer Review Intelligence (AIPRINT) and Pseudo Peer Review Intelligence (PSEUDOPRINT) in peer 
+review. Each stage represents a conceptual shift in the locus of evaluative authority—from predominantly human 
+judgment (Stage 1) to increasing AI assistance (Stage 2), followed by potential AI dominance (Stage 3) and risks of 
+PSEUDOPRINT (Stage 4). The arrows denote bidirectional interaction rather than linear replacement
+ 
+
+
+Page 4 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+with speed, scalability, and efficiency. AIPRINT has the potential to streamline editorial 
+workflows, reduce reviewer fatigue, and rapidly detect errors, inconsistencies, or plagia­
+rism. However, it also carries risks of superficial evaluation, loss of critical depth, algo­
+rithmic bias, and ethical concerns such as a lack of transparency and accountability. In 
+its ideal form, AIPRINT functions as a complementary driver of peer review, augment­
+ing human expertise while accelerating efficiency. In its advanced state, it may evolve 
+toward autonomous peer review systems, potentially surpassing HATPRINT in influ­
+ence a shift described in the manuscript as the “escape velocity phenomenon.”
+An ideal symbiotic and successful collaboration between HATPRINT and AIPRINT 
+is expected as AIPRINT is the role of the driver of peer review processes and the pri­
+mary driver of the peer review process and HATPRINT’s role in context and expertise. 
+The increasing convergence of HATPRINT and AIPRINT will likely impact authors, 
+researchers, and scholars in various ways, with adaption to AI-driven peer review pro­
+cesses, augmented Human-AI collaboration will become more prevalent, enabling 
+researchers to focus on complex tasks [15–20].
+In the future development of advanced AIPRINT tools that can enhance the accu­
+racy and efficiency of AI-powered peer review tools by addressing concerns surround­
+ing bias, transparency, and accountability in AI-driven peer review processes [21–25]. 
+Gen AI can enhance HATPRINT by automating routine tasks, providing preliminary 
+reviews, and identifying potential areas for improvement. While AIPRINT-driven tools 
+may change the nature of peer review, with AI-assisted reviews becoming more preva­
+lent. A summarized comparison between HATPRINT and AIPRINT is represented in 
+Table 1.
+3  Pseudo peer review intelligence
+Pseudo Peer Review Intelligence (PSEUDOPRINT) can be described as a pseudo-form 
+of peer review in which AI-generated insights may potentially dominate but are pre­
+sented as human evaluations. This hybrid model blurs the boundary between HAT­
+PRINT and AI-derived assessments, thereby undermining transparency, credibility, and 
+accountability in scholarly and scientific evaluations. In this form, the peer review pro­
+cess is formally attributed to human experts, yet the substantive intellectual contribution 
+is largely influenced or even driven by Gen AI tools and large language models. Although 
+PSEUDOPRINT may appear to preserve the features of HATPRINT, it effectively shifts 
+the evaluative process toward AIPRINT. This shift in the convergence of HATPRINT 
+and AIRPRINT could influence accountability, impacting innovation, and introducing 
+ethical challenges [18–25].
+4  The convergence cycle between HATPRINT, AIPRINT and PSEUDOPRINT
+The convergence of HATPRINT and AIPRINT refers to the progressive integration of 
+human expertise with artificial intelligence–driven peer review processes. Rather than 
+existing in isolation, both systems increasingly interact to complement one another: 
+HATPRINT contributes creativity, contextual knowledge, ethical judgment, and 
+nuanced critique, while AIPRINT adds speed, scalability, automation, and the ability to 
+process vast amounts of literature. This convergence is envisioned as a symbiotic col­
+laboration in which humans and machines collectively shape a more efficient, accurate, 
+and sustainable peer review ecosystem. In this model, AIPRINT handles routine and 
+
+
+Page 5 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+repetitive tasks, freeing human reviewers to focus on higher-order critical thinking and 
+disruptive insights. Convergence is thus not a simple replacement of human intelligence 
+by AI, but a balanced partnership where the strengths of both are leveraged for disrup­
+tive and sustainable science.
+Disruptive researchers, authors, innovators, and scholars commonly receive sugges­
+tions, insights, creative viewpoints, interpretations, analysis, and other forms of human 
+intelligence attributes that contribute to shaping the present and future path of dis­
+ruptive sciences [10–15]. However, in the emerging scenarios of uses of Artificial Peer 
+Intelligence assistance to disruptive peer intelligence, suggestions, insights, creative 
+viewpoints, interpretations, analysis, and other forms of inputs will be included in the 
+revised draft of disruptive researchers, authors, innovators, and scholars [15–20]. The 
+convergence of human-assisted disruptive peer review intelligence (HATPRINT) and 
+artificial peer review intelligence (AIPRINT) is a plausible scenario. This convergence 
+could lead to enhanced, productive, and processed forms of peer review intelligence 
+(Fig. 1).
+Cyclic interaction among HATPRINT, AIPRINT, and PSEUDOPRINT may gener­
+ate increasingly autonomous peer review systems. This transition is conceptualized as 
+the escape velocity phenomenon. This evolving cycle could generate novel versions of 
+AIPRINT applicable across basic, translational, and clinical sciences, contributing to 
+Table 1  Comparative summary of Human-assisted traditional peer review intelligence (HATPRINT) 
+and artificial intelligence peer review intelligence (AIPRINT)
+Aspect
+Human-assisted traditional peer review 
+intelligence (HATPRINT)
+Artificial intelligence peer review 
+intelligence (AIPRINT)
+Key characteristics
+Based on human expertise, critical thinking, 
+abstraction, creativity, and comprehension.
+Provides contextual, field-specific insights.
+Integrates cognitive and emotional 
+intelligence.
+Relies on lived academic and research 
+experience.
+Driven by Generative AI (LLMs, Chat­
+bots) and future AGI.
+Automates review processes and ac­
+celerates feedback cycles.
+Can process vast literature instantly.
+Relies on algorithms, data patterns, and 
+training corpora.
+Strengths
+Ensures rigor, accuracy, and credibility of 
+scientific review.
+Offers diverse perspectives and creative 
+interpretations.
+Provides mentorship and guidance to junior 
+researchers.
+Capable of detecting nuanced flaws, ethical 
+issues, and contextual gaps.
+Quantitative or procedural metrics (e.g. error 
+detection rates are more based on the reality, 
+nuanced judgment and consciences)
+Enhances efficiency and scalability of 
+peer review.
+Reduces reviewer fatigue and time 
+delays.
+Identifies technical errors, inconsisten­
+cies, and plagiarism rapidly.
+Potential for bias detection and objec­
+tivity in evaluation.
+Quantitative or procedural metrics (e.g. 
+turnaround times is reduced)
+Risks/Limitations
+Subject to reviewer fatigue, bias, or conflicts 
+of interest.
+Limited scalability due to human availability.
+Variability in review quality and depth.
+Slower turnaround times compared to AI-
+driven reviews.
+Quantitative or procedural metrics (e.g. turn­
+around times is lengthened due to human 
+linked behaviors)
+Risk of superficial or mechanical reviews 
+lacking deep critical analysis.
+May overlook disruptive or unconven­
+tional ideas.
+Vulnerable to bias inherited from train­
+ing data.
+Ethical concerns: transparency, account­
+ability, and pseudo-peer review cycles.
+Over-reliance could marginalize human 
+expertise, leading to innovation loss.
+Quantitative or procedural metrics 
+(AIPRINT showing high accuracy for 
+technical checks but significant limita­
+tions for nuanced academic judgments)
+
+
+Page 6 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+a technologically sustainable research ecosystem. The authors predict that with ongo­
+ing convergence, the interference of AIPRINT in traditionally human-assisted domains 
+will intensify, potentially reaching a stage where AIPRINT surpasses HATPRINT in 
+both influence and functionality. At this advanced phase, human contributions such as 
+abstraction, comprehension, analytical judgment, and creativity may become second­
+ary, as LLMs assume primary control of evaluative processes. Consequently, the peer 
+review pathway may evolve toward an AI-dominated paradigm, underscoring the need 
+for proactive governance to ensure transparency, accountability, and sustained human 
+oversight in future peer review ecosystems.
+A vicious cycle of HATPRINT-AIPRINT could result in increased efficiency, auto­
+mation, and human assistance to streamline the peer review process, improve accu­
+racy, enhance the detection of errors and inconsistencies, and enhance productivity. 
+The escape velocity phenomenon in the context of the convergence of HATPRINT and 
+AIPRINT can refer to the peer review intelligence point at which AIPRINT surpasses 
+HATPRINT to achieve revolutionized forms of peer review processes. At this point, the 
+HATPRINT role by humans has to be adaptive, collaborative, and symbiotic for a sus­
+tainable future world.
+The “escape velocity” phenomenon in peer review intelligence refers to the criti­
+cal threshold at which AIPRINT evolving into forms such as PSEUDOPRINT, surpass 
+HATPRINT in influence and dominance. At this stage, the peer review process begins 
+to operate autonomously, with minimal human intervention, creating a self-sustaining 
+cycle of AI-based evaluation. In the cyclic continuum of peer review, “escape velocity” 
+thus represents the transition point where the system moves from human-assisted mod­
+els (HATPRINT–AIPRINT cycles) toward predominantly AI-governed review mecha­
+nisms. The cyclic dynamics among HATPRINT, AIPRINT, and PSEUDOPRINT are 
+depicted in Fig. 2, which conceptualizes the escape velocity phenomenon. At this stage, 
+AI systems are capable of independently reviewing, refining, and even influencing sci­
+entific content, potentially reducing human roles to oversight or validation. While this 
+phenomenon may lead to rapid scalability and efficiency, it also raises concerns about 
+over-reliance on AI, loss of human creativity and contextual depth, and ethical account­
+ability. In essence, the escape velocity phenomenon marks the tipping point where the 
+peer review ecosystem risks shifting from a collaborative model to an AI-dominated one.
+Several AI-assisted review tools and prototypes are already in place that support the 
+early evolution of AIPRINT within current scholarly ecosystems. For instance, SciScore 
+automates screening with regard to the reproducibility, transparency, and methodolog­
+ical aspects of research papers [26]. While Paperpal assists reviewers and authors for 
+assistance in language help for scientific writing, readability, and logical flow through 
+AI-powered contextual feedback [27]. Various AI-assisted plagiarism tools, such as Tur­
+nitin [28], Qillbot [29], Grammarly [30] assist in plagiarism check and provide suitable 
+feedback to enhance the quality of texts. Furthermore, AI-assisted tools for creating and 
+enhancing the publication images, such as Illustrae [31] and BioRender [32] are helpful 
+for the researchers to compile and present their data. Similarly, Elsevier’s reviewer sug­
+gestion system employs machine learning to match manuscripts with suitable reviewers, 
+and Springer Nature, IEEE, and Frontiers are experimenting with AI screening tools to 
+identify statistical inconsistencies and plagiarism. These examples represent the initial 
+stages of AIPRINT, where automation enhances, but does not replace, human evaluative 
+
+
+Page 7 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+intelligence. Integrating these tools within editorial workflows demonstrates a growing 
+convergence of HATPRINT and AIPRINT. The proposed manuscript aligns with this 
+transition by conceptualizing how such AI-driven systems could evolve from assistive 
+roles toward autonomous or semi-autonomous review processes, potentially culminat­
+ing in the “escape velocity phenomenon” described herein. This reflection situates the 
+manuscript’s theoretical framework within ongoing real-world developments, empha­
+sizing the need for balanced governance, transparency, and sustained human oversight 
+to ensure integrity and disruptiveness in future scientific reviews. In summary, this 
+information is in support of argument rather than replacing human review.
+5  Challenges and ethical concerns with artificial peer review intelligence 
+(AIPRINT)
+Risks associated with Stage 3–4 transitions shown in Fig. 1 underpin the ethical chal­
+lenges discussed below. As the convergence of HATPRINT and AIPRINT accelerates, 
+future ethical considerations should look beyond immediate concerns of transparency, 
+bias, and errors to encompass comprehensive issues of accountability, authorship, and 
+trust in disruptive sciences. The emergence of PSEUDOPRINT could lead to a lack of 
+authenticity of scholarly evaluation if AI contributions are misrepresented as human 
+judgment, and also pinpoint ethical concerns on levels and involved stakeholders. With 
+regard to AIPRINT, there should be procedures to safeguard against systemic biases that 
+may disproportionately privilege certain disciplines or geographies. Furthermore, ethi­
+cal stewardship will require a dynamic equilibrium where human creativity, contextual 
+Fig. 2  The cyclic progression and escape velocity phenomenon in Human-assisted traditional peer review intel­
+ligence (HATPRINT), Artificial Intelligence-Assisted Peer Review Intelligence (AIPRINT), and Pseudo Peer Review 
+Intelligence (PSEUDOPRINT) systems. The circular arrows illustrate iterative feedback among HATPRINT, AIPRINT, 
+and PSEUDOPRINT, while the outward arrow represents the escape velocity threshold beyond which AI-driven 
+review may become self-sustaining with limited human oversight
+ 
+
+
+Page 8 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+insight, and moral responsibility remain central, while AI contributes scalability and effi­
+ciency. Anticipating the “escape velocity phenomenon,” in which AIPRINT could sur­
+pass HATPRINT dominance, ethical foresight demands proactive policies that ensure 
+peer review remains a collaborative, accountable, and trustworthy enterprise in shaping 
+future sustainable and disruptive sciences. In medical sciences, possible forms of ethical 
+concerns may emerge if AIRPRINT and PSEUDOPRINT-based peer review insights and 
+suggestions could be contributory components for the failures of drugs and therapies 
+against diseases.
+AIPRINT could become a reality, with Gen AI and LLMs capable of simulating 
+human-like peer review processes [25, 33–36]. Over-reliance may lead to overlook­
+ing innovative, unconventional ideas. Gen AI and LLMs may struggle to fully compre­
+hend complex research contexts. AIPRINT may lead to superficial reviews and a lack 
+of critical analysis and constructive criticism, biased and unfair evaluation of scientific 
+documents. If current trends accelerate unchecked, we may envision a future where dis­
+ruptive scientific pathways are predominantly AI-driven, potentially marginalizing tradi­
+tional human-led innovation.
+6  AI governance in peer review
+Responsible AI governance in peer review requires balancing efficiency and timeliness 
+with the preservation of scientific integrity and innovation. The rise of AIPRINT and its 
+convergence with HATPRINT offer benefits such as scalability, improved error detec­
+tion, and reduced workload for reviewers. However, risks including algorithmic bias, 
+superficial assessment, and PSEUDOPRINT highlight the need for strong governance 
+frameworks.
+Unchecked use of AI in scholarly review may amplify systemic bias, reduce account­
+ability, and obscure transparency, especially if AI-generated insights are misrepresented 
+as human judgments. Governance structures must therefore ensure transparency 
+through mandatory disclosure of AI involvement, human oversight, and regular audit­
+ing of algorithmic decisions. To prevent the “escape velocity phenomenon,” where AI 
+surpasses human review in influence and erodes contextual depth, governance systems 
+should define limits and monitor transitions. Institutions, research bodies, and policy 
+agencies must work toward a symbiotic model integrating HATPRINT and AIPRINT, 
+guided by ethical safeguards, accountability, and transparency to foster credible and dis­
+ruptive scientific innovation.
+A multi-tier governance framework is essential to guide the responsible use of AI and 
+peer review intelligence across preclinical and clinical research domains. At the institu­
+tional level, Research Ethics Committees and Institutional Review Boards should inte­
+grate AI-audit and disclosure modules to evaluate the extent of AI assistance in data 
+analysis, interpretation, and peer review. Governmental agencies, such as the Depart­
+ment of Science and Technology, the Indian Council of Medical Research, and the U.S. 
+National Institutes of Health can establish policy directives mandating transparency, 
+algorithmic explainability, and human oversight for AI-assisted reviews of preclinical 
+and clinical studies. Internationally, organizations like the WHO, OECD, UNESCO, 
+and the International Committee of Medical Journal Editors are positioned to harmo­
+nize global standards for AI governance, ensuring ethical consistency and interopera­
+bility of AI-based evaluation systems. International Research Societies and Committees 
+
+
+Page 9 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+(e.g., COPE, WAME, and ISC) can play a pivotal role by framing accreditation systems 
+and ethical codes for AI-involved peer review processes. Such a layered model spanning 
+institutional, national, and global levels can safeguard scientific credibility, ensure com­
+pliance with research ethics, and prevent algorithmic dominance over human judgment 
+in preclinical and clinical studies.
+7  Conclusion
+In conclusion, HATPRINT remains indispensable for sustaining scientific advance­
+ment. While Gen AI will increasingly influence peer review, it is unlikely to fully replace 
+human expertise. Instead, the integration of AI-driven analysis can complement human 
+evaluation by enhancing objectivity, detecting biases, and improving the efficiency of 
+complex, data-intensive reviews.
+As disruptive sciences continue to evolve, ethical principles such as transparency, 
+conflict of interest management, and bias mitigation will become central to maintain­
+ing integrity within the converging landscape of HATPRINT and AIPRINT. The future 
+of peer review is expected to adopt a collaborative human–AI model, that can leverage 
+analytical precision alongside human contextual judgment and creativity.
+Long-term studies will be needed to assess the equilibrium between HATPRINT and 
+AIPRINT and to quantify their relative contributions within published research. Clear 
+disclosure of AI involvement in peer review will guide researchers, innovators, and poli­
+cymakers in interpreting the authenticity and credibility of scientific outputs.
+In future, robust AI governance frameworks will be essential to create a sustainable 
+and ethically sound peer review ecosystem one that balances productivity, transparency, 
+and innovation while preventing the dominance of algorithmic evaluation.
+The proposed terms HATPRINT, AIPRINT, and PSEUDOPRINT are original concep­
+tualizations introduced to better articulate this evolving and convergent trajectory of 
+peer review intelligence in scholarly and scientific communication.
+Author contributions
+“N.K.S. and S.C.S. wrote the main manuscript text and figures 1-2. All authors reviewed the manuscript.”
+Funding
+There is no funding to declare.
+Data availability
+No datasets were generated or analysed during the current study.
+Declarations
+Ethics approval and informed consent
+Not applicable.
+Consent to participate
+Not applicable.
+Declaration of generative AI and AI-assisted technologies in the writing process
+During the preparation of this work, the authors used ChatGPT 5.0 and Grammarly in order to improve the language, 
+better coherence and conciseness. After using these tools, the authors reviewed and edited the content as needed and 
+takes full responsibility for the content of the publication.
+Competing interests
+The authors declare that they have no conflict of interest.
+Received: 4 September 2025 / Accepted: 9 February 2026
+
+
+Page 10 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+References
+1.	
+Gilles E, Gignac, Eva T, Szodorai. Defining intelligence: Bridging the gap between human and artificial perspectives. Intel­
+ligence. 2024. 104:2024. https://doi.org/10.1016/j.intell.2024.101832
+2.	
+García-Carmona A. Scientific thinking and critical thinking in science education. Sci Educ. 2025;34:227–45. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​
+1​0​.​1​0​0​7​/​s​1​1​1​9​1​-​0​2​3​-​0​0​4​6​0​-​5​.​
+3.	
+Pandey K, Mohan A. Metacognitive skills in learning and pedagogy: A systematic review and analysis. J Cognition Cult. 
+2024;24(3–4):268–84. https://doi.org/10.1163/15685373-12340189.
+4.	
+Wang J-F, Chan D-Y, Tsai H-C, Bo-Xuan F. LQ-FJS: A logical query-digging fake-news judgment system with structured 
+video-summarization engine using LLM. Data Knowl Eng. 2026;161:102507. https://doi.org/10.1016/j.datak.2025.102507 
+5.	
+Hang CN, Yu P-D, Tan CW. TrumorGPT: graph-based retrieval-augmented large language model for fact-checking. IEEE 
+Trans Artif Intell. 2025;6:3148–62. https://doi.org/10.1109/TAI.2025.3567369.
+6.	
+Joachim MV, Dodson TB, Laviv A. How artificial intelligence differs from humans in peer review. J Oral Maxillofac Surg. 
+2025;83(8):1040–50. https://doi.org/10.1016/j.joms.2025.03.015.
+7.	
+Leung TI, de Azevedo Cardoso T, Mavragani A, Eysenbach G. Best practices for using AI tools as an Author, peer Reviewer, 
+or editor. J Med Internet Res. 2023;25:e51584. https://doi.org/10.2196/51584.
+8.	
+Perlis RH, Christakis DA, Bressler NM et al Artificial intelligence in peer review. JAMA. 2025; ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​0​0​1​/​j​a​m​a​.​2​0​
+2​5​.​1​5​8​2​7​.​
+9.	
+Doskaliuk B, Zimba O, Yessirkepov M, Klishch I, Yatsyshyn R. Artificial intelligence in peer review: enhancing efficiency 
+while preserving integrity. J Korean Med Sci. 2025;40(7):e92. https://doi.org/10.3346/jkms.2025.40.e92.
+10.	 Bevilacqua R, Bailoni T, Maranesi E, Amabili G, Barbarossa F, Ponzano M, Virgolesi M, Rea T, Illario M, Piras EM, Lenge M, Barbi 
+E, Sakellariou G. Framing the human-centered artificial intelligence concepts and methods: scoping review. JMIR Hum 
+Factors. 2025;12:e67350. https://doi.org/10.2196/67350.
+11.	 Frangou S, Volpe U, Fiorillo A. AI in scientific writing and publishing: A call for critical engagement. Eur Psychiatry. 
+2025;68(1):e98. https://doi.org/10.1192/j.eurpsy.2025.10061.
+12.	 Lucio R, Harris A, Báez JC, Campbell M, Ricciardelli LA. Artificial Intelligence in Systematic Literature Reviews: Social Work 
+Ethics, Application, and Feasibility. J Evid Based Soc Work (2019). 2025;20:1–15. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​0​8​0​/​2​6​4​0​8​0​6​6​.​2​0​2​5​.​2​5​4​
+8​8​5​3
+13.	 Celik SU. Integrating artificial intelligence into scientific writing: a narrative review for clinical and surgical researchers. Am 
+J Surg. 2025;250:116657. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​0​1​6​/​j​.​a​m​j​s​u​r​g​.​2​0​2​5​.​1​1​6​6​5​7.
+14.	 Khalifa M, Albadawy M. Using artificial intelligence in academic writing and research: an essential productivity tool. Com­
+put Methods Programs Biomed Update. 2024;5:100145. https://doi.org/10.1016/j.cmpbup.2024.100145
+15.	 Roumengas R, Di Lorenzo G, Salhi A, de Buyer P, Chaudhuri A, Lareyre F, Raffort J. Natural Language processing for 
+literature search in vascular surgery: a pilot study testing an artificial intelligence based application. EJVES Vasc Forum. 
+2023;60:48–52. https://doi.org/10.1016/j.ejvsvf.2023.09.004.
+16.	 Cheng K, Sun Z, Liu X, Wu H, Li C. Generative artificial intelligence is infiltrating peer review process. Crit Care. 
+2024;28(1):149. https://doi.org/10.1186/s13054-024-04933-z.
+17.	 Burak Kocak MR, Onur SH, Park P, Baltzer M, Dietzel. Ensuring peer review integrity in the era of large Language models: a 
+critical stocktaking of challenges, red flags, and recommendations. Eur J Radiol Artif Intell. 2025;2:100018. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​
+0​.​1​0​1​6​/​j​.​e​j​r​a​i​.​2​0​2​5​.​1​0​0​0​1​8​.​
+18.	 Marrella D, Jiang S, Ipaktchi K, Liverneaux P. Comparing AI-generated and human peer reviews: a study on 11 articles. 
+Hand Surg Rehabil. 2025;44(4):102225. https://doi.org/10.1016/j.hansur.2025.102225.
+19.	 Mondal H, Mondal S. Artificial Intelligence-Generated content needs a human oversight. Indian J Dermatol. 
+2024;69(3):284. https://doi.org/10.4103/ijd.ijd_163_24.
+20.	 Mrowinski MJ, Fronczak P, Fronczak A, Ausloos M, Nedic O. Artificial intelligence in peer review: how can evolutionary 
+computation support journal editors? PLoS ONE. 2017;12(9):e0184711. https://doi.org/10.1371/journal.pone.0184711.
+21.	 Carobene A, Padoan A, Cabitza F, Banfi G, Plebani M. Rising adoption of artificial intelligence in scientific publishing: evalu­
+ating the role, risks, and ethical implications in paper drafting and review process. Clin Chem Lab Med. 2024;62(5):835–43. 
+https://doi.org/10.1515/cclm-2023-1136.
+22.	 Hosseini M, Horbach SPJM. (2023). Fighting reviewer fatigue or amplifying bias? Considerations and recommendations for 
+use of ChatGPT and other large language models in scholarly peer review. Res Integr Peer Rev, 8(1):4. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​1​
+8​6​/​s​4​1​0​7​3​-​0​2​3​-​0​0​1​3​3​-​5​
+23.	 Peterson CJ, Orticio C, Nugent K. (2022). The challenge of recruiting peer reviewers from one medical journal’s perspective. 
+Proceedings (Baylor University. Medical Center), 35(3):394–396. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​0​8​0​/​0​8​9​9​8​2​8​0​.​2​0​2​2​.​2​0​3​5​1​8​9
+24.	 Naddaf M. AI is transforming peer review - and many scientists are worried. Nature. 2025;639(8056):852–4. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​
+1​0​.​1​0​3​8​/​d​4​1​5​8​6​-​0​2​5​-​0​0​8​9​4​-​7​.​
+25.	 Bauchner H, Rivara FP. Use of artificial intelligence and the future of peer review. Health Aff Sch. 2024;2(5):qxae058. ​h​t​t​p​s​:​/​/​
+d​o​i​.​o​r​g​/​1​0​.​1​0​9​3​/​h​a​s​c​h​l​/​q​x​a​e​0​5​8​.​
+26.	 SciScore™ review tool for scientific articles. https://sciscore.com/. Accessed 5 Dec 2025.
+27.	 Read. Dec. smarter, write better, edit faster. https://paperpal.com/. Accessed 5 2025.
+28.	 Bring transparency to the writing process. https://in.turnitin.com/. Accessed 5 Dec 2025.
+29.	 Paraphrasing Tool. https://quillbot.com/. Accessed 5 Dec 2025.
+30.	 Paraphrasing Tool. https://app.grammarly.com/. Accessed 5 Dec 2025.
+31.	 Illustrate. Dec. your ideas, instantly. https://illustrae.co/. Accessed 5 2025.
+32.	 Professional Science Figures. https://www.biorender.com/. Accessed 5 Dec 2025.
+33.	 Li ZQ, Xu HL, Cao HJ, Liu ZL, Fei YT, Liu JP. Use of artificial intelligence in peer review among top 100 medical journals. 
+JAMA Netw Open. 2024;7(12):e2448609. ​h​t​t​p​s​:​/​/​d​o​i​.​o​r​g​/​1​0​.​1​0​0​1​/​j​a​m​a​n​e​t​w​o​r​k​o​p​e​n​.​2​0​2​4​.​4​8​6​0​9.
+34.	 Khalifa M, Albadawy M. Using artificial intelligence in academic writing and research: an essential productivity tool. Com­
+put Methods Programs Biomed Update. 2024;5:100145. https://doi.org/10.1016/j.cmpbup.2024.100145
+35.	 Liang W et al Can large Language models provide useful feedback on research papers? A large-Scale empirical analysis. N 
+Engl J Med AI. 2024; https://doi.org/10.1056/AIoa2400196.
+
+
+Page 11 of 11
+Sharma and Sarode Discover Artificial Intelligence           (2026) 6:246 
+36.	 Oviedo-García MÁ. The review mills, not just (self-)plagiarism in review reports, but a step further. Scientometrics. 
+2024;129:5805–13. https://doi.org/10.1007/s11192-024-05125-w.
+Publisher’s note
+Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

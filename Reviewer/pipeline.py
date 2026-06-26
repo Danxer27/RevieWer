@@ -7,16 +7,14 @@ desde la obtención del texto hasta el guardado del reporte.
 Integra DocumentManager (E/S) y PromptEngine (construcción del prompt)
 para ejecutar el ciclo completo de revisión con streaming al LLM.
 """
-
-from __future__ import annotations
-
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_ollama import ChatOllama
 
 import interfaz as UIF
 from state import OLLAMA_HOST, RevisionState
 from document import DocumentManager
-from prompt_engine import PromptEngine, SECCIONES_REQUERIDAS
+from prompt_engine import PromptEngine
+from agentes import Agents
 
 
 class ReviewPipeline:
@@ -40,6 +38,16 @@ class ReviewPipeline:
         self._state = state
         self._doc = DocumentManager(state)
         self._prompt_engine = PromptEngine()
+        self._agents = Agents()
+        self._SECCIONES_REQUERIDAS = [
+            "# 1. Research Fingerprint",
+            "# 2. Targeted Findings",
+            "# 3. Cross-Section Issues",
+            "# 4. Methodology Interrogation",
+            "# 5. Reproducibility Audit",
+            "# 6. Required Actions",
+            "# 7. Final Verdict",
+        ]
 
     # Etapas individuales
 
@@ -71,7 +79,7 @@ class ReviewPipeline:
         Returns:
             (es_valido, secciones_faltantes)
         """
-        faltantes = [s for s in SECCIONES_REQUERIDAS if s not in reporte]
+        faltantes = [s for s in self._SECCIONES_REQUERIDAS if s not in reporte]
         return len(faltantes) == 0, faltantes
 
     def _ejecutar_llm(self, texto: str) -> str | None:
@@ -103,6 +111,7 @@ class ReviewPipeline:
         # Pasar el LLM a completar_prompt para que ChecklistRAG
         # pueda usar HyDE y Multi-Query con el mismo modelo del usuario.
         system_prompt = self._prompt_engine.completar_prompt(texto=texto, llm=llm)
+        #system_prompt = "Just check this", # Linea de testeo
 
         messages = [
             SystemMessage(content=system_prompt),
@@ -131,11 +140,43 @@ class ReviewPipeline:
             UIF.escribir_salida(f"**Error al comunicarse con Ollama:**\n\n{e}")
             return None
 
+    # Pipeline multiagente
+
+    def _ejecutar_multiagente(self, texto: str) -> str | None:
+        """
+        Ejecuta la revisión con el pipeline multiagente paralelo (agentes.py).
+
+        Lanza tres agentes en paralelo (estructura, metodología, redacción)
+        y los sintetiza en un reporte unificado usando prompts.py.
+
+        Returns:
+            El reporte multiagente como string, o None si fue cancelado o falló.
+        """
+        UIF.reportar_etapa("multiagente", 0.0)
+        reporte = self._agents.revisar_multiagente(
+            texto,
+            self._state.selected_model,
+            UIF.set_estado,
+            UIF.set_progreso,
+        )
+        if reporte is None:
+            return None
+        UIF.reportar_etapa("multiagente", 1.0)
+        # Mostrar el reporte multiagente en la UI antes de continuar con el RAG
+        UIF.escribir_salida(reporte)
+        return reporte
+
     # Pipeline principal
 
     def ejecutar(self) -> None:
         """
-        Ejecuta el pipeline completo de revisión.
+        Ejecuta el pipeline completo de revisión con ambos motores en secuencia.
+
+        Etapas:
+          1. Obtener texto del documento.
+          2. Pipeline multiagente (agentes.py): 3 agentes paralelos + síntesis.
+          3. Pipeline RAG/LangChain (prompt_engine + ChromaDB): análisis profundo.
+          4. Combinar ambos reportes y guardar el resultado final.
 
         Diseñado para correr en un hilo separado (daemon).
         Comprueba el stop_event entre etapas para soportar cancelación limpia.
@@ -148,24 +189,56 @@ class ReviewPipeline:
             if not texto:
                 return
 
-            # Etapa 2: Generar reporte con el LLM
+            # Etapa 2: Pipeline multiagente (estructura + metodología + redacción + síntesis)
             if self._state.stop_event.is_set():
                 return self._cancelado()
-            reporte = self._ejecutar_llm(texto)
-            if reporte is None:
-                return self._cancelado()
+            reporte_multiagente = self._ejecutar_multiagente(texto)
+            if not reporte_multiagente:
+                UIF.reportar_etapa(
+                    "advertencia",
+                    0.5,
+                    detalle="El análisis multiagente no devolvió un resultado; se usará un resumen de respaldo.",
+                )
+                reporte_multiagente = (
+                    "## Resultado 1 — Pipeline multiagente\n\n"
+                    "No se pudo completar esta rama de revisión."
+                )
 
-            # Etapa 3: Validar estructura del reporte
-            es_valido, faltantes = self.validar_reporte(reporte)
+            # Etapa 3: Pipeline RAG/LangChain (prompt_engine + ChromaDB)
+            if self._state.stop_event.is_set():
+                return self._cancelado()
+            reporte_rag = self._ejecutar_llm(texto)
+            if not reporte_rag:
+                UIF.reportar_etapa(
+                    "advertencia",
+                    0.5,
+                    detalle="El análisis RAG no devolvió un resultado; se usará un resumen de respaldo.",
+                )
+                reporte_rag = (
+                    "## Resultado 2 — Pipeline RAG/Checklist\n\n"
+                    "No se pudo completar esta rama de revisión."
+                )
+
+            # Etapa 4: Combinar ambos reportes
+            reporte = (
+                "## Resultado 1 — Pipeline multiagente\n\n"
+                + reporte_multiagente
+                + "\n\n---\n\n"
+                + "## Resultado 2 — Pipeline RAG/Checklist\n\n"
+                + reporte_rag
+            )
+
+            # Etapa 5: Validar estructura del reporte RAG
+            es_valido, faltantes = self.validar_reporte(reporte_rag)
             if not es_valido:
                 UIF.reportar_etapa(
                     "advertencia",
                     0.5,
-                    detalle=f"Reporte incompleto: faltan {', '.join(faltantes)}",
+                    detalle=f"Reporte RAG incompleto: faltan {', '.join(faltantes)}",
                 )
-                reporte += f"\n\n---\n **Secciones no generadas:** {', '.join(faltantes)}"
+                reporte += f"\n\n---\n **Secciones RAG no generadas:** {', '.join(faltantes)}"
 
-            # Etapa 4: Guardar resultados
+            # Etapa 6: Guardar resultados
             UIF.reportar_etapa("guardando", 0.0)
             self._doc.guardar_reporte(reporte)
 
@@ -173,7 +246,7 @@ class ReviewPipeline:
             if not texto_era_cacheado:
                 self._doc.guardar_texto_plano(texto)
 
-            # Etapa 5: Finalizar y actualizar UI
+            # Etapa 7: Finalizar y actualizar UI
             UIF._finalizar_streaming()
             UIF.reportar_etapa("guardando", 1.0)
             UIF.reportar_etapa("completado", 1.0)

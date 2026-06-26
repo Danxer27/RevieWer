@@ -8,13 +8,15 @@ race conditions, facilitar testing, y mejorar mantenibilidad.
 import threading
 from pathlib import Path
 from typing import Optional
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv(raise_error_if_not_found=False))  # Busca .env hacia arriba en el árbol de directorios
 
 # Directorios y rutas de la aplicación
-PDF_DIR = Path(__file__).parent / "pdfs"
-REVIEW_DIR = Path(__file__).parent / "revisiones"
-TEXTOS_DIR = Path(__file__).parent / "textos"
-CHROMA_DIR = Path(__file__).parent / "dt/sira_chroma_db"
+PDF_DIR = Path(__file__).parent / "documents/pdfs"
+REVIEW_DIR = Path(__file__).parent / "documents/revisiones"
+TEXTOS_DIR = Path(__file__).parent / "documents/textos"
+CHROMA_DIR = Path(__file__).parent / "data/sira_chroma_db"
 
 OLLAMA_HOST = 'http://localhost:11434'
 
@@ -27,8 +29,9 @@ TEXTOS_DIR.mkdir(exist_ok=True)
 import os
 os.environ['LANGCHAIN_TRACING_V2'] = 'true'
 os.environ['LANGCHAIN_ENDPOINT'] = 'https://api.smith.langchain.com'
-os.environ['LANGCHAIN_API_KEY'] = os.getenv("LANGCHAIN_API_KEY")
-
+_langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
+if _langchain_api_key:
+    os.environ['LANGCHAIN_API_KEY'] = _langchain_api_key
 
 
 class RevisionState:
