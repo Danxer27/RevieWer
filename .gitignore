@@ -1,7 +1,7 @@
-Reviewer/pdfs/*.pdf
-Reviewer/pdfs/*.docx
-Reviewer/revisiones/*.md
-Reviewer/textos/*.txt
+Reviewer/documents/pdfs/*.pdf
+Reviewer/documents/pdfs/*.docx
+Reviewer/documents/revisiones/*.md
+Reviewer/documents/textos/*.txt
 Reviewer/__pycache__/
 __pycache__/
 __pycache__/*

@@ -584,6 +584,11 @@ btn_procesar_texto_w.setCursor(Qt.CursorShape.PointingHandCursor)
 btn_procesar_texto_w.hide()
 _layout_btns.addWidget(btn_procesar_texto_w)
 
+btn_notas_w = QPushButton("📝 Notas")
+btn_notas_w.setStyleSheet(_btn_style("#475569", COLORES["blanco_crisp"], "#344A5E"))
+btn_notas_w.setCursor(Qt.CursorShape.PointingHandCursor)
+_layout_btns.addWidget(btn_notas_w)
+
 _layout_btns.addStretch()
 
 frame_mini_model = QWidget()
@@ -646,37 +651,48 @@ _layout_card.addWidget(_salida_w, stretch=1)
 
 _layout_right.addWidget(frame_top_card, stretch=3)
 
+# --- Panel de notas (fijo en la parte inferior, ocultable) ---
 frame_notes_card = QWidget()
 frame_notes_card.setStyleSheet(
     f"background-color: {COLORES['fondo_notas']}; border-radius: 8px;"
+    f" border: 1px solid {COLORES['gris_claro']};"
 )
 _layout_notes = QVBoxLayout(frame_notes_card)
-_layout_notes.setContentsMargins(22, 22, 22, 22)
+_layout_notes.setContentsMargins(16, 12, 16, 14)
+_layout_notes.setSpacing(8)
 
-lbl_notes_title_w = QLabel(" Notas")
+_notas_header = QWidget()
+_notas_header.setStyleSheet("background: transparent;")
+_notas_header_lay = QHBoxLayout(_notas_header)
+_notas_header_lay.setContentsMargins(0, 0, 0, 0)
+
+lbl_notes_title_w = QLabel("📝  Notas")
 lbl_notes_title_w.setStyleSheet(
     f"color: {COLORES['texto_principal']}; font-family: 'Segoe UI';"
-    f" font-size: {FONT_SIZE['subtitle']}px; font-weight: bold;"
+    f" font-size: {FONT_SIZE['subtitle']}px; font-weight: bold; background: transparent;"
 )
-_layout_notes.addWidget(lbl_notes_title_w)
+_notas_header_lay.addWidget(lbl_notes_title_w)
+_notas_header_lay.addStretch()
 
-lbl_notes_sub_w = QLabel(
-    "Capture observaciones y anotaciones de la revisión en esta sección."
-)
+lbl_notes_sub_w = QLabel("Capture observaciones y anotaciones de la revisión.")
 lbl_notes_sub_w.setWordWrap(True)
 lbl_notes_sub_w.setStyleSheet(
     f"color: {COLORES['texto_secundario']}; font-family: 'Segoe UI'; font-size: 10px;"
+    " background: transparent;"
 )
-_layout_notes.addWidget(lbl_notes_sub_w)
+_notas_header_lay.addWidget(lbl_notes_sub_w)
+_layout_notes.addWidget(_notas_header)
 
 txt_notas_w = QTextEdit()
 txt_notas_w.setPlainText("Notas de revisión académica...")
 txt_notas_w.setStyleSheet(
     f"background: {COLORES['blanco_crisp']}; color: {COLORES['texto_principal']};"
-    f" border: none; font-family: 'Segoe UI'; font-size: 11px; padding: 14px;"
+    " border: 1px solid #CBD5E1; border-radius: 6px;"
+    " font-family: 'Segoe UI'; font-size: 11px; padding: 10px;"
 )
 _layout_notes.addWidget(txt_notas_w)
 
+frame_notes_card.hide()  # oculto por defecto
 _layout_right.addWidget(frame_notes_card, stretch=1)
 stacked_right.addWidget(frame_right)
 
@@ -692,6 +708,19 @@ def _sync_combos(target: QComboBox, index: int):
 
 _combo_first_w.activated.connect(lambda idx: _sync_combos(_combo_after_w, idx))
 _combo_after_w.activated.connect(lambda idx: _sync_combos(_combo_first_w, idx))
+
+def _toggle_notas():
+    """Muestra u oculta el panel de notas en la parte inferior del display."""
+    if frame_notes_card.isVisible():
+        frame_notes_card.hide()
+    else:
+        frame_notes_card.show()
+
+btn_notas_w.clicked.connect(_toggle_notas)
+
+def get_notas() -> str:
+    """Retorna el contenido actual del panel de notas."""
+    return txt_notas_w.toPlainText()
 
 # Conectar controladores y callbacks
 def wire_commands(
